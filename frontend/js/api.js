@@ -90,6 +90,24 @@ const API = {
             return null;
         }
     },
+    
+    /**
+     * GET request helper (alias for fetch with GET method)
+     */
+    async get(endpoint, options = {}) {
+        return this.fetch(endpoint, { ...options, method: 'GET' });
+    },
+    
+    /**
+     * POST request helper
+     */
+    async post(endpoint, data = null, options = {}) {
+        return this.fetch(endpoint, {
+            ...options,
+            method: 'POST',
+            body: data ? JSON.stringify(data) : undefined
+        });
+    },
 
     // ═══════════════════════════════════════════════════════════════════
     // Dashboard

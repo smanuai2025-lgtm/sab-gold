@@ -1,0 +1,92 @@
+# ═══════════════════════════════════════════════════════════════════
+# Mr. Golden Bader - Git Ignore
+# ═══════════════════════════════════════════════════════════════════
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.production
+*.env
+
+# API Keys & Configuration
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+!appsettings.example.json
+
+# Logs
+logs/
+*.log
+Logs/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build Outputs
+**/bin/
+**/obj/
+**/out/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# .NET
+*.dll
+*.exe
+*.pdb
+*.user
+*.suo
+*.cache
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Database
+*.db
+*.sqlite
+*.mdf
+*.ldf
+
+# Docker
+.dockerignore
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+
+# SSL Certificates
+ssl/
+*.pem
+*.key
+*.crt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.Python
+
+# Redis
+dump.rdb
+
+# Backup Files
+*.backup
+*-old.*
+*-backup.*

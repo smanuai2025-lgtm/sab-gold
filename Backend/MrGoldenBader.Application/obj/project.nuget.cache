@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "12fHaLiW+GE=",
+  "dgSpecHash": "1nXQ5ve8ee4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\OMAR1\\Desktop\\Mr.Golden Bader\\Backend\\MrGoldenBader.Application\\MrGoldenBader.Application.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/runner/work/sab-gold/sab-gold/Backend/MrGoldenBader.Application/MrGoldenBader.Application.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/work/sab-gold/.codeql-scratch/dbs/csharp/working/packages/microsoft.netcore.app.ref/8.0.23/microsoft.netcore.app.ref.8.0.23.nupkg.sha512",
+    "/home/runner/work/sab-gold/.codeql-scratch/dbs/csharp/working/packages/microsoft.aspnetcore.app.ref/8.0.23/microsoft.aspnetcore.app.ref.8.0.23.nupkg.sha512"
+  ],
   "logs": []
 }

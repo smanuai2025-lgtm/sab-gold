@@ -65,6 +65,7 @@ public static class DependencyInjection
         // ═══════════════════════════════════════════════════════════════════
         // تسجيل خدمات Application
         // ═══════════════════════════════════════════════════════════════════
+        services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IGoldPriceService, GoldPriceServiceImpl>();
         services.AddScoped<NewsIntegrationService>();
         services.AddScoped<IRecommendationService, RecommendationEngine>();
