@@ -14,8 +14,26 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// تمكين CORS لجميع المصادر
-app.use(cors());
+// تمكين CORS للمصادر المحددة فقط
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+    ? process.env.ALLOWED_ORIGINS.split(',')
+    : ['http://localhost', 'http://localhost:80', 'http://localhost:3000'];
+
+app.use(cors({
+    origin: function(origin, callback) {
+        // السماح للطلبات بدون origin (مثل mobile apps أو Postman)
+        if (!origin) return callback(null, true);
+        
+        // التحقق من أن المصدر في القائمة المسموحة
+        if (allowedOrigins.some(allowed => origin.startsWith(allowed))) {
+            callback(null, true);
+        } else {
+            console.warn(`⚠️ CORS blocked: ${origin}`);
+            callback(new Error('غير مسموح بالوصول من هذا المصدر'));
+        }
+    },
+    credentials: true
+}));
 app.use(express.json());
 
 // ═══════════════════════════════════════════════════════════════════
@@ -92,7 +110,9 @@ async function fetchFromTradingView() {
                 if (jsonData.price) {
                     price = parseFloat(jsonData.price);
                 }
-            } catch (e) { }
+            } catch (e) {
+                console.warn('⚠️ خطأ في تحليل JSON-LD:', e.message);
+            }
         }
 
         // طريقة 2: البحث في العناصر المعروفة
@@ -180,7 +200,7 @@ async function fetchFromTradingViewAPI() {
                 }
             }
         } catch (e) {
-            // تجربة السوق التالي
+            console.warn(`⚠️ خطأ في جلب من TradingView Scanner (${market}):`, e.message);
         }
     }
 
@@ -549,9 +569,17 @@ app.get('/api/gold/kuwait', priceLimiter, async (req, res) => {
             });
         }
 
-        // إعدادات الحساب (يمكن تخصيصها من Query Parameters)
-        const exchangeRate = parseFloat(req.query.rate) || 0.3075;
-        const commission = parseFloat(req.query.commission) || 1.5;
+        // إعدادات الحساب (يمكن تخصيصها من Query Parameters مع التحقق)
+        let exchangeRate = parseFloat(req.query.rate);
+        let commission = parseFloat(req.query.commission);
+        
+        // التحقق من صحة القيم ووضع حدود معقولة
+        if (isNaN(exchangeRate) || exchangeRate <= 0 || exchangeRate > 1) {
+            exchangeRate = 0.3075; // القيمة الافتراضية
+        }
+        if (isNaN(commission) || commission < 0 || commission > 10) {
+            commission = 1.5; // القيمة الافتراضية
+        }
 
         const ounceUSD = result.price;
         const gramUSD = ounceUSD / 31.1035;
