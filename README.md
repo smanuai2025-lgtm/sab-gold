@@ -25,12 +25,15 @@ Mr.Golden Bader/
 │   ├── MrGoldenBader.Domain/        # طبقة المجال (Entities, Interfaces)
 │   └── MrGoldenBader.Infrastructure/# طبقة البنية التحتية (EF Core, Repos)
 │
-├── AIServices/                       # خدمات الذكاء الاصطناعي
-│   ├── main.py                      # FastAPI Application
-│   └── requirements.txt             # Python Dependencies
+├── frontend/                         # الواجهة الأمامية
+│   ├── index.html                   # لوحة التحكم الرئيسية
+│   ├── pages/                       # 12 صفحة HTML
+│   ├── js/                          # JavaScript modules
+│   ├── css/                         # Tailwind CSS + custom
+│   └── admin/                       # لوحة الإدارة
 │
-└── dashboard/                        # الواجهة الأمامية
-    └── (Next.js 14 + TypeScript + Tailwind)
+└── price-proxy/                      # خادم وسيط للأسعار
+    └── server.js                    # Node.js + Express
 ```
 
 ---
@@ -41,26 +44,25 @@ Mr.Golden Bader/
 - **ASP.NET Core 8** - Web API
 - **Entity Framework Core** - ORM
 - **SQL Server** - قاعدة البيانات الرئيسية
-- **MongoDB** - تخزين الأخبار
 - **Redis** - التخزين المؤقت
 - **SignalR** - التحديثات اللحظية
 - **JWT** - المصادقة
 - **Hangfire** - المهام المجدولة
 - **Serilog** - التسجيل
 
-### AI Services
-- **Python 3.11**
-- **FastAPI** - API Framework
-- **PyTorch** - نماذج التعلم العميق
-- **HuggingFace Transformers** - NLP
-- **spaCy** - معالجة اللغة
-- **scikit-learn** - تعلم آلي
+### Price Proxy
+- **Node.js 18+** - JavaScript Runtime
+- **Express** - Web Framework
+- **Cheerio** - HTML Parsing
+- **node-fetch** - HTTP Client
 
 ### Frontend
-- **Next.js 14** - React Framework
-- **TypeScript** - لغة البرمجة
+- **HTML5 + JavaScript** - الواجهة الأمامية
 - **Tailwind CSS** - التصميم
-- **RTL Support** - دعم العربية
+- **Chart.js** - الرسوم البيانية
+- **TradingView Widget** - أسعار فورية
+- **Gemini AI** - التحليل الذكي
+- **RTL Support** - دعم العربية الكامل
 
 ---
 
@@ -84,36 +86,33 @@ dotnet run --project MrGoldenBader.API
 
 سيعمل على: `https://localhost:5001` و `http://localhost:5000`
 
-### 2️⃣ تشغيل AI Services
+### 2️⃣ تشغيل Price Proxy
 
-```powershell
-# الانتقال لمجلد AI
-cd AIServices
-
-# إنشاء بيئة افتراضية
-python -m venv venv
-.\venv\Scripts\activate
-
-# تثبيت المتطلبات
-pip install -r requirements.txt
-
-# تشغيل الخدمة
-python main.py
-```
-
-سيعمل على: `http://localhost:8000`
-
-### 3️⃣ تشغيل Frontend
-
-```powershell
-# الانتقال لمجلد Dashboard
-cd dashboard
+```bash
+# الانتقال لمجلد price-proxy
+cd price-proxy
 
 # تثبيت الحزم
 npm install
 
-# تشغيل خادم التطوير
-npm run dev
+# تشغيل الخادم
+npm start
+```
+
+سيعمل على: `http://localhost:3001`
+
+### 3️⃣ تشغيل Frontend
+
+```bash
+# الانتقال لمجلد frontend
+cd frontend
+
+# تشغيل خادم محلي (يمكن استخدام live-server أو http-server)
+# تثبيت http-server إذا لم يكن مثبتاً
+npm install -g http-server
+
+# تشغيل الخادم
+http-server -p 3000
 ```
 
 سيعمل على: `http://localhost:3000`
@@ -182,6 +181,16 @@ npm run dev
 8. ⏳ المرحلة 8: محرك التوصيات
 9. ⏳ المرحلة 9: التنبيهات اللحظية
 10. ⏳ المرحلة 10: التقارير والإنتاج
+
+---
+
+## 📚 الوثائق الإضافية
+
+- **[SECURITY_REPORT.md](./SECURITY_REPORT.md)** - تقرير الأمان الشامل
+- **[TECHNICAL_ANALYSIS.md](./TECHNICAL_ANALYSIS.md)** - التحليل التقني المفصل
+- **[ARABIC_SUMMARY.md](./ARABIC_SUMMARY.md)** - ملخص المراجعة بالعربية
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - دليل النشر
+- **[SYSTEM_SETUP.md](./SYSTEM_SETUP.md)** - إعداد النظام
 
 ---
 
