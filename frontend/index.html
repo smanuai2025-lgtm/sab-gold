@@ -1,0 +1,1921 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SabeekaGold - منصة الاستثمار الذكي في الذهب</title>
+    <meta name="description" content="منصة كويتية متخصصة في تحليل وتوقع أسعار الذهب مدعومة بالذكاء الاصطناعي">
+
+    <!-- Favicon - Gold Coin Emoji -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪙</text></svg>">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/css/tailwind.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="font-cairo">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- Navbar - شريط التنقل العلوي -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+        <div class="container mx-auto px-3 lg:px-8">
+            <div class="flex items-center justify-between h-14 lg:h-20">
+
+                <!-- Mobile: Hamburger + Logo -->
+                <div class="flex items-center gap-2 lg:hidden">
+                    <button class="p-1.5 text-gold-400" onclick="toggleMobileMenu()" aria-label="القائمة">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <a href="index.html" class="flex items-center">
+                        <img src="images/logo.png" alt="SabeekaGold" class="h-8 w-auto">
+                    </a>
+                </div>
+
+                <!-- Desktop: Logo -->
+                <a href="index.html" class="hidden lg:flex items-center gap-3">
+                    <img src="images/logo.png" alt="SabeekaGold" class="h-12 w-auto">
+                    <span class="text-xl font-bold text-gold-400">SabeekaGold</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-0.5">
+                    <a href="index.html" class="nav-link active px-3 py-2 rounded-lg text-gold-400 text-sm">الرئيسية</a>
+                    <a href="pages/analysis.html"
+                        class="nav-link px-3 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all text-sm">التحليلات</a>
+                    <a href="pages/gold-assistant.html"
+                        class="nav-link px-3 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all text-sm flex items-center gap-1">
+                        <span>🧠</span>
+                        <span>المستشار</span>
+                    </a>
+                    <a href="pages/calculator.html"
+                        class="nav-link px-3 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all text-sm">الحاسبة</a>
+                    <a href="pages/portfolio.html"
+                        class="nav-link px-3 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all text-sm">محفظتي</a>
+                    <a href="pages/news.html"
+                        class="nav-link px-3 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all text-sm">الأخبار</a>
+                    <a href="pages/reports.html"
+                        class="nav-link px-3 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all text-sm">التقارير</a>
+                    <a href="pages/alerts.html"
+                        class="nav-link px-3 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all text-sm relative">
+                        التنبيهات
+                        <span data-notification-badge
+                            class="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span>
+                    </a>
+                </div>
+
+                <!-- Mobile: Alerts + Auth -->
+                <div class="flex lg:hidden items-center gap-1">
+                    <!-- Alerts Icon -->
+                    <a href="pages/alerts.html" class="relative p-2 text-gray-300 hover:text-gold-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        <span id="mobile-alerts-badge"
+                            class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-rose-500 text-white text-[10px] rounded-full flex items-center justify-center font-bold hidden">0</span>
+                    </a>
+
+                    <!-- Guest: Login/Register -->
+                    <div id="mobile-header-guest" class="flex items-center gap-1">
+                        <a href="pages/login.html" class="px-2 py-1 text-xs text-gray-300 hover:text-gold-400">دخول</a>
+                        <a href="pages/register.html"
+                            class="px-2 py-1 bg-gradient-to-r from-gold-500 to-gold-600 text-primary rounded text-xs font-bold">تسجيل</a>
+                    </div>
+
+                    <!-- User: Welcome + Avatar -->
+                    <div id="mobile-header-user" class="hidden flex items-center gap-1.5">
+                        <span class="text-[10px] text-gray-400">أهلاً</span>
+                        <div class="w-7 h-7 bg-gradient-to-br from-gold-500 to-gold-600 rounded-full flex items-center justify-center text-primary text-xs font-bold"
+                            id="mobile-header-avatar">م</div>
+                    </div>
+                </div>
+
+                <!-- Desktop: Auth Buttons -->
+                <div id="auth-buttons" class="hidden lg:flex items-center gap-3">
+                    <!-- Guest Buttons -->
+                    <div id="guest-buttons" class="flex items-center gap-2">
+                        <a href="pages/login.html"
+                            class="px-4 py-2 text-gray-300 hover:text-gold-400 transition-colors text-sm font-medium">تسجيل
+                            الدخول</a>
+                        <a href="pages/register.html"
+                            class="px-4 py-2 bg-gradient-to-r from-gold-500 to-gold-600 text-primary rounded-lg text-sm font-bold hover:shadow-lg hover:shadow-gold-500/20 transition-all">إنشاء
+                            حساب</a>
+                    </div>
+                    <!-- User Buttons (hidden by default) -->
+                    <div id="user-buttons" class="hidden flex items-center gap-3">
+                        <div
+                            class="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/50 rounded-lg border border-zinc-700">
+                            <div class="w-7 h-7 bg-gradient-to-br from-gold-500 to-gold-600 rounded-full flex items-center justify-center text-primary text-xs font-bold"
+                                id="user-avatar">م</div>
+                            <span id="user-name" class="text-sm text-gray-300">مستخدم</span>
+                        </div>
+                        <a id="admin-link" href="admin/dashboard.html"
+                            class="hidden px-3 py-1.5 bg-indigo-500/20 text-indigo-400 rounded-lg text-xs font-medium border border-indigo-500/30 hover:bg-indigo-500/30 transition-colors">لوحة
+                            التحكم</a>
+                        <button onclick="logoutUser()" class="p-2 text-gray-400 hover:text-rose-400 transition-colors"
+                            title="تسجيل الخروج">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <aside id="mobile-menu"
+        class="fixed top-0 right-0 w-64 h-full bg-primary-light/98 backdrop-blur-xl z-[60] transform translate-x-full transition-transform duration-300 lg:hidden border-r border-gold-500/20">
+        <div class="p-4">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                    <img src="images/logo.png" alt="SabeekaGold" class="h-8 w-auto">
+                    <span class="font-bold text-gold-400 text-sm">SabeekaGold</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- User Welcome (shown when logged in) -->
+            <div id="mobile-menu-user" class="hidden mb-4 p-3 bg-zinc-800/50 rounded-xl border border-zinc-700">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-gold-500 to-gold-600 rounded-full flex items-center justify-center text-primary font-bold"
+                        id="mobile-menu-avatar">م</div>
+                    <div>
+                        <p class="text-xs text-gray-400">مرحباً بك</p>
+                        <p id="mobile-menu-name" class="text-sm text-white font-medium">مستخدم</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="space-y-1">
+                <a href="index.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg bg-gold-500/10 text-gold-400 border border-gold-500/20">
+                    <span class="text-base">🏠</span><span class="text-sm">الرئيسية</span>
+                </a>
+                <a href="pages/analysis.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-base">📈</span><span class="text-sm">التحليلات</span>
+                </a>
+                <a href="pages/gold-assistant.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-base">🧠</span><span class="text-sm">المستشار الذكي</span>
+                </a>
+                <a href="pages/calculator.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-base">🧮</span><span class="text-sm">الحاسبة</span>
+                </a>
+                <a href="pages/portfolio.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-base">💼</span><span class="text-sm">محفظتي</span>
+                </a>
+                <a href="pages/news.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-base">📰</span><span class="text-sm">الأخبار</span>
+                </a>
+                <a href="pages/reports.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-base">📊</span><span class="text-sm">التقارير</span>
+                </a>
+                <a href="pages/alerts.html"
+                    class="mobile-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-base">🔔</span><span class="text-sm">التنبيهات</span>
+                </a>
+
+                <!-- User-only links -->
+                <div id="mobile-menu-user-links" class="hidden pt-2 mt-2 border-t border-gold-500/20 space-y-1">
+                    <a id="mobile-menu-admin" href="admin/dashboard.html"
+                        class="hidden flex items-center gap-3 px-3 py-2.5 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                        <span class="text-base">🎛️</span><span class="text-sm">لوحة التحكم</span>
+                    </a>
+                    <a href="pages/settings.html"
+                        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                        <span class="text-base">⚙️</span><span class="text-sm">الإعدادات</span>
+                    </a>
+                    <button onclick="logoutUser(); toggleMobileMenu();"
+                        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-rose-400 hover:bg-rose-500/10 transition-all">
+                        <span class="text-base">🚪</span><span class="text-sm">تسجيل الخروج</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] hidden lg:hidden"
+        onclick="toggleMobileMenu()"></div>
+
+    <style>
+        /* Mobile menu animation - slide from right */
+        #mobile-menu.menu-open {
+            transform: translateX(0) !important;
+        }
+    </style>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- Hero Section - لوحة تحكم البورصة العالمية -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <style>
+        /* Mobile/Default Styles */
+        .hero-banking {
+            background:
+                linear-gradient(135deg, rgba(20, 30, 48, 0.97) 0%, rgba(36, 59, 85, 0.97) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23b8860b' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            min-height: 100vh;
+            position: relative;
+            padding-top: 120px;
+            padding-bottom: 40px;
+        }
+
+        .gold-accent-text {
+            background: linear-gradient(90deg, #b8860b, #daa520, #ffd700, #daa520, #b8860b);
+            background-size: 200% 100%;
+            animation: goldFlow 4s linear infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes goldFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .tradingview-container {
+            background: linear-gradient(145deg, rgba(10, 14, 23, 0.9), rgba(20, 30, 48, 0.95));
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 215, 0, 0.1);
+        }
+
+        .kuwait-price-card {
+            background: linear-gradient(145deg, rgba(184, 134, 11, 0.2), rgba(255, 215, 0, 0.08));
+            border: 1px solid rgba(218, 165, 32, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 215, 0, 0.15);
+        }
+
+        .live-pulse {
+            animation: livePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════ */
+        /* Desktop Bento Dashboard - Only for lg+ screens */
+        /* ═══════════════════════════════════════════════════════════════════ */
+        @media (min-width: 1024px) {
+            .hero-banking {
+                min-height: auto;
+                padding-top: 120px;
+                padding-bottom: 30px;
+            }
+
+            .desktop-dashboard {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                grid-auto-rows: minmax(auto, auto);
+                gap: 20px;
+                max-width: 1800px;
+                margin: 0 auto;
+            }
+
+            /* Bento Cards */
+            .bento-card {
+                background: linear-gradient(145deg, rgba(10, 14, 23, 0.95), rgba(20, 30, 48, 0.9));
+                border: 1px solid rgba(218, 165, 32, 0.2);
+                border-radius: 20px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .bento-card:hover {
+                border-color: rgba(218, 165, 32, 0.4);
+                transform: translateY(-2px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Grid Layout - Optimized */
+            .bento-chart {
+                grid-column: span 7;
+                grid-row: span 2;
+                min-height: 520px;
+            }
+
+            .bento-price {
+                grid-column: span 5;
+                grid-row: span 1;
+            }
+
+            .bento-decision {
+                grid-column: span 5;
+                grid-row: span 1;
+            }
+
+            .bento-analysis {
+                grid-column: span 5;
+                grid-row: span 1;
+                min-height: 320px;
+            }
+
+            .bento-sentiment {
+                grid-column: span 4;
+                grid-row: span 1;
+            }
+
+            .bento-correlation {
+                grid-column: span 3;
+                grid-row: span 1;
+            }
+
+            .bento-actions {
+                grid-column: span 12;
+            }
+
+            .bento-gold-accent {
+                background: linear-gradient(145deg, rgba(184, 134, 11, 0.15), rgba(255, 215, 0, 0.05));
+                border-color: rgba(218, 165, 32, 0.35);
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .hero-banking {
+                padding-top: 130px;
+            }
+
+            .desktop-dashboard {
+                gap: 24px;
+            }
+
+            .bento-chart {
+                min-height: 580px;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .hero-banking {
+                padding-top: 140px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .desktop-dashboard {
+                gap: 20px;
+            }
+        }
+
+        /* Hide mobile sections on desktop */
+        @media (min-width: 1024px) {
+            .mobile-only-section {
+                display: none !important;
+            }
+        }
+
+        /* Show mobile sections only on mobile */
+        @media (max-width: 1023px) {
+            .desktop-only-section {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <section class="hero-banking relative">
+        <div class="container mx-auto px-4 lg:px-6 relative z-10">
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- Desktop Bento Dashboard - لوحة تحكم البورصة -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <div class="desktop-only-section desktop-dashboard">
+
+                <!-- 1. TradingView Advanced Chart - البطاقة الكبرى -->
+                <div class="bento-card bento-chart" style="grid-column: span 7; grid-row: span 2;">
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%">
+                        </div>
+                        <div class="tradingview-widget-copyright"><a
+                                href="https://ar.tradingview.com/symbols/XAUUSD/?exchange=OANDA" rel="noopener nofollow"
+                                target="_blank"><span class="blue-text">Track all markets on TradingView</span></a>
+                        </div>
+                        <script type="text/javascript"
+                            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                                {
+                                    "allow_symbol_change": true,
+                                        "calendar": false,
+                                            "details": false,
+                                                "hide_side_toolbar": true,
+                                                    "hide_top_toolbar": false,
+                                                        "hide_legend": false,
+                                                            "hide_volume": false,
+                                                                "hotlist": false,
+                                                                    "interval": "1",
+                                                                        "locale": "ar_AE",
+                                                                            "save_image": true,
+                                                                                "style": "1",
+                                                                                    "symbol": "TVC:GOLD",
+                                                                                        "theme": "dark",
+                                                                                            "timezone": "Etc/UTC",
+                                                                                                "backgroundColor": "rgba(10, 14, 23, 1)",
+                                                                                                    "gridColor": "rgba(255, 215, 0, 0.06)",
+                                                                                                        "watchlist": [],
+                                                                                                            "withdateranges": true,
+                                                                                                                "compareSymbols": [],
+                                                                                                                    "studies": [],
+                                                                                                                        "autosize": true
+                                }
+                            </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                </div>
+
+                <!-- 2. سعر الكويت - البطاقة الذهبية -->
+                <div class="bento-card bento-gold-accent p-6" style="grid-column: span 5;">
+                    <div class="flex items-center gap-3 mb-5">
+                        <svg width="48" height="32" viewBox="0 0 900 600" class="rounded shadow-lg">
+                            <rect width="900" height="600" fill="#007A3D" />
+                            <rect width="900" height="400" fill="#FFFFFF" />
+                            <rect width="900" height="200" fill="#CE1126" />
+                            <path d="M 0,0 L 300,300 L 0,600 Z" fill="#000000" />
+                        </svg>
+                        <div>
+                            <span class="text-white font-bold text-lg">سعر الجرام في الكويت</span>
+                            <p class="text-gray-500 text-sm">عيار 24 قيراط · سعر دار السبائك</p>
+                        </div>
+                    </div>
+                    <p id="desktop-hero-price" class="text-5xl xl:text-6xl font-black text-white live-pulse mb-2">
+                        <span id="desktop-hero-price-value">--</span> <span class="text-2xl text-amber-500">د.ك</span>
+                    </p>
+                    <p id="desktop-hero-price-change" class="text-xl font-bold text-emerald-400 mb-6">▲ +0.00%</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="pages/analysis.html"
+                            class="px-5 py-3.5 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-bold rounded-xl text-center hover:shadow-lg hover:shadow-amber-500/30 transition-all">🤖
+                            تحليل AI مفصّل</a>
+                        <a href="pages/calculator.html"
+                            class="px-5 py-3.5 bg-white/5 text-white font-bold rounded-xl border border-amber-700/50 hover:bg-amber-900/30 transition-all text-center">🧮
+                            حاسبة الذهب</a>
+                    </div>
+                </div>
+
+
+
+                <!-- 4. الرسم البياني الكويتي + الإحصائيات -->
+                <div class="bento-card p-5" style="grid-column: span 5; min-height: 350px;">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl">📈</span>
+                            <span class="text-white font-bold">سعر 24K في الكويت</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-2 bg-gold-500/10 border border-gold-500/30 px-4 py-2 rounded-lg">
+                            <span id="desktop-chart-price" class="text-gold-400 font-bold text-lg">--</span>
+                            <span id="desktop-chart-change" class="text-sm text-green-400">▲ 0%</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mb-4">
+                        <button data-desktop-period="1m"
+                            class="desktop-chart-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-light text-gray-400 hover:bg-gold-500/20 transition-all">1
+                            دقيقة</button>
+                        <button data-desktop-period="5m"
+                            class="desktop-chart-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-light text-gray-400 hover:bg-gold-500/20 transition-all">5
+                            دقائق</button>
+                        <button data-desktop-period="10m"
+                            class="desktop-chart-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-gold-500/20 text-gold-400 border border-gold-500/30">10
+                            دقائق</button>
+                        <button data-desktop-period="30m"
+                            class="desktop-chart-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-light text-gray-400 hover:bg-gold-500/20 transition-all">30
+                            دقيقة</button>
+                        <button data-desktop-period="1h"
+                            class="desktop-chart-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-light text-gray-400 hover:bg-gold-500/20 transition-all">ساعة</button>
+                    </div>
+
+                    <div class="relative bg-primary-light/30 rounded-xl p-4" style="height: 200px;">
+                        <canvas id="desktopGoldChart"></canvas>
+                    </div>
+
+                    <!-- إحصائيات الرسم -->
+                    <div class="grid grid-cols-3 gap-3 mt-4">
+                        <div class="bg-green-500/10 rounded-lg p-3 text-center border border-green-500/20">
+                            <p class="text-xs text-gray-500 mb-1">أعلى سعر</p>
+                            <p id="desktop-chart-high" class="text-green-400 font-bold">--</p>
+                        </div>
+                        <div class="bg-red-500/10 rounded-lg p-3 text-center border border-red-500/20">
+                            <p class="text-xs text-gray-500 mb-1">أدنى سعر</p>
+                            <p id="desktop-chart-low" class="text-red-400 font-bold">--</p>
+                        </div>
+                        <div class="bg-gold-500/10 rounded-lg p-3 text-center border border-gold-500/20">
+                            <p class="text-xs text-gray-500 mb-1">المتوسط</p>
+                            <p id="desktop-chart-avg" class="text-gold-400 font-bold">--</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. شريط الإجراءات والمميزات -->
+                <div class="bento-card p-5" style="grid-column: span 12;">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-8">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">📊</span>
+                                <div>
+                                    <p class="text-white font-bold">تحليلات AI</p>
+                                    <p class="text-gray-500 text-xs">مدعومة بـ Gemini</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">⚡</span>
+                                <div>
+                                    <p class="text-white font-bold">تحديث لحظي</p>
+                                    <p class="text-gray-500 text-xs">كل 15 ثانية</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">🔔</span>
+                                <div>
+                                    <p class="text-white font-bold">تنبيهات ذكية</p>
+                                    <p class="text-gray-500 text-xs">حسب أهدافك</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">🇰🇼</span>
+                                <div>
+                                    <p class="text-white font-bold">للسوق الكويتي</p>
+                                    <p class="text-gray-500 text-xs">أسعار دار السبائك</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="pages/analysis.html"
+                                class="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-500 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-purple-500/30 transition-all">🧠
+                                تحليل مفصّل</a>
+                            <a href="pages/calculator.html"
+                                class="px-8 py-4 bg-white/5 text-white font-bold rounded-xl border border-gray-700 hover:bg-white/10 transition-all">🧮
+                                احسب ربحك</a>
+                            <a href="pages/portfolio.html"
+                                class="px-8 py-4 bg-white/5 text-white font-bold rounded-xl border border-gray-700 hover:bg-white/10 transition-all">💰
+                                محفظتي</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <!-- Mobile Layout - الهاتف فقط (كما هو) -->
+            <!-- ═══════════════════════════════════════════════════════════════════ -->
+            <div class="mobile-only-section max-w-4xl mx-auto">
+                <!-- TradingView Advanced Chart - Mobile -->
+                <div class="tradingview-container rounded-2xl overflow-hidden" style="height: 400px;">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%">
+                        </div>
+                        <div class="tradingview-widget-copyright"><a
+                                href="https://ar.tradingview.com/symbols/XAUUSD/?exchange=OANDA" rel="noopener nofollow"
+                                target="_blank"><span class="blue-text">TradingView</span></a></div>
+                        <script type="text/javascript"
+                            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                                {
+                                    "allow_symbol_change": true,
+                                        "calendar": false,
+                                            "details": false,
+                                                "hide_side_toolbar": true,
+                                                    "hide_top_toolbar": false,
+                                                        "hide_legend": true,
+                                                            "hide_volume": true,
+                                                                "hotlist": false,
+                                                                    "interval": "1",
+                                                                        "locale": "ar_AE",
+                                                                            "save_image": false,
+                                                                                "style": "1",
+                                                                                    "symbol": "TVC:GOLD",
+                                                                                        "theme": "dark",
+                                                                                            "timezone": "Etc/UTC",
+                                                                                                "backgroundColor": "rgba(10, 14, 23, 1)",
+                                                                                                    "gridColor": "rgba(255, 215, 0, 0.06)",
+                                                                                                        "watchlist": [],
+                                                                                                            "withdateranges": false,
+                                                                                                                "compareSymbols": [],
+                                                                                                                    "studies": [],
+                                                                                                                        "autosize": true
+                                }
+                            </script>
+                    </div>
+                </div>
+
+                <!-- Kuwait Main Price Card -->
+                <div class="kuwait-price-card rounded-2xl p-4 mt-4">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <svg width="48" height="32" viewBox="0 0 900 600" class="rounded shadow-lg hidden sm:block">
+                                <rect width="900" height="600" fill="#007A3D" />
+                                <rect width="900" height="400" fill="#FFFFFF" />
+                                <rect width="900" height="200" fill="#CE1126" />
+                                <path d="M 0,0 L 300,300 L 0,600 Z" fill="#000000" />
+                            </svg>
+                            <div class="text-center sm:text-right">
+                                <p class="text-gray-400 text-sm">سعر الجرام في الكويت (24K)</p>
+                                <p id="hero-price" class="text-3xl font-bold text-white live-pulse">
+                                    <span id="hero-price-value">47.370</span> <span
+                                        class="text-lg text-amber-500">د.ك</span>
+                                </p>
+                                <p id="hero-price-change" class="text-sm text-emerald-400 mt-1">▲ +0.36%</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="pages/analysis.html"
+                                class="px-5 py-3 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-bold rounded-xl text-sm">🤖
+                                تحليل AI</a>
+                            <a href="#prices"
+                                class="px-5 py-3 bg-white/5 text-white font-bold rounded-xl border border-amber-700/50 text-sm">💰
+                                الأسعار</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Features -->
+                <div class="grid grid-cols-2 gap-3 mt-6 pt-6 border-t border-amber-900/30">
+                    <div class="text-center">
+                        <p class="text-2xl mb-2">📊</p>
+                        <p class="text-white font-bold text-xs">تحليلات متقدمة</p>
+                        <p class="text-gray-500 text-xs">بالذكاء الاصطناعي</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl mb-2">⚡</p>
+                        <p class="text-white font-bold text-xs">تحديث لحظي</p>
+                        <p class="text-gray-500 text-xs">كل 15 ثانية</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl mb-2">🔔</p>
+                        <p class="text-white font-bold text-xs">تنبيهات ذكية</p>
+                        <p class="text-gray-500 text-xs">حسب أهدافك</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl mb-2">🇰🇼</p>
+                        <p class="text-white font-bold text-xs">للسوق الكويتي</p>
+                        <p class="text-gray-500 text-xs">أسعار دار السبائك</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- 🏆 وقتك الذهبي - القرار الحين (Mobile Only) -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="prices" class="mobile-only-section py-16 px-4 relative overflow-hidden">
+        <!-- خلفية متحركة -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-gold-500 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-gold-400 rounded-full blur-3xl animate-pulse"
+                style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto relative">
+            <!-- العنوان الرئيسي -->
+            <div class="text-center mb-10">
+                <div
+                    class="inline-flex items-center gap-2 bg-gold-500/10 border border-gold-500/30 rounded-full px-6 py-2 mb-4">
+                    <span class="w-2 h-2 bg-gold-400 rounded-full animate-pulse"></span>
+                    <span class="text-gold-400 text-sm font-bold">تحليل لحظي مباشر</span>
+                    <span id="live-time" class="text-gray-500 text-xs">--:--:--</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-3">
+                    <span class="text-white">وقتك</span>
+                    <span class="gradient-text"> الذهبي</span>
+                </h2>
+                <p class="text-gray-400 text-lg">قرارك الحين.. بناءً على بيانات السوق اللحظية</p>
+            </div>
+
+            <!-- البطاقة الرئيسية للقرار -->
+            <div id="golden-decision-card" class="relative rounded-3xl p-1 mb-8 transition-all duration-700"
+                style="background: linear-gradient(135deg, rgba(251,191,36,0.3), rgba(251,191,36,0.1));">
+                <div class="bg-primary-dark rounded-3xl p-6 md:p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                        <!-- القرار الرئيسي -->
+                        <div class="lg:col-span-2">
+                            <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+                                <!-- أيقونة القرار الكبيرة -->
+                                <div id="decision-main-icon"
+                                    class="w-24 h-24 md:w-32 md:h-32 rounded-2xl flex items-center justify-center text-6xl md:text-7xl transition-all duration-500 shrink-0"
+                                    style="background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(251,191,36,0.05)); border: 2px solid rgba(251,191,36,0.3);">
+                                    ⏳
+                                </div>
+
+                                <!-- تفاصيل القرار -->
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span id="decision-action-text"
+                                            class="text-3xl md:text-4xl font-black text-gold-400">جاري التحليل...</span>
+                                        <span id="decision-confidence-badge"
+                                            class="px-3 py-1 rounded-full text-sm font-bold bg-gray-700 text-gray-400">--%</span>
+                                    </div>
+                                    <p id="decision-main-reason" class="text-gray-400 text-lg mb-4">جاري تحليل بيانات
+                                        السوق...</p>
+
+                                    <!-- الأسباب الثلاثة -->
+                                    <div id="decision-reasons" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                        <div class="flex items-center gap-2 bg-primary-light/50 rounded-xl px-3 py-2">
+                                            <span class="text-xl">📊</span>
+                                            <span class="text-sm text-gray-400">جاري التحليل...</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 bg-primary-light/50 rounded-xl px-3 py-2">
+                                            <span class="text-xl">📈</span>
+                                            <span class="text-sm text-gray-400">جاري التحليل...</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 bg-primary-light/50 rounded-xl px-3 py-2">
+                                            <span class="text-xl">🌍</span>
+                                            <span class="text-sm text-gray-400">جاري التحليل...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- شريط الثقة البصري -->
+                            <div class="mt-6 pt-6 border-t border-gold-500/10">
+                                <div class="flex items-center justify-between text-sm text-gray-500 mb-2">
+                                    <span>🔴 لا تشتري</span>
+                                    <span>🟡 استنى شوي</span>
+                                    <span>🟢 اشتري الحين</span>
+                                </div>
+                                <div class="h-4 rounded-full relative overflow-hidden"
+                                    style="background: linear-gradient(90deg, #ef4444 0%, #f59e0b 50%, #10b981 100%);">
+                                    <div id="confidence-slider"
+                                        class="absolute top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-lg border-2 border-gray-800 transition-all duration-700"
+                                        style="left: 50%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- السعر الحالي -->
+                        <div
+                            class="bg-gradient-to-br from-gold-500/10 to-transparent rounded-2xl p-6 border border-gold-500/20">
+                            <div class="text-center">
+                                <div class="flex items-center justify-center gap-2 mb-4">
+                                    <svg width="32" height="22" viewBox="0 0 900 600" class="rounded shadow">
+                                        <rect width="900" height="600" fill="#007A3D" />
+                                        <rect width="900" height="400" fill="#FFFFFF" />
+                                        <rect width="900" height="200" fill="#CE1126" />
+                                        <path d="M 0,0 L 300,300 L 0,600 Z" fill="#000000" />
+                                    </svg>
+                                    <span class="text-gold-400 font-bold">الكويت 24K</span>
+                                </div>
+
+                                <p id="main-kw-price" class="text-4xl md:text-5xl font-black gradient-text mb-1">-- د.ك
+                                </p>
+                                <p id="main-kw-change" class="text-lg font-bold text-gray-500 mb-4">--</p>
+
+                                <!-- مقارنة مع أمس -->
+                                <div id="vs-yesterday" class="bg-primary-dark/50 rounded-xl p-3 mb-4">
+                                    <p class="text-xs text-gray-500 mb-1">مقارنة بأمس</p>
+                                    <p id="yesterday-diff" class="text-lg font-bold text-gray-400">--</p>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div class="bg-primary-dark/50 rounded-lg p-2">
+                                        <p class="text-gray-500">الأونصة</p>
+                                        <p id="global-ounce-price" class="text-white font-bold">$--</p>
+                                    </div>
+                                    <div class="bg-primary-dark/50 rounded-lg p-2">
+                                        <p class="text-gray-500">التحديث</p>
+                                        <p id="last-update-time" class="text-gold-400 font-bold">--</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نصيحة التحليل الذكي -->
+            <div id="ai-advice-box"
+                class="bg-gradient-to-r from-gold-500/5 via-gold-500/10 to-gold-500/5 border border-gold-500/20 rounded-2xl p-6 text-center">
+                <div class="flex items-center justify-center gap-3 mb-3">
+                    <span class="text-3xl">💡</span>
+                    <span class="text-gold-400 font-bold text-lg">نصيحة التحليل الذكي</span>
+                    <span class="px-2 py-1 bg-gold-500/20 rounded-full text-xs text-gold-400">لحظي</span>
+                </div>
+                <p id="ai-direct-advice" class="text-xl md:text-2xl text-white font-bold leading-relaxed">
+                    جاري تحليل بيانات السوق...
+                </p>
+                <p id="ai-advice-detail" class="text-gray-400 mt-2 text-sm">
+                    التحليل يعتمد على الأسعار اللحظية والمستويات الفنية
+                </p>
+            </div>
+
+            <!-- أزرار سريعة -->
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <a href="pages/analysis.html"
+                    class="flex items-center gap-2 bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/30 rounded-xl px-6 py-3 text-gold-400 font-bold transition-all">
+                    <span>📊</span>
+                    <span>تحليل مفصّل</span>
+                </a>
+                <a href="pages/calculator.html"
+                    class="flex items-center gap-2 bg-primary-light hover:bg-primary-light/80 border border-gray-700 rounded-xl px-6 py-3 text-white font-bold transition-all">
+                    <span>🧮</span>
+                    <span>احسب ربحك</span>
+                </a>
+                <a href="pages/portfolio.html"
+                    class="flex items-center gap-2 bg-primary-light hover:bg-primary-light/80 border border-gray-700 rounded-xl px-6 py-3 text-white font-bold transition-all">
+                    <span>💰</span>
+                    <span>محفظتي</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- Chart Section - قسم الرسم البياني (Mobile Only) -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="chart-section" class="mobile-only-section py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="card p-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <span class="text-2xl">📈</span>
+                            <span>سعر الذهب 24K في الكويت</span>
+                        </h3>
+                        <div
+                            class="flex items-center gap-2 bg-gold-500/10 border border-gold-500/30 px-4 py-2 rounded-xl">
+                            <span class="text-gold-400 font-bold text-lg" id="chart-current-price">-- د.ك</span>
+                            <span id="chart-price-change" class="text-sm text-green-400">▲ 0.00%</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button data-period="1m"
+                            class="chart-period-btn px-3 py-1.5 rounded-full text-sm font-bold bg-primary-light text-gray-300 hover:bg-gold-500/20 transition-all">1
+                            دقيقة</button>
+                        <button data-period="5m"
+                            class="chart-period-btn px-3 py-1.5 rounded-full text-sm font-bold bg-primary-light text-gray-300 hover:bg-gold-500/20 transition-all">5
+                            دقائق</button>
+                        <button data-period="10m"
+                            class="chart-period-btn active px-3 py-1.5 rounded-full text-sm font-bold transition-all">10
+                            دقائق</button>
+                        <button data-period="30m"
+                            class="chart-period-btn px-3 py-1.5 rounded-full text-sm font-bold bg-primary-light text-gray-300 hover:bg-gold-500/20 transition-all">30
+                            دقيقة</button>
+                        <button data-period="1h"
+                            class="chart-period-btn px-3 py-1.5 rounded-full text-sm font-bold bg-primary-light text-gray-300 hover:bg-gold-500/20 transition-all">ساعة</button>
+                    </div>
+                </div>
+
+                <div class="relative bg-primary-light/30 rounded-xl p-4" style="height: 350px;">
+                    <canvas id="goldPriceChart"></canvas>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 mt-4 pt-4 border-t border-gold-500/10">
+                    <div class="flex items-center gap-6">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">أعلى سعر</p>
+                            <p id="chart-high" class="text-green-400 font-bold">--</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">أدنى سعر</p>
+                            <p id="chart-low" class="text-red-400 font-bold">--</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">المتوسط</p>
+                            <p id="chart-avg" class="text-gold-400 font-bold">--</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span>تحديث مباشر</span>
+                        <span id="chart-update-time">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- Features Section - المميزات -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="features" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="section-title mb-12">
+                <div class="gold-line mb-4"></div>
+                <h2 class="gradient-text">لماذا SabeekaGold؟</h2>
+                <p>نقدم لك أفضل تجربة استثمارية في الذهب</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="text-xl font-bold text-white mb-3">ذكاء اصطناعي</h3>
+                    <p class="text-gray-400">تحليلات وتوصيات مدعومة بـ Gemini AI لاتخاذ قرارات استثمارية ذكية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="text-xl font-bold text-white mb-3">أسعار لحظية</h3>
+                    <p class="text-gray-400">تحديث مباشر للأسعار من TradingView مع حساب فوري لأسعار الكويت</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="text-xl font-bold text-white mb-3">توصيات دقيقة</h3>
+                    <p class="text-gray-400">مركز قرار استثماري يقدم توصيات شراء وبيع بناءً على تحليل فني</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3 class="text-xl font-bold text-white mb-3">تنبيهات ذكية</h3>
+                    <p class="text-gray-400">احصل على إشعارات فورية عند وصول السعر لهدفك</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="text-xl font-bold text-white mb-3">رسوم بيانية</h3>
+                    <p class="text-gray-400">رسوم بيانية تفاعلية لتتبع حركة الأسعار عبر الزمن</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🇰🇼</div>
+                    <h3 class="text-xl font-bold text-white mb-3">للسوق الكويتي</h3>
+                    <p class="text-gray-400">مصمم خصيصاً للمستثمر الكويتي بالدينار الكويتي</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- 🧠 مختبر الذهب الذكي - تحليلات متقدمة (Mobile Only) -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section class="mobile-only-section py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- العنوان -->
+            <div class="text-center mb-12">
+                <div
+                    class="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-full px-6 py-2 mb-4">
+                    <span class="text-purple-400 text-sm font-bold">🧠 تحليلات متقدمة</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-2">مختبر الذهب الذكي</h2>
+                <p class="text-gray-400">فهم عميق لما يحرك السوق الحين</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- 🌡️ متتبع نفسية الذهب - Gold Sentiment Heatmap -->
+                <div class="card p-6 relative overflow-hidden">
+                    <!-- خلفية متحركة -->
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500/20 to-transparent rounded-full blur-2xl">
+                    </div>
+
+                    <div class="relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold flex items-center gap-2">
+                                <span class="text-2xl">🌡️</span>
+                                <span>نفسية السوق</span>
+                            </h3>
+                            <span class="text-xs text-gray-500">آخر 30 يوم</span>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mb-6">شنو اللي يحرك الذهب الحين؟ خريطة حرارية توضح المحركات
+                            الرئيسية</p>
+
+                        <!-- خريطة المشاعر الحرارية -->
+                        <div id="sentiment-heatmap" class="space-y-3">
+                            <!-- الخوف والأزمات -->
+                            <div class="group">
+                                <div class="flex items-center justify-between mb-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-lg">😨</span>
+                                        <span class="text-sm text-gray-300">الخوف والأزمات</span>
+                                    </div>
+                                    <span id="fear-value" class="text-sm font-bold text-orange-400">--</span>
+                                </div>
+                                <div class="h-3 bg-primary-light rounded-full overflow-hidden">
+                                    <div id="fear-bar" class="h-full rounded-full transition-all duration-1000"
+                                        style="width: 0%; background: linear-gradient(90deg, #f97316, #ef4444);"></div>
+                                </div>
+                            </div>
+
+                            <!-- التضخم العالمي -->
+                            <div class="group">
+                                <div class="flex items-center justify-between mb-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-lg">📈</span>
+                                        <span class="text-sm text-gray-300">التضخم العالمي</span>
+                                    </div>
+                                    <span id="inflation-value" class="text-sm font-bold text-amber-400">--</span>
+                                </div>
+                                <div class="h-3 bg-primary-light rounded-full overflow-hidden">
+                                    <div id="inflation-bar" class="h-full rounded-full transition-all duration-1000"
+                                        style="width: 0%; background: linear-gradient(90deg, #fbbf24, #f59e0b);"></div>
+                                </div>
+                            </div>
+
+                            <!-- البنوك المركزية -->
+                            <div class="group">
+                                <div class="flex items-center justify-between mb-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-lg">🏦</span>
+                                        <span class="text-sm text-gray-300">طلب البنوك المركزية</span>
+                                    </div>
+                                    <span id="banks-value" class="text-sm font-bold text-emerald-400">--</span>
+                                </div>
+                                <div class="h-3 bg-primary-light rounded-full overflow-hidden">
+                                    <div id="banks-bar" class="h-full rounded-full transition-all duration-1000"
+                                        style="width: 0%; background: linear-gradient(90deg, #10b981, #059669);"></div>
+                                </div>
+                            </div>
+
+                            <!-- عدم اليقين السياسي -->
+                            <div class="group">
+                                <div class="flex items-center justify-between mb-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-lg">🗳️</span>
+                                        <span class="text-sm text-gray-300">عدم اليقين السياسي</span>
+                                    </div>
+                                    <span id="political-value" class="text-sm font-bold text-purple-400">--</span>
+                                </div>
+                                <div class="h-3 bg-primary-light rounded-full overflow-hidden">
+                                    <div id="political-bar" class="h-full rounded-full transition-all duration-1000"
+                                        style="width: 0%; background: linear-gradient(90deg, #a855f7, #7c3aed);"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- الخلاصة -->
+                        <div id="sentiment-summary"
+                            class="mt-6 p-4 bg-gradient-to-r from-orange-500/10 to-transparent rounded-xl border border-orange-500/20">
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">💡</span>
+                                <div>
+                                    <p id="sentiment-driver" class="text-white font-bold">جاري التحليل...</p>
+                                    <p id="sentiment-explanation" class="text-gray-400 text-sm mt-1">تحليل لحظي للمحركات
+                                        الرئيسية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🔄 محاكي الارتباط العكسي - Correlation Matrix -->
+                <div class="card p-6 relative overflow-hidden">
+                    <!-- خلفية متحركة -->
+                    <div
+                        class="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl">
+                    </div>
+
+                    <div class="relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold flex items-center gap-2">
+                                <span class="text-2xl">🔄</span>
+                                <span>الارتباط العكسي</span>
+                            </h3>
+                            <span id="correlation-status"
+                                class="px-2 py-1 rounded-full text-xs font-bold bg-gray-700 text-gray-400">--</span>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mb-6">الذهب يرقص على أنغام الدولار والسندات - راقب الانحراف!</p>
+
+                        <!-- مؤشرات الارتباط -->
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <!-- الذهب -->
+                            <div
+                                class="bg-gradient-to-br from-gold-500/20 to-transparent rounded-xl p-4 text-center border border-gold-500/30">
+                                <span class="text-2xl mb-2 block">🥇</span>
+                                <p class="text-xs text-gray-500 mb-1">الذهب</p>
+                                <p id="gold-change" class="text-lg font-bold text-gold-400">--</p>
+                            </div>
+
+                            <!-- الدولار -->
+                            <div
+                                class="bg-gradient-to-br from-green-500/20 to-transparent rounded-xl p-4 text-center border border-green-500/30">
+                                <span class="text-2xl mb-2 block">💵</span>
+                                <p class="text-xs text-gray-500 mb-1">DXY الدولار</p>
+                                <p id="dxy-value" class="text-lg font-bold text-green-400">--</p>
+                            </div>
+
+                            <!-- السندات -->
+                            <div
+                                class="bg-gradient-to-br from-blue-500/20 to-transparent rounded-xl p-4 text-center border border-blue-500/30">
+                                <span class="text-2xl mb-2 block">📊</span>
+                                <p class="text-xs text-gray-500 mb-1">سندات 10Y</p>
+                                <p id="bonds-value" class="text-lg font-bold text-blue-400">--</p>
+                            </div>
+                        </div>
+
+                        <!-- مؤشر الارتباط البصري -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+                                <span>ارتباط عكسي قوي</span>
+                                <span>لا ارتباط</span>
+                                <span>ارتباط طردي</span>
+                            </div>
+                            <div class="h-4 rounded-full relative overflow-hidden"
+                                style="background: linear-gradient(90deg, #10b981 0%, #6b7280 50%, #ef4444 100%);">
+                                <div id="correlation-indicator"
+                                    class="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-gray-800 transition-all duration-700"
+                                    style="left: 25%;"></div>
+                            </div>
+                            <p class="text-center text-sm text-gray-400 mt-2">
+                                نسبة الارتباط: <span id="correlation-value" class="font-bold text-white">--</span>
+                            </p>
+                        </div>
+
+                        <!-- تنبيه الانحراف -->
+                        <div id="deviation-alert" class="p-4 rounded-xl border transition-all duration-500"
+                            style="background: rgba(113,113,122,0.1); border-color: rgba(113,113,122,0.3);">
+                            <div class="flex items-start gap-3">
+                                <span id="deviation-icon" class="text-2xl">📊</span>
+                                <div>
+                                    <p id="deviation-title" class="text-white font-bold">جاري الرصد...</p>
+                                    <p id="deviation-message" class="text-gray-400 text-sm mt-1">نراقب أي انحراف غير
+                                        منطقي بين الذهب والدولار</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- Footer -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="images/logo.png" alt="SabeekaGold" class="h-10">
+                    <p class="text-gray-500 text-sm">© 2026 SabeekaGold. جميع الحقوق محفوظة</p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="pages/analysis.html"
+                        class="text-gray-400 hover:text-gold-400 transition-colors text-sm">التحليلات</a>
+                    <a href="pages/calculator.html"
+                        class="text-gray-400 hover:text-gold-400 transition-colors text-sm">الحاسبة</a>
+                    <a href="pages/news.html"
+                        class="text-gray-400 hover:text-gold-400 transition-colors text-sm">الأخبار</a>
+                    <a href="pages/alerts.html"
+                        class="text-gray-400 hover:text-gold-400 transition-colors text-sm">التنبيهات</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 left-6 z-50 space-y-3"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="js/config.js?v=2602142041"></script>
+    <script src="js/api.js?v=2602142041"></script>
+    <script src="js/auth.js?v=2602142041"></script>
+    <script src="js/notifications.js?v=2602142041"></script>
+    <script src="js/gemini.js?v=2602142041"></script>
+    <script src="js/gemini-alerts.js?v=2602142041"></script>
+    <script src="js/portfolio.js?v=2602142041"></script>
+    <script src="js/signalr.js?v=2602142041"></script>
+    <script src="js/kuwait-gold-pricing.js?v=2602142041"></script>
+    <script src="js/app.js?v=2602142041"></script>
+
+    <script>
+        // Check auth status and update UI
+        function updateAuthUI() {
+            const user = AuthService.getCurrentUser();
+
+            // Desktop elements
+            const guestButtons = document.getElementById('guest-buttons');
+            const userButtons = document.getElementById('user-buttons');
+            const adminLink = document.getElementById('admin-link');
+            const userAvatar = document.getElementById('user-avatar');
+            const userName = document.getElementById('user-name');
+
+            // Mobile Header elements (new)
+            const mobileHeaderGuest = document.getElementById('mobile-header-guest');
+            const mobileHeaderUser = document.getElementById('mobile-header-user');
+            const mobileHeaderAvatar = document.getElementById('mobile-header-avatar');
+
+            // Mobile Menu elements (new)
+            const mobileMenuUser = document.getElementById('mobile-menu-user');
+            const mobileMenuAvatar = document.getElementById('mobile-menu-avatar');
+            const mobileMenuName = document.getElementById('mobile-menu-name');
+            const mobileMenuUserLinks = document.getElementById('mobile-menu-user-links');
+            const mobileMenuAdmin = document.getElementById('mobile-menu-admin');
+
+            if (user) {
+                const initial = user.name ? user.name.charAt(0) : 'م';
+
+                // Desktop
+                if (guestButtons) guestButtons.classList.add('hidden');
+                if (userButtons) {
+                    userButtons.classList.remove('hidden');
+                    userButtons.classList.add('flex');
+                }
+                if (userName) userName.textContent = user.name;
+                if (userAvatar) userAvatar.textContent = initial;
+
+                // Mobile Header
+                if (mobileHeaderGuest) mobileHeaderGuest.classList.add('hidden');
+                if (mobileHeaderUser) {
+                    mobileHeaderUser.classList.remove('hidden');
+                    mobileHeaderUser.classList.add('flex');
+                }
+                if (mobileHeaderAvatar) mobileHeaderAvatar.textContent = initial;
+
+                // Mobile Menu
+                if (mobileMenuUser) mobileMenuUser.classList.remove('hidden');
+                if (mobileMenuAvatar) mobileMenuAvatar.textContent = initial;
+                if (mobileMenuName) mobileMenuName.textContent = user.name;
+                if (mobileMenuUserLinks) mobileMenuUserLinks.classList.remove('hidden');
+
+                // Admin links
+                if (user.role === 'admin') {
+                    if (adminLink) adminLink.classList.remove('hidden');
+                    if (mobileMenuAdmin) {
+                        mobileMenuAdmin.classList.remove('hidden');
+                        mobileMenuAdmin.classList.add('flex');
+                    }
+                }
+            } else {
+                // Desktop
+                if (guestButtons) guestButtons.classList.remove('hidden');
+                if (userButtons) userButtons.classList.add('hidden');
+
+                // Mobile Header
+                if (mobileHeaderGuest) {
+                    mobileHeaderGuest.classList.remove('hidden');
+                    mobileHeaderGuest.classList.add('flex');
+                }
+                if (mobileHeaderUser) mobileHeaderUser.classList.add('hidden');
+
+                // Mobile Menu
+                if (mobileMenuUser) mobileMenuUser.classList.add('hidden');
+                if (mobileMenuUserLinks) mobileMenuUserLinks.classList.add('hidden');
+            }
+        }
+
+        function logoutUser() {
+            AuthService.logout();
+            updateAuthUI();
+            window.location.reload();
+        }
+
+        // Initialize auth UI
+        document.addEventListener('DOMContentLoaded', updateAuthUI);
+
+        // Mobile Menu Toggle (slides from right)
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-overlay');
+            const isOpen = menu.classList.contains('menu-open');
+
+            if (isOpen) {
+                menu.classList.remove('menu-open');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            } else {
+                menu.classList.add('menu-open');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // ═══════════════════════════════════════════════════════════════════
+        // [تم إزالة حساب السعر الكويتي - سيتم إضافة آلية جديدة لاحقاً]
+        // ═══════════════════════════════════════════════════════════════════
+        // 🏆 وقتك الذهبي - نظام القرار الذكي
+        // ═══════════════════════════════════════════════════════════════════
+
+        // ═══════════════════════════════════════════════════════════════════
+        // 🧠 محرك التحليل الذكي المحلي - بدون API
+        // خوارزميات احترافية تعتمد على الأسعار والبيانات اللحظية
+        // ═══════════════════════════════════════════════════════════════════
+
+        const SmartAnalyzer = {
+            // تخزين الأسعار للتحليل
+            priceHistory: [],
+            maxHistorySize: 100,
+
+            // المستويات التاريخية المهمة
+            LEVELS: {
+                allTimeHigh: 5080,      // أعلى سعر تاريخي
+                yearHigh: 4900,         // أعلى سعر هذا العام
+                resistanceStrong: 4800, // مقاومة قوية
+                pivotPoint: 4600,       // نقطة المحور
+                supportStrong: 4400,    // دعم قوي
+                yearLow: 4200           // أدنى سعر هذا العام
+            },
+
+            // إضافة سعر جديد للتاريخ
+            addPrice(price) {
+                this.priceHistory.push({ price, time: Date.now() });
+                if (this.priceHistory.length > this.maxHistorySize) {
+                    this.priceHistory.shift();
+                }
+            },
+
+            // حساب المتوسط المتحرك
+            getMA(period) {
+                if (this.priceHistory.length < period) return null;
+                const prices = this.priceHistory.slice(-period).map(p => p.price);
+                return prices.reduce((a, b) => a + b, 0) / period;
+            },
+
+            // حساب RSI مبسط
+            getRSI() {
+                if (this.priceHistory.length < 14) return 50;
+                const changes = [];
+                for (let i = 1; i < Math.min(14, this.priceHistory.length); i++) {
+                    changes.push(this.priceHistory[this.priceHistory.length - i].price -
+                        this.priceHistory[this.priceHistory.length - i - 1].price);
+                }
+                const gains = changes.filter(c => c > 0);
+                const losses = changes.filter(c => c < 0).map(c => Math.abs(c));
+                const avgGain = gains.length ? gains.reduce((a, b) => a + b, 0) / 14 : 0;
+                const avgLoss = losses.length ? losses.reduce((a, b) => a + b, 0) / 14 : 0;
+                if (avgLoss === 0) return 100;
+                const rs = avgGain / avgLoss;
+                return 100 - (100 / (1 + rs));
+            },
+
+            // حساب الاتجاه
+            getTrend() {
+                if (this.priceHistory.length < 5) return 'مستقر';
+                const recent = this.priceHistory.slice(-5);
+                const first = recent[0].price;
+                const last = recent[recent.length - 1].price;
+                const change = ((last - first) / first) * 100;
+                if (change > 0.3) return 'صاعد';
+                if (change < -0.3) return 'هابط';
+                return 'مستقر';
+            },
+
+            // التحليل الشامل
+            analyze(ouncePrice) {
+                this.addPrice(ouncePrice);
+
+                const rsi = this.getRSI();
+                const trend = this.getTrend();
+                const ma20 = this.getMA(20);
+
+                // تحديد الموقع من المستويات
+                const L = this.LEVELS;
+                const distFromHigh = ((L.allTimeHigh - ouncePrice) / L.allTimeHigh) * 100;
+                const distFromLow = ((ouncePrice - L.yearLow) / L.yearLow) * 100;
+
+                // حساب النتيجة
+                let score = 50; // محايد
+                let reasons = [];
+
+                // تحليل RSI
+                if (rsi > 70) {
+                    score -= 20;
+                    reasons.push('RSI مرتفع - تشبع شرائي');
+                } else if (rsi < 30) {
+                    score += 20;
+                    reasons.push('RSI منخفض - فرصة شراء');
+                } else {
+                    reasons.push(`RSI متوازن (${rsi.toFixed(0)})`);
+                }
+
+                // تحليل المستوى
+                if (ouncePrice > L.resistanceStrong) {
+                    score -= 15;
+                    reasons.push('السعر فوق المقاومة القوية');
+                } else if (ouncePrice < L.supportStrong) {
+                    score += 15;
+                    reasons.push('السعر قرب منطقة الدعم');
+                } else {
+                    reasons.push('السعر في المنطقة الوسطى');
+                }
+
+                // تحليل الاتجاه
+                if (trend === 'صاعد') {
+                    score += 5;
+                    reasons.push('الاتجاه صاعد حالياً');
+                } else if (trend === 'هابط') {
+                    score -= 5;
+                    reasons.push('الاتجاه هابط حالياً');
+                }
+
+                // تحليل المتوسط المتحرك
+                if (ma20 && ouncePrice > ma20) {
+                    score += 5;
+                } else if (ma20 && ouncePrice < ma20) {
+                    score -= 5;
+                }
+
+                // تحديد القرار
+                let decision, confidence, advice, adviceDetail;
+
+                if (score >= 65) {
+                    decision = 'اشتري الحين';
+                    confidence = Math.min(85, 50 + score - 50);
+                    advice = 'فرصة زينة للشراء! السعر في منطقة جيدة والمؤشرات إيجابية';
+                    adviceDetail = 'ادخل بشكل تدريجي للاستفادة من السعر الحالي';
+                } else if (score <= 35) {
+                    decision = 'لا تشتري';
+                    confidence = Math.min(85, 50 + (50 - score));
+                    advice = 'السعر مرتفع والمؤشرات سلبية، استنى ينزل';
+                    adviceDetail = 'انتظر تصحيح السعر قبل الدخول';
+                } else {
+                    decision = 'استنى شوي';
+                    confidence = 55 + Math.abs(50 - score);
+                    advice = 'السوق متذبذب، راقب وانتظر إشارة واضحة';
+                    adviceDetail = 'خلك متابع وادخل لما تتضح الصورة';
+                }
+
+                return {
+                    decision,
+                    confidence: Math.round(confidence),
+                    mainReason: reasons[0],
+                    reasons: reasons.slice(0, 3),
+                    advice,
+                    adviceDetail,
+                    trend,
+                    rsi: Math.round(rsi),
+                    score: Math.round(score)
+                };
+            }
+        };
+
+        const GoldenMoment = {
+            isRunning: false,
+            yesterdayPrice: null,
+
+            init() {
+                if (this.isRunning) return;
+                this.isRunning = true;
+
+                console.log('🏆 تشغيل التحليل الذكي المحلي...');
+
+                // تحميل سعر أمس
+                this.loadYesterdayPrice();
+
+                // تحديث الوقت كل ثانية
+                setInterval(() => this.updateLiveTime(), 1000);
+                this.updateLiveTime();
+
+                // تحليل فوري
+                this.analyze();
+
+                // تحديث كل 5 ثواني (سريع لأنه محلي)
+                setInterval(() => this.analyze(), 5000);
+            },
+
+            updateLiveTime() {
+                const el = document.getElementById('live-time');
+                if (el) el.textContent = new Date().toLocaleTimeString('ar-KW');
+            },
+
+            loadYesterdayPrice() {
+                const saved = localStorage.getItem('yesterday_gold_price');
+                const savedDate = localStorage.getItem('yesterday_gold_date');
+                const today = new Date().toDateString();
+
+                if (saved && savedDate !== today) {
+                    this.yesterdayPrice = parseFloat(saved);
+                }
+            },
+
+            getCurrentPrice() {
+                const el = document.getElementById('main-kw-price');
+                if (el) {
+                    const text = el.textContent.replace(/[^0-9.]/g, '');
+                    return parseFloat(text) || 0;
+                }
+                return 0;
+            },
+
+            getOuncePrice() {
+                const el = document.getElementById('global-ounce-price');
+                if (el) {
+                    const text = el.textContent.replace(/[^0-9.]/g, '');
+                    return parseFloat(text) || 0;
+                }
+                return 0;
+            },
+
+            analyze() {
+                const currentPrice = this.getCurrentPrice();
+                const ouncePrice = this.getOuncePrice();
+
+                if (ouncePrice <= 0) return;
+
+                // حفظ سعر اليوم
+                const today = new Date().toDateString();
+                localStorage.setItem('yesterday_gold_price', currentPrice);
+                localStorage.setItem('yesterday_gold_date', today);
+
+                // تحديث مقارنة أمس
+                this.updateYesterdayComparison(currentPrice);
+
+                // التحليل الذكي المحلي
+                const analysis = SmartAnalyzer.analyze(ouncePrice);
+                this.updateUI(analysis, currentPrice, ouncePrice);
+            },
+
+            updateYesterdayComparison(currentPrice) {
+                const el = document.getElementById('yesterday-diff');
+                if (!el) return;
+
+                if (this.yesterdayPrice && this.yesterdayPrice > 0) {
+                    const diff = currentPrice - this.yesterdayPrice;
+                    const percent = (diff / this.yesterdayPrice) * 100;
+                    const sign = diff >= 0 ? '+' : '';
+                    const color = diff >= 0 ? 'text-emerald-400' : 'text-rose-400';
+                    const icon = diff >= 0 ? '▲' : '▼';
+                    el.innerHTML = `<span class="${color}">${icon} ${sign}${diff.toFixed(3)} د.ك (${sign}${percent.toFixed(2)}%)</span>`;
+                } else {
+                    el.innerHTML = '<span class="text-gray-500">أول يوم - لا توجد مقارنة</span>';
+                }
+            },
+
+            updateUI(analysis, priceKWD, priceUSD) {
+                // أنماط القرار
+                const styles = {
+                    'اشتري الحين': {
+                        icon: '🚀',
+                        color: 'text-emerald-400',
+                        bg: 'linear-gradient(135deg, rgba(16,185,129,0.3), rgba(16,185,129,0.1))',
+                        border: 'rgba(16,185,129,0.5)',
+                        sliderPos: '85%',
+                        badgeColor: 'bg-emerald-500/20 text-emerald-400'
+                    },
+                    'لا تشتري': {
+                        icon: '🛑',
+                        color: 'text-rose-400',
+                        bg: 'linear-gradient(135deg, rgba(239,68,68,0.3), rgba(239,68,68,0.1))',
+                        border: 'rgba(239,68,68,0.5)',
+                        sliderPos: '15%',
+                        badgeColor: 'bg-rose-500/20 text-rose-400'
+                    },
+                    'استنى شوي': {
+                        icon: '⏳',
+                        color: 'text-amber-400',
+                        bg: 'linear-gradient(135deg, rgba(251,191,36,0.3), rgba(251,191,36,0.1))',
+                        border: 'rgba(251,191,36,0.5)',
+                        sliderPos: '50%',
+                        badgeColor: 'bg-amber-500/20 text-amber-400'
+                    }
+                };
+
+                const style = styles[analysis.decision] || styles['استنى شوي'];
+
+                // تحديث البطاقة الرئيسية
+                const card = document.getElementById('golden-decision-card');
+                if (card) card.style.background = style.bg;
+
+                // الأيقونة الرئيسية
+                const mainIcon = document.getElementById('decision-main-icon');
+                if (mainIcon) {
+                    mainIcon.textContent = style.icon;
+                    mainIcon.style.background = style.bg;
+                    mainIcon.style.borderColor = style.border;
+                }
+
+                // نص القرار
+                const actionText = document.getElementById('decision-action-text');
+                if (actionText) {
+                    actionText.textContent = analysis.decision;
+                    actionText.className = `text-3xl md:text-4xl font-black ${style.color}`;
+                }
+
+                // شارة الثقة
+                const badge = document.getElementById('decision-confidence-badge');
+                if (badge) {
+                    badge.textContent = analysis.confidence + '%';
+                    badge.className = `px-3 py-1 rounded-full text-sm font-bold ${style.badgeColor}`;
+                }
+
+                // السبب الرئيسي
+                const mainReason = document.getElementById('decision-main-reason');
+                if (mainReason) mainReason.textContent = analysis.mainReason;
+
+                // الأسباب الثلاثة
+                const reasonsContainer = document.getElementById('decision-reasons');
+                if (reasonsContainer && analysis.reasons) {
+                    const icons = ['📊', '📈', '🌍'];
+                    reasonsContainer.innerHTML = analysis.reasons.slice(0, 3).map((r, i) => `
+                        <div class="flex items-center gap-2 bg-primary-light/50 rounded-xl px-3 py-2">
+                            <span class="text-xl">${icons[i]}</span>
+                            <span class="text-sm text-gray-300">${r}</span>
+                        </div>
+                    `).join('');
+                }
+
+                // شريط الثقة
+                const slider = document.getElementById('confidence-slider');
+                if (slider) slider.style.left = style.sliderPos;
+
+                // النصيحة
+                const advice = document.getElementById('ai-direct-advice');
+                const adviceDetail = document.getElementById('ai-advice-detail');
+                if (advice) advice.textContent = analysis.advice;
+                if (adviceDetail) adviceDetail.textContent = analysis.adviceDetail;
+
+                // تغيير خلفية صندوق النصيحة
+                const adviceBox = document.getElementById('ai-advice-box');
+                if (adviceBox) {
+                    adviceBox.style.background = `linear-gradient(90deg, ${style.border}10, ${style.border}20, ${style.border}10)`;
+                    adviceBox.style.borderColor = style.border;
+                }
+
+                // ═══════════════════════════════════════════════════════════════════
+                // Desktop Dashboard Decision Update
+                // ═══════════════════════════════════════════════════════════════════
+                const desktopDecisionIcon = document.getElementById('desktop-decision-icon');
+                const desktopDecisionText = document.getElementById('desktop-decision-text');
+                const desktopDecisionConfidence = document.getElementById('desktop-decision-confidence');
+                const desktopConfidenceSlider = document.getElementById('desktop-confidence-slider');
+                const desktopLiveTime = document.getElementById('desktop-live-time');
+                const desktopAiAdvice = document.getElementById('desktop-ai-advice');
+                const desktopAdviceBox = document.getElementById('desktop-advice-box');
+
+                if (desktopDecisionIcon) {
+                    desktopDecisionIcon.textContent = style.icon;
+                    desktopDecisionIcon.style.background = style.bg;
+                    desktopDecisionIcon.style.borderColor = style.border;
+                }
+                if (desktopDecisionText) {
+                    desktopDecisionText.textContent = analysis.decision;
+                    desktopDecisionText.className = `text-3xl font-black ${style.color}`;
+                }
+                if (desktopDecisionConfidence) {
+                    desktopDecisionConfidence.innerHTML = `الثقة: <span class="font-bold text-white">${analysis.confidence}%</span>`;
+                }
+                if (desktopConfidenceSlider) {
+                    desktopConfidenceSlider.style.left = style.sliderPos;
+                }
+                if (desktopLiveTime) {
+                    desktopLiveTime.textContent = new Date().toLocaleTimeString('ar-EG');
+                }
+                if (desktopAiAdvice) {
+                    desktopAiAdvice.textContent = analysis.advice;
+                }
+                if (desktopAdviceBox) {
+                    desktopAdviceBox.style.background = `linear-gradient(135deg, ${style.border}15, ${style.border}05)`;
+                    desktopAdviceBox.style.borderColor = style.border;
+                }
+            }
+        };
+
+        // تشغيل النظام
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => GoldenMoment.init(), 2000);
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // 🧠 مختبر الذهب الذكي - خوارزميات محلية بدون API
+        // ═══════════════════════════════════════════════════════════════════
+
+        const GoldLab = {
+            priceHistory: [],
+            lastTrend: 'مستقر',
+
+            init() {
+                console.log('🧠 تشغيل مختبر الذهب الذكي (محلي)...');
+
+                // تحليل فوري
+                this.analyze();
+
+                // تحديث كل 10 ثواني (سريع لأنه محلي)
+                setInterval(() => this.analyze(), 10000);
+            },
+
+            getOuncePrice() {
+                const el = document.getElementById('global-ounce-price');
+                if (el) {
+                    const text = el.textContent.replace(/[^0-9.]/g, '');
+                    return parseFloat(text) || 4800;
+                }
+                return 4800;
+            },
+
+            analyze() {
+                const ouncePrice = this.getOuncePrice();
+
+                // تخزين السعر
+                this.priceHistory.push({ price: ouncePrice, time: Date.now() });
+                if (this.priceHistory.length > 50) this.priceHistory.shift();
+
+                // حساب الاتجاه
+                this.lastTrend = this.calculateTrend();
+            },
+
+            calculateTrend() {
+                if (this.priceHistory.length < 3) return 'مستقر';
+                const recent = this.priceHistory.slice(-5);
+                const first = recent[0].price;
+                const last = recent[recent.length - 1].price;
+                const change = ((last - first) / first) * 100;
+                if (change > 0.2) return 'صاعد';
+                if (change < -0.2) return 'هابط';
+                return 'مستقر';
+            }
+        };
+
+        // تشغيل مختبر الذهب
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => GoldenMoment.init(), 1500);
+            setTimeout(() => GoldLab.init(), 3000);
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // 📊 Desktop Chart - الرسم البياني للديسكتوب
+        // ═══════════════════════════════════════════════════════════════════
+        const DesktopChart = {
+            chart: null,
+            data: [],
+
+            init() {
+                if (window.innerWidth < 1024) return;
+
+                const ctx = document.getElementById('desktopGoldChart');
+                if (!ctx) return;
+
+                // Destroy existing chart if any
+                if (this.chart) {
+                    this.chart.destroy();
+                }
+
+                this.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'سعر 24K',
+                            data: [],
+                            borderColor: '#fbbf24',
+                            backgroundColor: 'rgba(251, 191, 36, 0.15)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 2,
+                            pointBackgroundColor: '#fbbf24',
+                            pointHoverRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 300 },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                backgroundColor: 'rgba(0,0,0,0.9)',
+                                titleColor: '#fbbf24',
+                                bodyColor: '#fff',
+                                padding: 12,
+                                callbacks: {
+                                    label: (ctx) => ctx.parsed.y.toFixed(3) + ' د.ك'
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: true,
+                                grid: { color: 'rgba(255,215,0,0.08)' },
+                                ticks: { color: '#9ca3af', font: { size: 11 } }
+                            },
+                            y: {
+                                display: true,
+                                grid: { color: 'rgba(255,215,0,0.08)' },
+                                ticks: {
+                                    color: '#9ca3af',
+                                    font: { size: 11 },
+                                    callback: (v) => v.toFixed(2)
+                                }
+                            }
+                        },
+                        interaction: { intersect: false, mode: 'index' }
+                    }
+                });
+
+                console.log('📊 Desktop Chart initialized');
+            },
+
+            update(price) {
+                if (!this.chart || window.innerWidth < 1024) return;
+                if (!price || price <= 0) return;
+
+                const now = new Date();
+                const timeLabel = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+                this.data.push({ time: timeLabel, price: price });
+
+                // Keep last 50 points for smoother chart
+                if (this.data.length > 50) {
+                    this.data.shift();
+                }
+
+                this.chart.data.labels = this.data.map(d => d.time);
+                this.chart.data.datasets[0].data = this.data.map(d => d.price);
+                this.chart.update('none');
+
+                // Update stats
+                this.updateStats();
+            },
+
+            updateStats() {
+                if (this.data.length === 0) return;
+
+                const prices = this.data.map(d => d.price);
+                const high = Math.max(...prices);
+                const low = Math.min(...prices);
+                const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
+
+                const highEl = document.getElementById('desktop-chart-high');
+                const lowEl = document.getElementById('desktop-chart-low');
+                const avgEl = document.getElementById('desktop-chart-avg');
+
+                if (highEl) highEl.textContent = high.toFixed(3) + ' د.ك';
+                if (lowEl) lowEl.textContent = low.toFixed(3) + ' د.ك';
+                if (avgEl) avgEl.textContent = avg.toFixed(3) + ' د.ك';
+            }
+        };
+
+        // Initialize desktop chart
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => DesktopChart.init(), 1500);
+        });
+
+        // Hook into price updates - check every 2 seconds
+        setInterval(() => {
+            if (window.innerWidth < 1024) return;
+
+            const priceEl = document.getElementById('desktop-hero-price-value');
+            if (priceEl && priceEl.textContent && priceEl.textContent !== '--') {
+                const price = parseFloat(priceEl.textContent);
+                if (price > 0) {
+                    DesktopChart.update(price);
+                }
+            }
+        }, 2000);
+    </script>
+</body>
+
+</html>

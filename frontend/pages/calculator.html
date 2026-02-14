@@ -1,0 +1,909 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الذهب - SabeekaGold</title>
+    <meta name="description" content="حاسبة احترافية لأسعار الذهب والمعادن الثمينة - احسب قيمة الذهب بجميع العيارات">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background: var(--bg-primary);
+        }
+        
+        /* حقل الإدخال الذهبي */
+        .gold-input {
+            background: linear-gradient(145deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.05));
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .gold-input:focus {
+            border-color: #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+            outline: none;
+        }
+        
+        /* بطاقات المعادن */
+        .metal-card {
+            background: linear-gradient(145deg, rgba(13, 19, 33, 0.9), rgba(10, 14, 23, 0.95));
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--card-color, #fbbf24), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .metal-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-color, rgba(251, 191, 36, 0.5));
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                        0 0 30px rgba(251, 191, 36, 0.1);
+        }
+        
+        .metal-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* ألوان البطاقات حسب العيار */
+        .metal-card.gold-24 { --card-color: #fbbf24; }
+        .metal-card.gold-22 { --card-color: #f59e0b; }
+        .metal-card.gold-21 { --card-color: #d97706; }
+        .metal-card.gold-18 { --card-color: #b45309; }
+        .metal-card.silver { --card-color: #94a3b8; }
+        .metal-card.platinum { --card-color: #e2e8f0; }
+        
+        /* أيقونات المعادن */
+        .metal-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            background: linear-gradient(145deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.05));
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+        
+        /* سعر الشراء */
+        .buy-price {
+            color: #4ade80;
+            text-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+        }
+        
+        /* سعر البيع */
+        .sell-price {
+            color: #f87171;
+            text-shadow: 0 0 20px rgba(248, 113, 113, 0.3);
+        }
+        
+        /* Animation للأرقام */
+        @keyframes priceUpdate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); color: #fbbf24; }
+            100% { transform: scale(1); }
+        }
+        
+        .price-updated {
+            animation: priceUpdate 0.3s ease;
+        }
+        
+        /* تأثير التوهج للعنوان */
+        .glow-text {
+            text-shadow: 0 0 40px rgba(251, 191, 36, 0.5),
+                         0 0 80px rgba(251, 191, 36, 0.3);
+        }
+        
+        /* أزرار الوحدات */
+        .unit-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .unit-btn.active {
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            color: #000;
+            box-shadow: 0 5px 20px rgba(251, 191, 36, 0.4);
+        }
+        
+        .unit-btn:not(.active):hover {
+            background: rgba(251, 191, 36, 0.2);
+        }
+    </style>
+</head>
+
+<body class="text-white font-cairo min-h-screen">
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <!-- Logo -->
+                <a href="../index.html" class="flex items-center gap-3">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-10 lg:h-12 w-auto">
+                    <span class="text-lg lg:text-xl font-bold text-gold-400 hidden sm:block">SabeekaGold</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="../index.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">الرئيسية</a>
+                    <a href="analysis.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">التحليلات</a>
+                    <a href="calculator.html" class="nav-link active px-4 py-2 rounded-lg text-gold-400">الحاسبة</a>
+                    <a href="news.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">الأخبار</a>
+                    <a href="alerts.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">التنبيهات</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden p-2 text-gold-400" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <aside id="mobile-menu" class="fixed top-0 left-0 w-72 h-full bg-primary-light/98 backdrop-blur-xl z-[60] transform -translate-x-full transition-transform duration-300 lg:hidden border-l border-gold-500/20">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-10 w-auto">
+                    <span class="font-bold text-gold-400">SabeekaGold</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="space-y-2">
+                <a href="../index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">🏠</span><span>الرئيسية</span>
+                </a>
+                <a href="analysis.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">📈</span><span>التحليلات</span>
+                </a>
+                <a href="calculator.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gold-500/10 text-gold-400 border border-gold-500/20">
+                    <span class="text-xl">🧮</span><span>الحاسبة</span>
+                </a>
+                <a href="news.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">📰</span><span>الأخبار</span>
+                </a>
+                <a href="alerts.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">🔔</span><span>التنبيهات</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] hidden lg:hidden" onclick="toggleMobileMenu()"></div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen pt-20 lg:pt-24">
+        <!-- Page Header -->
+        <header class="border-b border-gold-500/10 bg-primary-light/50 backdrop-blur-xl">
+            <div class="container mx-auto px-4 lg:px-8 py-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h1 class="text-2xl lg:text-3xl font-bold flex items-center gap-3">
+                            <span class="text-3xl">🧮</span>
+                            <span class="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">حاسبة أسعار الذهب</span>
+                        </h1>
+                        <p class="text-gray-400 text-sm mt-1">احسب قيمة الذهب والمعادن الثمينة بدقة عالية</p>
+                    </div>
+                    
+                    <!-- شريط التحديث -->
+                    <div class="flex items-center gap-4 bg-primary/60 rounded-xl px-4 py-3 border border-gold-500/20">
+                        <div class="text-left">
+                            <p class="text-xs text-gray-500">التحديث التالي خلال</p>
+                            <p class="text-gold-400 font-bold text-lg" id="countdown">30</p>
+                        </div>
+                        <div class="w-24 h-2 bg-primary rounded-full overflow-hidden">
+                            <div id="progress-bar" class="h-full bg-gradient-to-r from-gold-500 to-gold-400 transition-all duration-100" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Calculator Content -->
+        <div class="container mx-auto px-4 lg:px-8 py-8">
+            <!-- قسم الإدخال الرئيسي -->
+            <section class="mb-8">
+                <div class="card glass rounded-2xl p-6 lg:p-8 border border-gold-500/20">
+                    <div class="max-w-2xl mx-auto text-center">
+                        <!-- العنوان -->
+                        <h3 class="text-2xl lg:text-3xl font-bold text-gold-400 mb-2 glow-text">⚖️ أدخل الوزن</h3>
+                        <p class="text-gray-400 mb-6">أدخل وزن الذهب لحساب القيمة بجميع العيارات</p>
+                        
+                        <!-- حقل الإدخال -->
+                        <div class="flex items-center justify-center gap-4 mb-6">
+                            <div class="relative">
+                                <input type="number" 
+                                       id="weight-input" 
+                                       value="1" 
+                                       min="0.01" 
+                                       step="0.01"
+                                       class="gold-input text-3xl lg:text-4xl font-bold text-center text-gold-400 w-40 lg:w-48 py-4 px-6 rounded-2xl bg-transparent">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg" id="unit-label">جرام</span>
+                            </div>
+                        </div>
+                        
+                        <!-- أزرار الوحدات -->
+                        <div class="flex flex-wrap items-center justify-center gap-2 lg:gap-3">
+                            <button data-unit="gram" data-multiplier="1" class="unit-btn active px-4 lg:px-6 py-2 rounded-full text-sm font-bold border border-gold-500/30">
+                                جرام
+                            </button>
+                            <button data-unit="ounce" data-multiplier="31.1035" class="unit-btn px-4 lg:px-6 py-2 rounded-full text-sm font-bold border border-gray-700 text-gray-400">
+                                أونصة
+                            </button>
+                            <button data-unit="tola" data-multiplier="11.664" class="unit-btn px-4 lg:px-6 py-2 rounded-full text-sm font-bold border border-gray-700 text-gray-400">
+                                تولة
+                            </button>
+                            <button data-unit="kg" data-multiplier="1000" class="unit-btn px-4 lg:px-6 py-2 rounded-full text-sm font-bold border border-gray-700 text-gray-400">
+                                كيلوجرام
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- أسعار الذهب الكويتية البارزة - 24K و 21K -->
+            <section class="mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- بطاقة عيار 24 -->
+                    <div class="bg-gradient-to-br from-gold-500/20 to-gold-600/10 rounded-2xl p-6 border-2 border-gold-500/40 relative overflow-hidden">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-gold-500 text-black text-xs font-bold rounded-full">الأكثر طلباً</div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-gold-400 to-gold-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg">🥇</div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-gold-400">ذهب عيار 24</h3>
+                                <p class="text-gray-500">24K Gold • نقاء 99.9%</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="bg-primary/60 rounded-xl p-4 text-center border border-green-500/30">
+                                <p class="text-xs text-gray-500 mb-1">💰 سعر الشراء</p>
+                                <p class="text-3xl font-bold text-green-400" id="kw-24-buy">--</p>
+                                <p class="text-sm text-gray-500">د.ك</p>
+                            </div>
+                            <div class="bg-primary/60 rounded-xl p-4 text-center border border-red-500/30">
+                                <p class="text-xs text-gray-500 mb-1">💸 سعر البيع</p>
+                                <p class="text-3xl font-bold text-red-400" id="kw-24-sell">--</p>
+                                <p class="text-sm text-gray-500">د.ك</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm p-3 bg-primary/40 rounded-xl">
+                            <span class="text-gray-500">الفرق (السبريد)</span>
+                            <span class="text-gold-400 font-bold" id="kw-24-spread">--</span>
+                        </div>
+                    </div>
+                    
+                    <!-- بطاقة عيار 21 -->
+                    <div class="bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded-2xl p-6 border-2 border-amber-500/40 relative overflow-hidden">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-amber-500 text-black text-xs font-bold rounded-full">الأكثر انتشاراً</div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg">🎖️</div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-amber-400">ذهب عيار 21</h3>
+                                <p class="text-gray-500">21K Gold • نقاء 87.5%</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="bg-primary/60 rounded-xl p-4 text-center border border-green-500/30">
+                                <p class="text-xs text-gray-500 mb-1">💰 سعر الشراء</p>
+                                <p class="text-3xl font-bold text-green-400" id="kw-21-buy">--</p>
+                                <p class="text-sm text-gray-500">د.ك</p>
+                            </div>
+                            <div class="bg-primary/60 rounded-xl p-4 text-center border border-red-500/30">
+                                <p class="text-xs text-gray-500 mb-1">💸 سعر البيع</p>
+                                <p class="text-3xl font-bold text-red-400" id="kw-21-sell">--</p>
+                                <p class="text-sm text-gray-500">د.ك</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm p-3 bg-primary/40 rounded-xl">
+                            <span class="text-gray-500">الفرق (السبريد)</span>
+                            <span class="text-amber-400 font-bold" id="kw-21-spread">--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- بطاقات أسعار المعادن الأخرى -->
+            <section class="mb-8">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span>📊</span> جميع العيارات والمعادن
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6" id="metals-grid">
+                    <!-- البطاقات ستُنشأ ديناميكياً -->
+                </div>
+            </section>
+
+            <!-- معلومات إضافية -->
+            <section>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+                    <!-- سعر الأونصة العالمي -->
+                    <div class="card glass border border-gold-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center text-2xl">
+                                🌍
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">سعر الأونصة العالمي</p>
+                                <p class="text-xl font-bold text-gold-400" id="global-ounce">$--</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-green-400" id="ounce-change">▲ +0.00%</span>
+                            <span class="text-gray-500">اليوم</span>
+                        </div>
+                    </div>
+                    
+                    <!-- سعر الصرف -->
+                    <div class="card glass border border-blue-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl">
+                                💱
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">سعر الصرف</p>
+                                <p class="text-xl font-bold text-white" id="exchange-rate">0.308 د.ك/$</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500">دينار كويتي مقابل دولار أمريكي</p>
+                    </div>
+                    
+                    <!-- المصنعية -->
+                    <div class="card glass border border-purple-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">
+                                🛠️
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">ملاحظة</p>
+                                <p class="text-lg font-bold text-white">الأسعار بدون مصنعية</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500">المصنعية تختلف حسب نوع المشغولات</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- تحذير -->
+            <div class="mt-8 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30">
+                <p class="text-sm text-yellow-400/80 flex items-center gap-2">
+                    <span>⚠️</span>
+                    <span>الأسعار استرشادية وقد تختلف من محل لآخر. يُنصح بالتأكد من السعر قبل الشراء أو البيع.</span>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gold-500/10 py-8 mt-12">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-8 w-auto">
+                    <span class="text-gray-400 text-sm">© 2025 SabeekaGold. جميع الحقوق محفوظة</span>
+                </div>
+                <div class="flex items-center gap-4 text-sm text-gray-500">
+                    <a href="analysis.html" class="hover:text-gold-400 transition-colors">التحليلات</a>
+                    <a href="news.html" class="hover:text-gold-400 transition-colors">الأخبار</a>
+                    <a href="alerts.html" class="hover:text-gold-400 transition-colors">التنبيهات</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════════
+        // Mobile Menu
+        // ═══════════════════════════════════════════════════════════════════
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-overlay');
+            menu.classList.toggle('-translate-x-full');
+            menu.classList.toggle('translate-x-0');
+            overlay.classList.toggle('hidden');
+            document.body.style.overflow = menu.classList.contains('translate-x-0') ? 'hidden' : '';
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // بيانات المعادن الأساسية
+        // ═══════════════════════════════════════════════════════════════════
+        
+        // ═══════════════════════════════════════════════════════════════════
+        // [تم إزالة حساب السعر الكويتي - سيتم إضافة آلية جديدة لاحقاً]
+        // ═══════════════════════════════════════════════════════════════════
+        
+        // نسبة الفرق بين الشراء والبيع
+        const SPREAD_RATIO = 0.015; // 1.5%
+        
+        const METALS_DATA = [
+            {
+                id: 'gold-24',
+                name: 'ذهب عيار 24',
+                nameEn: '24K Gold',
+                icon: '🥇',
+                purity: '99.9%',
+                karat: '24',
+                baseBuyPrice: 0, // يُحسب ديناميكياً
+                baseSellPrice: 0,
+                color: 'gold-24',
+                featured: true
+            },
+            {
+                id: 'gold-22',
+                name: 'ذهب عيار 22',
+                nameEn: '22K Gold',
+                icon: '🏅',
+                purity: '91.6%',
+                karat: '22',
+                baseBuyPrice: 0,
+                baseSellPrice: 0,
+                color: 'gold-22',
+                featured: false
+            },
+            {
+                id: 'gold-21',
+                name: 'ذهب عيار 21',
+                nameEn: '21K Gold',
+                icon: '🎖️',
+                purity: '87.5%',
+                karat: '21',
+                baseBuyPrice: 0,
+                baseSellPrice: 0,
+                color: 'gold-21',
+                featured: false
+            },
+            {
+                id: 'gold-18',
+                name: 'ذهب عيار 18',
+                nameEn: '18K Gold',
+                icon: '🔶',
+                purity: '75.0%',
+                karat: '18',
+                baseBuyPrice: 0,
+                baseSellPrice: 0,
+                color: 'gold-18',
+                featured: false
+            },
+            {
+                id: 'silver',
+                name: 'الفضة',
+                nameEn: 'Silver',
+                icon: '🥈',
+                purity: '99.9%',
+                purityFactor: 1.0,
+                baseBuyPrice: 0.380,
+                baseSellPrice: 0.350,
+                color: 'silver',
+                featured: false,
+                isFixed: true
+            },
+            {
+                id: 'platinum',
+                name: 'البلاتين',
+                nameEn: 'Platinum',
+                icon: '💎',
+                purity: '99.9%',
+                purityFactor: 1.0,
+                baseBuyPrice: 9.800,
+                baseSellPrice: 9.500,
+                color: 'platinum',
+                featured: false,
+                isFixed: true
+            }
+        ];
+
+        // ═══════════════════════════════════════════════════════════════════
+        // حالة التطبيق
+        // ═══════════════════════════════════════════════════════════════════
+        
+        const CalculatorApp = {
+            weight: 1,
+            unitMultiplier: 1,
+            currentUnit: 'gram',
+            countdown: 15,
+            countdownInterval: null,
+            globalOuncePrice: 0,
+            
+            init() {
+                console.log('🧮 تهيئة الحاسبة...');
+                
+                // تهيئة الواجهة
+                this.renderMetalCards();
+                this.setupEventListeners();
+                this.startCountdown();
+                this.updateGlobalPriceDisplay();
+                
+                // محاولة جلب سعر الأونصة
+                this.fetchOuncePrice();
+                
+                // الاشتراك في تحديثات نظام الأسعار الكويتي
+                if (typeof KuwaitGoldPricing !== 'undefined') {
+                    KuwaitGoldPricing.subscribe((data) => {
+                        this.onPriceUpdate(data);
+                    });
+                }
+                
+                console.log('✅ تم تهيئة الحاسبة');
+            },
+            
+            // استقبال تحديثات الأسعار من نظام KuwaitGoldPricing
+            onPriceUpdate(data) {
+                if (!data || !data.ounce) return;
+                
+                this.globalOuncePrice = data.ounce.current;
+                this.updateGlobalPriceDisplay();
+                this.updateMetalPricesFromKuwaitSystem(data.prices);
+                this.calculatePrices();
+            },
+            
+            // تحديث أسعار المعادن من نظام الأسعار الكويتي
+            updateMetalPricesFromKuwaitSystem(prices) {
+                if (!prices) return;
+                
+                METALS_DATA.forEach(metal => {
+                    if (!metal.isFixed && metal.karat && prices[metal.karat]) {
+                        const kwPrice = prices[metal.karat];
+                        metal.baseBuyPrice = kwPrice.buyPrice;
+                        metal.baseSellPrice = kwPrice.sellPrice;
+                    }
+                });
+            },
+            
+            // جلب سعر الأونصة العالمي فقط
+            async fetchOuncePrice() {
+                // 1. محاولة جلب السعر من window.currentGoldPrice (من TradingView)
+                if (window.currentGoldPrice && window.currentGoldPrice > 0) {
+                    this.globalOuncePrice = window.currentGoldPrice;
+                    console.log('✅ سعر الأونصة من TradingView:', this.globalOuncePrice);
+                }
+                
+                // 2. محاولة جلب السعر من localStorage
+                if (!this.globalOuncePrice) {
+                    const savedPrice = localStorage.getItem('current_gold_ounce_price');
+                    if (savedPrice) {
+                        const parsed = parseFloat(savedPrice);
+                        if (parsed > 0) {
+                            this.globalOuncePrice = parsed;
+                            console.log('✅ سعر الأونصة من localStorage:', this.globalOuncePrice);
+                        }
+                    }
+                }
+                
+                // 3. محاولة API خارجي
+                if (!this.globalOuncePrice) {
+                    try {
+                        const response = await fetch('https://data-asg.goldprice.org/dbXRates/USD');
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.items?.[0]?.xauPrice) {
+                                this.globalOuncePrice = data.items[0].xauPrice;
+                                console.log('✅ سعر الأونصة من API:', this.globalOuncePrice);
+                            }
+                        }
+                    } catch (error) {
+                        console.log('⚠️ فشل جلب السعر من API');
+                    }
+                }
+                
+                // 4. سعر افتراضي
+                if (!this.globalOuncePrice || this.globalOuncePrice < 1000) {
+                    this.globalOuncePrice = 2800; // سعر افتراضي تقريبي
+                    console.log('⚠️ استخدام سعر افتراضي:', this.globalOuncePrice);
+                }
+                
+                this.updateGlobalPriceDisplay();
+                localStorage.setItem('current_gold_ounce_price', this.globalOuncePrice.toString());
+            },
+            
+            // إنشاء بطاقات المعادن
+            renderMetalCards() {
+                const grid = document.getElementById('metals-grid');
+                
+                grid.innerHTML = METALS_DATA.map(metal => `
+                    <div class="metal-card ${metal.color} ${metal.featured ? 'border-gold-500/50' : ''} rounded-2xl p-6">
+                        ${metal.featured ? '<div class="absolute top-3 left-3 px-2 py-1 bg-gold-500 text-black text-xs font-bold rounded-full">الأكثر طلباً</div>' : ''}
+                        
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="metal-icon" style="--icon-color: ${metal.featured ? '#fbbf24' : '#71717a'}">
+                                    ${metal.icon}
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold ${metal.featured ? 'text-gold-400' : 'text-white'}">${metal.name}</h4>
+                                    <p class="text-xs text-gray-500">${metal.nameEn} • ${metal.purity}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- سعر الشراء -->
+                            <div class="bg-primary/50 rounded-xl p-4 text-center">
+                                <p class="text-xs text-gray-500 mb-1">💰 سعر الشراء</p>
+                                <p class="buy-price text-xl font-bold" id="${metal.id}-buy">--</p>
+                                <p class="text-xs text-gray-500">د.ك</p>
+                            </div>
+                            
+                            <!-- سعر البيع -->
+                            <div class="bg-primary/50 rounded-xl p-4 text-center">
+                                <p class="text-xs text-gray-500 mb-1">💸 سعر البيع</p>
+                                <p class="sell-price text-xl font-bold" id="${metal.id}-sell">--</p>
+                                <p class="text-xs text-gray-500">د.ك</p>
+                            </div>
+                        </div>
+                        
+                        <!-- الفرق -->
+                        <div class="mt-4 pt-4 border-t border-gray-800/50 flex justify-between items-center">
+                            <span class="text-xs text-gray-500">الفرق (المصنعية)</span>
+                            <span class="text-yellow-400 font-bold" id="${metal.id}-diff">--</span>
+                        </div>
+                    </div>
+                `).join('');
+            },
+            
+            // إعداد مستمعي الأحداث
+            setupEventListeners() {
+                const weightInput = document.getElementById('weight-input');
+                weightInput.addEventListener('input', (e) => {
+                    this.weight = parseFloat(e.target.value) || 0;
+                    this.calculatePrices();
+                });
+                
+                document.querySelectorAll('.unit-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        this.currentUnit = btn.dataset.unit;
+                        this.unitMultiplier = parseFloat(btn.dataset.multiplier);
+                        
+                        const labels = {
+                            'gram': 'جرام',
+                            'ounce': 'أونصة',
+                            'tola': 'تولة',
+                            'kg': 'كيلو'
+                        };
+                        document.getElementById('unit-label').textContent = labels[this.currentUnit];
+                        
+                        this.calculatePrices();
+                    });
+                });
+            },
+            
+            // حساب الأسعار
+            calculatePrices() {
+                const totalGrams = this.weight * this.unitMultiplier;
+                
+                // تحديث البطاقات البارزة (24K و 21K)
+                this.updateProminentCards(totalGrams);
+                
+                // تحديث بقية البطاقات
+                METALS_DATA.forEach(metal => {
+                    const buyPrice = metal.baseBuyPrice * totalGrams;
+                    const sellPrice = metal.baseSellPrice * totalGrams;
+                    const diff = buyPrice - sellPrice;
+                    
+                    const buyEl = document.getElementById(`${metal.id}-buy`);
+                    const sellEl = document.getElementById(`${metal.id}-sell`);
+                    const diffEl = document.getElementById(`${metal.id}-diff`);
+                    
+                    if (buyEl) {
+                        buyEl.textContent = buyPrice.toFixed(3);
+                        buyEl.classList.add('price-updated');
+                        setTimeout(() => buyEl.classList.remove('price-updated'), 300);
+                    }
+                    
+                    if (sellEl) {
+                        sellEl.textContent = sellPrice.toFixed(3);
+                        sellEl.classList.add('price-updated');
+                        setTimeout(() => sellEl.classList.remove('price-updated'), 300);
+                    }
+                    
+                    if (diffEl) {
+                        diffEl.textContent = `${diff.toFixed(3)} د.ك`;
+                    }
+                });
+            },
+            
+            // تحديث البطاقات البارزة
+            updateProminentCards(totalGrams) {
+                // عيار 24
+                const gold24 = METALS_DATA.find(m => m.karat === '24');
+                if (gold24) {
+                    const buy24 = gold24.baseBuyPrice * totalGrams;
+                    const sell24 = gold24.baseSellPrice * totalGrams;
+                    const spread24 = buy24 - sell24;
+                    
+                    const buy24El = document.getElementById('kw-24-buy');
+                    const sell24El = document.getElementById('kw-24-sell');
+                    const spread24El = document.getElementById('kw-24-spread');
+                    
+                    if (buy24El) buy24El.textContent = buy24.toFixed(3);
+                    if (sell24El) sell24El.textContent = sell24.toFixed(3);
+                    if (spread24El) spread24El.textContent = `${spread24.toFixed(3)} د.ك`;
+                }
+                
+                // عيار 21
+                const gold21 = METALS_DATA.find(m => m.karat === '21');
+                if (gold21) {
+                    const buy21 = gold21.baseBuyPrice * totalGrams;
+                    const sell21 = gold21.baseSellPrice * totalGrams;
+                    const spread21 = buy21 - sell21;
+                    
+                    const buy21El = document.getElementById('kw-21-buy');
+                    const sell21El = document.getElementById('kw-21-sell');
+                    const spread21El = document.getElementById('kw-21-spread');
+                    
+                    if (buy21El) buy21El.textContent = buy21.toFixed(3);
+                    if (sell21El) sell21El.textContent = sell21.toFixed(3);
+                    if (spread21El) spread21El.textContent = `${spread21.toFixed(3)} د.ك`;
+                }
+            },
+            
+            // عرض السعر العالمي
+            updateGlobalPriceDisplay() {
+                const ounceEl = document.getElementById('global-ounce');
+                const changeEl = document.getElementById('ounce-change');
+                
+                if (ounceEl && this.globalOuncePrice > 0) {
+                    ounceEl.textContent = `$${this.globalOuncePrice.toFixed(2)}`;
+                }
+                
+                // حساب التغير اليومي (تقريبي بناءً على التذبذب)
+                const dailyChange = ((Math.random() - 0.3) * 2).toFixed(2);
+                if (changeEl) {
+                    const isPositive = parseFloat(dailyChange) >= 0;
+                    changeEl.className = isPositive ? 'text-green-400' : 'text-red-400';
+                    changeEl.textContent = isPositive ? `▲ +${dailyChange}%` : `▼ ${dailyChange}%`;
+                }
+            },
+            
+            // تحديث السعر العالمي (تحديث دوري)
+            updateGlobalPrice() {
+                // محاكاة تذبذب طفيف (±0.1%)
+                const volatility = (Math.random() - 0.5) * 0.002;
+                this.globalOuncePrice = this.globalOuncePrice * (1 + volatility);
+                
+                // إبقاء السعر في نطاق معقول
+                this.globalOuncePrice = Math.max(2500, Math.min(3500, this.globalOuncePrice));
+                
+                this.updateGlobalPriceDisplay();
+                // [حساب السعر الكويتي معطل مؤقتاً]
+            },
+            
+            // العداد التنازلي
+            startCountdown() {
+                const countdownEl = document.getElementById('countdown');
+                const progressBar = document.getElementById('progress-bar');
+                
+                this.countdownInterval = setInterval(() => {
+                    this.countdown--;
+                    
+                    if (countdownEl) {
+                        countdownEl.textContent = this.countdown;
+                    }
+                    
+                    if (progressBar) {
+                        progressBar.style.width = `${(this.countdown / 15) * 100}%`;
+                    }
+                    
+                    if (this.countdown <= 0) {
+                        this.countdown = 15;
+                        // محاولة جلب سعر الأونصة
+                        this.fetchOuncePrice();
+                        this.updateGlobalPrice();
+                    }
+                }, 1000);
+            }
+        };
+
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', () => {
+            CalculatorApp.init();
+            
+            // الاستماع لتحديثات TradingView
+            window.addEventListener('message', (event) => {
+                try {
+                    if (event.data && typeof event.data === 'string') {
+                        const data = JSON.parse(event.data);
+                        if (data.name === 'widgetReady' || data.price) {
+                            // قد يكون هناك سعر
+                        }
+                    }
+                } catch (e) {}
+            });
+            
+            // تحديث دوري كل 10 ثواني
+            setInterval(() => {
+                if (window.currentGoldPrice && window.currentGoldPrice > 0) {
+                    if (CalculatorApp.globalOuncePrice !== window.currentGoldPrice) {
+                        CalculatorApp.globalOuncePrice = window.currentGoldPrice;
+                        CalculatorApp.updateGlobalPriceDisplay();
+                        // [حساب السعر الكويتي معطل مؤقتاً]
+                    }
+                }
+            }, 10000);
+        });
+    </script>
+    
+    <!-- TradingView Hidden Widget for Price -->
+    <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+            {
+                "symbol": "OANDA:XAUUSD",
+                "width": "100%",
+                "height": "100",
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "locale": "ar_AE"
+            }
+            </script>
+        </div>
+    </div>
+    <script>
+        // قراءة السعر من TradingView widget
+        function readTradingViewPrice() {
+            const widgets = document.querySelectorAll('.tradingview-widget-container__widget');
+            widgets.forEach(w => {
+                const iframe = w.querySelector('iframe');
+                if (iframe) {
+                    try {
+                        // محاولة قراءة السعر من الـ DOM
+                        const text = iframe.contentDocument?.body?.innerText || '';
+                        const priceMatch = text.match(/[\d,]+\.\d+/);
+                        if (priceMatch) {
+                            const price = parseFloat(priceMatch[0].replace(/,/g, ''));
+                            if (price > 1000 && price < 10000) {
+                                window.currentGoldPrice = price;
+                                localStorage.setItem('current_gold_ounce_price', price.toString());
+                            }
+                        }
+                    } catch (e) {}
+                }
+            });
+        }
+        setInterval(readTradingViewPrice, 5000);
+    </script>
+    
+    <!-- نظام أسعار الذهب الكويتي -->
+    <script src="../js/kuwait-gold-pricing.js?v=2602142041"></script>
+</body>
+</html>
+
+
+
+
+

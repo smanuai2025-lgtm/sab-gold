@@ -1,0 +1,6 @@
+@MrGoldenBader.API_HostAddress = http://localhost:5276
+
+GET {{MrGoldenBader.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

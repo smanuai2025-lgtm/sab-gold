@@ -1,0 +1,16 @@
+{
+  "name": "mrgoldenbader-frontend",
+  "version": "1.0.0",
+  "description": "Mr. Golden Bader - Frontend",
+  "scripts": {
+    "build:tailwind": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css",
+    "watch:tailwind": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --watch",
+    "dev": "npm run watch:tailwind",
+    "build": "npm run build:tailwind"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16"
+  }
+}

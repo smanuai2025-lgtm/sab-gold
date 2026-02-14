@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - SabeekaGold</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { font-family: 'Cairo', sans-serif; box-sizing: border-box; }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+        
+        .auth-bg {
+            background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 50%, #0a0e17 100%);
+            min-height: 100vh;
+            min-height: 100dvh;
+            position: relative;
+        }
+        
+        .auth-bg::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(218, 165, 32, 0.06) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.04) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        .glass-card {
+            background: rgba(26, 31, 46, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .input-field {
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid rgba(113, 113, 122, 0.3);
+            transition: all 0.3s ease;
+            font-size: 16px; /* منع التكبير في iOS */
+        }
+        
+        .input-field:focus {
+            border-color: rgba(218, 165, 32, 0.6);
+            box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.1);
+            outline: none;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #DAA520 0%, #FFD700 50%, #B8860B 100%);
+            color: #0a0e17;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3);
+        }
+        
+        .btn-gold:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(113, 113, 122, 0.3), transparent);
+        }
+        
+        .social-btn {
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid rgba(113, 113, 122, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            border-color: rgba(218, 165, 32, 0.4);
+            background: rgba(218, 165, 32, 0.05);
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 640px) {
+            .glass-card {
+                padding: 1.5rem !important;
+                border-radius: 1.25rem !important;
+            }
+            .auth-container {
+                padding: 1rem !important;
+            }
+            .logo-section img {
+                height: 3rem !important;
+            }
+            .logo-section h1 {
+                font-size: 1.25rem !important;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .auth-container {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+            .logo-section {
+                margin-bottom: 1rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="auth-bg">
+    <div class="auth-container relative z-10 min-h-screen min-h-[100dvh] flex items-center justify-center p-4 py-6 sm:py-8">
+        <div class="w-full max-w-sm sm:max-w-md">
+            <!-- Logo -->
+            <div class="logo-section text-center mb-6 sm:mb-8">
+                <a href="../index.html" class="inline-block">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-12 sm:h-14 mx-auto mb-3">
+                </a>
+                <h1 class="text-xl sm:text-2xl font-bold text-white mb-1">مرحباً بعودتك</h1>
+                <p class="text-zinc-400 text-sm sm:text-base">سجل دخولك للوصول إلى حسابك</p>
+            </div>
+            
+            <!-- Login Card -->
+            <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+                <!-- Error Message -->
+                <div id="error-message" class="hidden mb-4 sm:mb-6 p-3 sm:p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-400 text-sm text-center"></div>
+                
+                <!-- Login Form -->
+                <form id="login-form" class="space-y-4 sm:space-y-5">
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">البريد الإلكتروني</label>
+                        <div class="relative">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                                </svg>
+                            </span>
+                            <input type="email" id="email" required
+                                class="input-field w-full pr-12 pl-4 py-3 rounded-xl text-white placeholder-zinc-500"
+                                placeholder="example@email.com">
+                        </div>
+                    </div>
+                    
+                    <!-- Password -->
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">كلمة المرور</label>
+                        <div class="relative">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </span>
+                            <input type="password" id="password" required
+                                class="input-field w-full pr-12 pl-12 py-3 rounded-xl text-white placeholder-zinc-500"
+                                placeholder="••••••••">
+                            <button type="button" onclick="togglePassword()" class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-gold-400 transition-colors">
+                                <svg id="eye-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Remember & Forgot -->
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="remember" class="w-4 h-4 rounded border-zinc-600 bg-zinc-800 text-gold-500 focus:ring-gold-500">
+                            <span class="text-sm text-zinc-400">تذكرني</span>
+                        </label>
+                        <a href="#" class="text-sm text-gold-400 hover:text-gold-300 transition-colors">نسيت كلمة المرور؟</a>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-gold w-full py-3.5 rounded-xl text-lg">
+                        تسجيل الدخول
+                    </button>
+                </form>
+                
+                <!-- Divider -->
+                <div class="divider my-6 text-zinc-500 text-sm">أو</div>
+                
+                <!-- Google Login -->
+                <button id="google-login-btn" onclick="signInWithGoogle()" class="social-btn w-full flex items-center justify-center gap-3 py-3.5 rounded-xl text-zinc-300 hover:text-white hover:border-blue-500/50 transition-all">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    <span>المتابعة مع Google</span>
+                </button>
+                
+                <!-- Register Link -->
+                <p class="text-center mt-6 text-zinc-400">
+                    ليس لديك حساب؟
+                    <a href="register.html" class="text-gold-400 hover:text-gold-300 font-medium transition-colors">إنشاء حساب جديد</a>
+                </p>
+            </div>
+            
+            <!-- Back to Home -->
+            <div class="text-center mt-6">
+                <a href="../index.html" class="text-zinc-500 hover:text-gold-400 transition-colors text-sm flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                    العودة للرئيسية
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <script src="../js/auth.js"></script>
+    <script>
+        // ═══════════════════════════════════════════════════════════════════
+        // إعدادات Google OAuth - ضع المفاتيح هنا
+        // ═══════════════════════════════════════════════════════════════════
+        const GOOGLE_CONFIG = {
+            // ضع Client ID الخاص بك من Google Cloud Console
+            // https://console.cloud.google.com/apis/credentials
+            CLIENT_ID: '303513528321-1m9b4pqkaq7u5nhv6408q0elc2pn1721.apps.googleusercontent.com',
+            
+            // Redirect URI (يجب إضافته في Google Console)
+            REDIRECT_URI: window.location.origin + '/pages/login.html'
+        };
+        
+        // ═══════════════════════════════════════════════════════════════════
+        // تهيئة Google Sign-In
+        // ═══════════════════════════════════════════════════════════════════
+        function initGoogleSignIn() {
+            if (typeof google !== 'undefined' && GOOGLE_CONFIG.CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
+                google.accounts.id.initialize({
+                    client_id: GOOGLE_CONFIG.CLIENT_ID,
+                    callback: handleGoogleCallback,
+                    auto_select: false,
+                    cancel_on_tap_outside: true
+                });
+            }
+        }
+        
+        // تسجيل الدخول بـ Google - استخدام OAuth redirect مباشرةً
+        function signInWithGoogle() {
+            const errorDiv = document.getElementById('error-message');
+            
+            // التحقق من إعداد المفتاح
+            if (GOOGLE_CONFIG.CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
+                errorDiv.innerHTML = `
+                    <div class="text-right">
+                        <p class="font-bold mb-1">⚠️ مطلوب إعداد Google OAuth</p>
+                        <p class="text-xs opacity-80">يجب إضافة Client ID من Google Cloud Console</p>
+                    </div>
+                `;
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            // استخدام OAuth redirect مباشرةً (أكثر موثوقية)
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+                `client_id=${GOOGLE_CONFIG.CLIENT_ID}` +
+                `&redirect_uri=${encodeURIComponent(GOOGLE_CONFIG.REDIRECT_URI)}` +
+                `&response_type=token` +
+                `&scope=email%20profile` +
+                `&prompt=select_account`;
+            
+            window.location.href = authUrl;
+        }
+        
+        // معالجة استجابة Google
+        function handleGoogleCallback(response) {
+            const credential = response.credential;
+            
+            // فك تشفير JWT للحصول على بيانات المستخدم
+            const payload = JSON.parse(atob(credential.split('.')[1]));
+            
+            const googleUser = {
+                id: 'google_' + payload.sub,
+                name: payload.name,
+                email: payload.email,
+                avatar: payload.picture,
+                provider: 'google'
+            };
+            
+            // تسجيل أو تسجيل دخول المستخدم
+            handleSocialLogin(googleUser);
+        }
+        
+        // معالجة تسجيل الدخول الاجتماعي
+        function handleSocialLogin(userData) {
+            // البحث عن المستخدم أو إنشاء حساب جديد
+            let users = [];
+            try {
+                users = JSON.parse(localStorage.getItem('sabeeka_users')) || [];
+            } catch (e) {
+                users = [];
+            }
+            
+            let user = users.find(u => u.email === userData.email);
+            
+            if (!user) {
+                // إنشاء مستخدم جديد
+                user = {
+                    id: userData.id,
+                    name: userData.name,
+                    email: userData.email,
+                    avatar: userData.avatar || null,
+                    password: null, // لا يوجد كلمة مرور للحسابات الاجتماعية
+                    role: 'user',
+                    provider: userData.provider,
+                    createdAt: new Date().toISOString()
+                };
+                users.push(user);
+                localStorage.setItem('sabeeka_users', JSON.stringify(users));
+            }
+            
+            // إنشاء جلسة
+            const session = {
+                userId: user.id,
+                token: 'social_' + Date.now(),
+                expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+                createdAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('sabeeka_session', JSON.stringify(session));
+            localStorage.setItem('sabeeka_current_user', JSON.stringify({ ...user, password: undefined }));
+            
+            // التوجيه
+            window.location.href = '../index.html';
+        }
+        
+        // التحقق من OAuth redirect
+        function checkOAuthRedirect() {
+            const hash = window.location.hash;
+            if (hash.includes('access_token')) {
+                const params = new URLSearchParams(hash.substring(1));
+                const accessToken = params.get('access_token');
+                
+                if (accessToken) {
+                    // الحصول على بيانات المستخدم من Google API
+                    fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+                        headers: { Authorization: `Bearer ${accessToken}` }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        handleSocialLogin({
+                            id: 'google_' + data.id,
+                            name: data.name,
+                            email: data.email,
+                            avatar: data.picture,
+                            provider: 'google'
+                        });
+                    })
+                    .catch(err => {
+                        console.error('Google API Error:', err);
+                        document.getElementById('error-message').textContent = 'خطأ في الحصول على بيانات الحساب';
+                        document.getElementById('error-message').classList.remove('hidden');
+                    });
+                }
+                
+                // مسح الـ hash من URL
+                history.replaceState(null, '', window.location.pathname);
+            }
+        }
+        
+        // ═══════════════════════════════════════════════════════════════════
+        // الدوال الأساسية
+        // ═══════════════════════════════════════════════════════════════════
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                `;
+            }
+        }
+        
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            const errorDiv = document.getElementById('error-message');
+            
+            errorDiv.classList.add('hidden');
+            
+            const result = AuthService.login(email, password, remember);
+            
+            if (result.success) {
+                // Redirect based on role
+                if (result.user.role === 'admin') {
+                    window.location.href = '../admin/dashboard.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            } else {
+                errorDiv.textContent = result.error;
+                errorDiv.classList.remove('hidden');
+            }
+        });
+        
+        // تهيئة عند تحميل الصفحة
+        window.addEventListener('load', () => {
+            checkOAuthRedirect();
+            initGoogleSignIn();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

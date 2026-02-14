@@ -1,0 +1,119 @@
+# ═══════════════════════════════════════════════════════════════════
+# SabeekaGold - Docker Compose Production
+# ═══════════════════════════════════════════════════════════════════
+
+version: '3.8'
+
+services:
+  # ═══════════════════════════════════════════════════════════════════
+  # Frontend (Nginx)
+  # ═══════════════════════════════════════════════════════════════════
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sabeekagold-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./ssl:/etc/nginx/ssl:ro
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - sabeekagold-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═══════════════════════════════════════════════════════════════════
+  # Backend (.NET API)
+  # ═══════════════════════════════════════════════════════════════════
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: sabeekagold-backend
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=${DATABASE_CONNECTION_STRING}
+      - ConnectionStrings__Redis=${REDIS_CONNECTION_STRING}
+      - Jwt__Key=${JWT_SECRET_KEY}
+      - AllowedHosts=${ALLOWED_HOSTS}
+      - AllowedOrigins=${ALLOWED_ORIGINS}
+    volumes:
+      - ./logs:/var/log/sabeekagold
+    depends_on:
+      - redis
+      - sqlserver
+    networks:
+      - sabeekagold-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═══════════════════════════════════════════════════════════════════
+  # SQL Server Database
+  # ═══════════════════════════════════════════════════════════════════
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sabeekagold-db
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${DB_SA_PASSWORD}
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - sabeekagold-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${DB_SA_PASSWORD}", "-Q", "SELECT 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═══════════════════════════════════════════════════════════════════
+  # Redis Cache
+  # ═══════════════════════════════════════════════════════════════════
+  redis:
+    image: redis:7-alpine
+    container_name: sabeekagold-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - sabeekagold-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# ═══════════════════════════════════════════════════════════════════
+# Volumes
+# ═══════════════════════════════════════════════════════════════════
+volumes:
+  sqlserver-data:
+    driver: local
+  redis-data:
+    driver: local
+
+# ═══════════════════════════════════════════════════════════════════
+# Networks
+# ═══════════════════════════════════════════════════════════════════
+networks:
+  sabeekagold-network:
+    driver: bridge

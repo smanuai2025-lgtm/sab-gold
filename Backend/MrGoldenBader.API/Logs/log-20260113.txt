@@ -1,0 +1,207 @@
+2026-01-13 23:37:12.820 +03:00 [WRN] No store type was specified for the decimal property 'Volume' on entity type 'GoldPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.863 +03:00 [WRN] No store type was specified for the decimal property 'ChangePercent' on entity type 'KuwaitGoldPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.866 +03:00 [WRN] No store type was specified for the decimal property 'ChangeValue' on entity type 'KuwaitGoldPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.868 +03:00 [WRN] No store type was specified for the decimal property 'MeanAbsoluteError' on entity type 'ModelPerformance'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.869 +03:00 [WRN] No store type was specified for the decimal property 'ActualPriceAtExpiry' on entity type 'Recommendation'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.870 +03:00 [WRN] No store type was specified for the decimal property 'TargetPrice' on entity type 'Recommendation'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.995 +03:00 [WRN] No store type was specified for the decimal property 'Volume' on entity type 'GoldPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.997 +03:00 [WRN] No store type was specified for the decimal property 'ChangePercent' on entity type 'KuwaitGoldPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:12.999 +03:00 [WRN] No store type was specified for the decimal property 'ChangeValue' on entity type 'KuwaitGoldPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:13.000 +03:00 [WRN] No store type was specified for the decimal property 'MeanAbsoluteError' on entity type 'ModelPerformance'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:13.002 +03:00 [WRN] No store type was specified for the decimal property 'ActualPriceAtExpiry' on entity type 'Recommendation'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:37:13.004 +03:00 [WRN] No store type was specified for the decimal property 'TargetPrice' on entity type 'Recommendation'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-13 23:52:48.583 +03:00 [INF] Executed DbCommand (293ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [MrGoldenBaderDb_Dev];
+2026-01-13 23:52:48.722 +03:00 [INF] Executed DbCommand (106ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [MrGoldenBaderDb_Dev] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2026-01-13 23:52:48.738 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-01-13 23:52:48.798 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2026-01-13 23:52:48.802 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-01-13 23:52:48.815 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-01-13 23:52:48.842 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-01-13 23:52:48.854 +03:00 [INF] Applying migration '20260113203713_InitialCreate'.
+2026-01-13 23:52:48.892 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Alerts] (
+    [Id] uniqueidentifier NOT NULL,
+    [Type] nvarchar(450) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Message] nvarchar(max) NOT NULL,
+    [Severity] nvarchar(max) NOT NULL,
+    [IsRead] bit NOT NULL,
+    [IsSent] bit NOT NULL,
+    [SentAt] datetime2 NULL,
+    [RelatedEntityId] uniqueidentifier NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_Alerts] PRIMARY KEY ([Id])
+);
+2026-01-13 23:52:48.898 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [GoldPrices] (
+    [Id] uniqueidentifier NOT NULL,
+    [Timestamp] datetime2 NOT NULL,
+    [Open] decimal(18,4) NOT NULL,
+    [High] decimal(18,4) NOT NULL,
+    [Low] decimal(18,4) NOT NULL,
+    [Close] decimal(18,4) NOT NULL,
+    [Volume] decimal(18,2) NULL,
+    [TimeFrame] nvarchar(450) NOT NULL,
+    [Source] nvarchar(max) NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_GoldPrices] PRIMARY KEY ([Id])
+);
+2026-01-13 23:52:48.901 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [KuwaitGoldPrices] (
+    [Id] uniqueidentifier NOT NULL,
+    [Timestamp] datetime2 NOT NULL,
+    [Karat] int NOT NULL,
+    [BuyPrice] decimal(18,4) NOT NULL,
+    [SellPrice] decimal(18,4) NOT NULL,
+    [ChangePercent] decimal(18,2) NULL,
+    [ChangeValue] decimal(18,2) NULL,
+    [Source] nvarchar(max) NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_KuwaitGoldPrices] PRIMARY KEY ([Id])
+);
+2026-01-13 23:52:48.904 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [ModelPerformances] (
+    [Id] uniqueidentifier NOT NULL,
+    [ModelName] nvarchar(450) NOT NULL,
+    [EvaluationDate] datetime2 NOT NULL,
+    [TotalPredictions] int NOT NULL,
+    [CorrectPredictions] int NOT NULL,
+    [AccuracyRate] decimal(5,2) NOT NULL,
+    [MeanAbsoluteError] decimal(18,2) NULL,
+    [Notes] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_ModelPerformances] PRIMARY KEY ([Id])
+);
+2026-01-13 23:52:48.908 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Recommendations] (
+    [Id] uniqueidentifier NOT NULL,
+    [Type] nvarchar(max) NOT NULL,
+    [Reason] nvarchar(max) NOT NULL,
+    [ConfidenceScore] decimal(5,2) NOT NULL,
+    [PriceAtRecommendation] decimal(18,4) NOT NULL,
+    [TargetPrice] decimal(18,2) NULL,
+    [TimeHorizon] nvarchar(max) NOT NULL,
+    [ExpiresAt] datetime2 NULL,
+    [IsActive] bit NOT NULL,
+    [ActualPriceAtExpiry] decimal(18,2) NULL,
+    [WasSuccessful] bit NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_Recommendations] PRIMARY KEY ([Id])
+);
+2026-01-13 23:52:48.913 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] uniqueidentifier NOT NULL,
+    [Username] nvarchar(450) NOT NULL,
+    [Email] nvarchar(450) NOT NULL,
+    [PasswordHash] nvarchar(max) NOT NULL,
+    [FullName] nvarchar(max) NOT NULL,
+    [IsActive] bit NOT NULL,
+    [LastLoginAt] datetime2 NULL,
+    [AlertSensitivity] int NOT NULL,
+    [PreferredCurrency] nvarchar(max) NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id])
+);
+2026-01-13 23:52:48.917 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Alerts_CreatedAt] ON [Alerts] ([CreatedAt]);
+2026-01-13 23:52:48.920 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Alerts_IsRead] ON [Alerts] ([IsRead]);
+2026-01-13 23:52:48.922 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Alerts_Type] ON [Alerts] ([Type]);
+2026-01-13 23:52:48.925 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_GoldPrices_Timestamp] ON [GoldPrices] ([Timestamp]);
+2026-01-13 23:52:48.928 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_GoldPrices_Timestamp_TimeFrame] ON [GoldPrices] ([Timestamp], [TimeFrame]);
+2026-01-13 23:52:48.931 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_KuwaitGoldPrices_Karat_Timestamp] ON [KuwaitGoldPrices] ([Karat], [Timestamp]);
+2026-01-13 23:52:48.933 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_KuwaitGoldPrices_Timestamp] ON [KuwaitGoldPrices] ([Timestamp]);
+2026-01-13 23:52:48.935 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ModelPerformances_EvaluationDate] ON [ModelPerformances] ([EvaluationDate]);
+2026-01-13 23:52:48.937 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ModelPerformances_ModelName] ON [ModelPerformances] ([ModelName]);
+2026-01-13 23:52:48.939 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Recommendations_CreatedAt] ON [Recommendations] ([CreatedAt]);
+2026-01-13 23:52:48.943 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Recommendations_IsActive] ON [Recommendations] ([IsActive]);
+2026-01-13 23:52:48.945 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [IX_Users_Email] ON [Users] ([Email]);
+2026-01-13 23:52:48.947 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [IX_Users_Username] ON [Users] ([Username]);
+2026-01-13 23:52:48.953 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260113203713_InitialCreate', N'8.0.0');
+2026-01-13 23:52:48.960 +03:00 [INF] Applying migration '20260113205004_AddDecimalPrecision'.
+2026-01-13 23:52:49.116 +03:00 [INF] Executed DbCommand (140ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Recommendations]') AND [c].[name] = N'TargetPrice');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Recommendations] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [Recommendations] ALTER COLUMN [TargetPrice] decimal(18,4) NULL;
+2026-01-13 23:52:49.139 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var1 sysname;
+SELECT @var1 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Recommendations]') AND [c].[name] = N'ActualPriceAtExpiry');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Recommendations] DROP CONSTRAINT [' + @var1 + '];');
+ALTER TABLE [Recommendations] ALTER COLUMN [ActualPriceAtExpiry] decimal(18,4) NULL;
+2026-01-13 23:52:49.158 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var2 sysname;
+SELECT @var2 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ModelPerformances]') AND [c].[name] = N'MeanAbsoluteError');
+IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [ModelPerformances] DROP CONSTRAINT [' + @var2 + '];');
+ALTER TABLE [ModelPerformances] ALTER COLUMN [MeanAbsoluteError] decimal(18,6) NULL;
+2026-01-13 23:52:49.181 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var3 sysname;
+SELECT @var3 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[KuwaitGoldPrices]') AND [c].[name] = N'ChangeValue');
+IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [KuwaitGoldPrices] DROP CONSTRAINT [' + @var3 + '];');
+ALTER TABLE [KuwaitGoldPrices] ALTER COLUMN [ChangeValue] decimal(18,4) NULL;
+2026-01-13 23:52:49.206 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var4 sysname;
+SELECT @var4 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[KuwaitGoldPrices]') AND [c].[name] = N'ChangePercent');
+IF @var4 IS NOT NULL EXEC(N'ALTER TABLE [KuwaitGoldPrices] DROP CONSTRAINT [' + @var4 + '];');
+ALTER TABLE [KuwaitGoldPrices] ALTER COLUMN [ChangePercent] decimal(10,4) NULL;
+2026-01-13 23:52:49.223 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var5 sysname;
+SELECT @var5 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[GoldPrices]') AND [c].[name] = N'Volume');
+IF @var5 IS NOT NULL EXEC(N'ALTER TABLE [GoldPrices] DROP CONSTRAINT [' + @var5 + '];');
+ALTER TABLE [GoldPrices] ALTER COLUMN [Volume] decimal(18,4) NULL;
+2026-01-13 23:52:49.226 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260113205004_AddDecimalPrecision', N'8.0.0');

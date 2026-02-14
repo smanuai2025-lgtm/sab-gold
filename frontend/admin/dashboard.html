@@ -1,0 +1,1006 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - SabeekaGold Admin</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+        
+        body {
+            background: #0f172a;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-left: 1px solid #334155;
+        }
+        
+        .nav-item {
+            transition: all 0.3s ease;
+            border-radius: 0.75rem;
+            margin: 0.25rem 0;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, transparent 100%);
+            border-right: 3px solid #6366f1;
+        }
+        
+        .nav-item.active {
+            color: #818cf8;
+        }
+        
+        .stat-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+        
+        .data-table {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+        
+        .data-table th {
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .data-table tr:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .chart-container {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+        }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+        }
+        
+        .setting-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        
+        .setting-card:hover {
+            border-color: #6366f1;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #334155;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            right: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(-24px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 fixed h-full z-20 flex flex-col">
+            <!-- Logo -->
+            <div class="p-6 border-b border-slate-700/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-white font-bold">SabeekaGold</h1>
+                        <p class="text-xs text-slate-400">لوحة التحكم</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="flex-1 p-4 overflow-y-auto">
+                <p class="text-xs text-slate-500 uppercase tracking-wider mb-3 px-3">القائمة الرئيسية</p>
+                
+                <a href="#dashboard" class="nav-item active flex items-center gap-3 px-4 py-3 text-slate-300" onclick="showSection('dashboard')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                    <span>الرئيسية</span>
+                </a>
+                
+                <a href="#users" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-300" onclick="showSection('users')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <span>المستخدمين</span>
+                </a>
+                
+                <a href="#reports" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-300" onclick="showSection('reports')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <span>التقارير</span>
+                </a>
+                
+                <a href="#settings" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-300" onclick="showSection('settings')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>الإعدادات</span>
+                </a>
+                
+                <p class="text-xs text-slate-500 uppercase tracking-wider mb-3 mt-6 px-3">إدارة المحتوى</p>
+                
+                <a href="#prices" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-300" onclick="showSection('prices')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>إدارة الأسعار</span>
+                    <span class="bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full mr-auto">💰</span>
+                </a>
+                
+                <a href="#alerts" class="nav-item flex items-center gap-3 px-4 py-3 text-slate-300" onclick="showSection('alerts')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                    </svg>
+                    <span>التنبيهات</span>
+                    <span class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded-full mr-auto">3</span>
+                </a>
+            </nav>
+            
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-slate-700/50">
+                <a href="../index.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-indigo-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                    </svg>
+                    <span>العودة للموقع</span>
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 mr-64">
+            <!-- Header -->
+            <header class="sticky top-0 z-10 bg-slate-900/80 backdrop-blur-xl border-b border-slate-700/50 px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 id="page-title" class="text-2xl font-bold text-white">لوحة التحكم</h1>
+                        <p id="page-subtitle" class="text-sm text-slate-400">مرحباً بك في لوحة تحكم SabeekaGold</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <!-- Notifications -->
+                        <button class="relative p-2 text-slate-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full pulse-dot"></span>
+                        </button>
+                        
+                        <!-- User Menu -->
+                        <div class="flex items-center gap-3 pr-4 border-r border-slate-700">
+                            <div class="text-left">
+                                <p id="admin-name" class="text-sm font-medium text-white">مدير النظام</p>
+                                <p class="text-xs text-slate-400">مسؤول</p>
+                            </div>
+                            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                                م
+                            </div>
+                        </div>
+                        
+                        <!-- Logout -->
+                        <button onclick="logout()" class="p-2 text-slate-400 hover:text-rose-400 transition-colors" title="تسجيل الخروج">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Sections -->
+            <div class="p-8">
+                <!-- Dashboard Section -->
+                <section id="section-dashboard" class="section-content">
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="stat-card rounded-2xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-emerald-400 text-sm font-medium">+12%</span>
+                            </div>
+                            <p id="stat-users" class="text-3xl font-bold text-white mb-1">0</p>
+                            <p class="text-slate-400 text-sm">إجمالي المستخدمين</p>
+                        </div>
+                        
+                        <div class="stat-card rounded-2xl overflow-hidden p-0" style="min-height: 130px;">
+                            <div class="tradingview-widget-container" style="height: 130px; width: 100%;">
+                                <div class="tradingview-widget-container__widget" style="height: 100%; width: 100%;"></div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                                {
+                                    "symbol": "OANDA:XAUUSD",
+                                    "width": "100%",
+                                    "height": "100%",
+                                    "locale": "ar_AE",
+                                    "dateRange": "1D",
+                                    "colorTheme": "dark",
+                                    "isTransparent": true,
+                                    "autosize": true,
+                                    "largeChartUrl": ""
+                                }
+                                </script>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card rounded-2xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                    </svg>
+                                </div>
+                                <span class="text-amber-400 text-sm font-medium">3 جديدة</span>
+                            </div>
+                            <p class="text-3xl font-bold text-white mb-1">24</p>
+                            <p class="text-slate-400 text-sm">التنبيهات النشطة</p>
+                        </div>
+                        
+                        <div class="stat-card rounded-2xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-purple-400 text-sm font-medium">هذا الشهر</span>
+                            </div>
+                            <p id="stat-new-users" class="text-3xl font-bold text-white mb-1">0</p>
+                            <p class="text-slate-400 text-sm">مستخدمين جدد</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="chart-container rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-white">النشاط الأخير</h3>
+                            <button class="text-sm text-indigo-400 hover:text-indigo-300">عرض الكل</button>
+                        </div>
+                        <div class="space-y-4" id="activity-list">
+                            <div class="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl">
+                                <div class="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-white font-medium">مستخدم جديد انضم</p>
+                                    <p class="text-sm text-slate-400">منذ 5 دقائق</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl">
+                                <div class="w-10 h-10 bg-amber-500/20 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-white font-medium">تحديث أسعار الذهب</p>
+                                    <p class="text-sm text-slate-400">منذ 15 دقيقة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Users Section -->
+                <section id="section-users" class="section-content hidden">
+                    <div class="data-table rounded-2xl overflow-hidden">
+                        <div class="p-6 border-b border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-bold text-white">قائمة المستخدمين</h3>
+                                <div class="flex gap-3">
+                                    <input type="text" placeholder="بحث..." class="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:border-indigo-500 focus:outline-none">
+                                </div>
+                            </div>
+                        </div>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-right text-slate-400 text-sm">
+                                    <th class="px-6 py-4">المستخدم</th>
+                                    <th class="px-6 py-4">البريد الإلكتروني</th>
+                                    <th class="px-6 py-4">الدور</th>
+                                    <th class="px-6 py-4">تاريخ التسجيل</th>
+                                    <th class="px-6 py-4">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body" class="text-slate-300">
+                                <!-- سيتم ملؤها بـ JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Reports Section -->
+                <section id="section-reports" class="section-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="chart-container rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-white mb-6">تقرير المستخدمين</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <span class="text-slate-300">إجمالي المستخدمين</span>
+                                    <span id="report-total-users" class="text-white font-bold">0</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <span class="text-slate-300">المسؤولين</span>
+                                    <span id="report-admins" class="text-white font-bold">0</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <span class="text-slate-300">المستخدمين العاديين</span>
+                                    <span id="report-users" class="text-white font-bold">0</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <span class="text-slate-300">تسجيلات هذا الشهر</span>
+                                    <span id="report-this-month" class="text-white font-bold">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-white mb-6">تقرير النظام</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <span class="text-slate-300">حالة الخادم</span>
+                                    <span class="flex items-center gap-2 text-emerald-400">
+                                        <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+                                        نشط
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <span class="text-slate-300">آخر تحديث للأسعار</span>
+                                    <span class="text-white font-bold">منذ دقيقة</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <span class="text-slate-300">Gemini API</span>
+                                    <span class="flex items-center gap-2 text-emerald-400">
+                                        <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+                                        متصل
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Settings Section -->
+                <section id="section-settings" class="section-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- General Settings -->
+                        <div class="setting-card rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                إعدادات عامة
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <div>
+                                        <p class="text-white font-medium">تحديث الأسعار التلقائي</p>
+                                        <p class="text-sm text-slate-400">تحديث كل 30 ثانية</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
+                                    <div>
+                                        <p class="text-white font-medium">إشعارات البريد</p>
+                                        <p class="text-sm text-slate-400">تنبيهات عبر البريد الإلكتروني</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- API Settings -->
+                        <div class="setting-card rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                                </svg>
+                                إعدادات API
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-slate-400 mb-2">Gemini API Key</label>
+                                    <input type="password" id="gemini-key" placeholder="AIza..." 
+                                        class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none">
+                                </div>
+                                <button onclick="saveApiKey()" class="btn-primary w-full py-3 rounded-xl text-white font-medium">
+                                    حفظ المفتاح
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Prices Section - إدارة أسعار الذهب الكويتي -->
+                <section id="section-prices" class="section-content hidden">
+                    <!-- TradingView Ticker Widget - السعر الحقيقي -->
+                    <div class="mb-6 rounded-2xl overflow-hidden border border-amber-500/30">
+                        <div class="tradingview-widget-container">
+                            <div class="tradingview-widget-container__widget"></div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                            {
+                                "symbol": "OANDA:XAUUSD",
+                                "width": "100%",
+                                "isTransparent": true,
+                                "colorTheme": "dark",
+                                "locale": "ar_AE"
+                            }
+                            </script>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- السعر الحالي -->
+                        <div class="stat-card rounded-2xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-slate-400">سعر الأونصة العالمي</span>
+                                <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
+                            </div>
+                            <p id="price-current-ounce" class="text-3xl font-bold text-white">$--</p>
+                            <p id="price-ounce-change" class="text-sm text-emerald-400 mt-1">-- %</p>
+                        </div>
+                        
+                        <div class="stat-card rounded-2xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-slate-400">سعر جرام 24K</span>
+                                <span class="text-amber-400">🇰🇼</span>
+                            </div>
+                            <p id="price-current-24k" class="text-3xl font-bold text-amber-400">-- د.ك</p>
+                            <p id="price-24k-change" class="text-sm text-emerald-400 mt-1">-- %</p>
+                        </div>
+                        
+                        <div class="stat-card rounded-2xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-slate-400">آخر تحديث</span>
+                                <span class="text-indigo-400">⏱️</span>
+                            </div>
+                            <p id="price-last-update" class="text-3xl font-bold text-white">--:--</p>
+                            <p class="text-sm text-slate-400 mt-1">التحديث كل <span id="price-interval">10</span> ثوانٍ</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- إعدادات الأسعار -->
+                        <div class="setting-card rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                <span class="text-amber-400">💰</span>
+                                إعدادات حساب السعر الكويتي
+                            </h3>
+                            
+                            <div class="space-y-5">
+                                <!-- سعر الصرف -->
+                                <div>
+                                    <label class="block text-slate-300 mb-2">سعر صرف الدولار (د.ك/$)</label>
+                                    <div class="flex gap-2">
+                                        <input type="number" id="setting-exchange-rate" step="0.0001" 
+                                            class="flex-1 px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-indigo-500 focus:outline-none"
+                                            placeholder="0.3075">
+                                        <button onclick="fetchCurrentExchangeRate()" class="px-4 py-3 bg-slate-700 rounded-xl text-slate-300 hover:bg-slate-600 transition-colors" title="جلب السعر الحالي">
+                                            🔄
+                                        </button>
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1">السعر الرسمي من البنك المركزي الكويتي</p>
+                                </div>
+                                
+                                <!-- نسبة العمولة -->
+                                <div>
+                                    <label class="block text-slate-300 mb-2">نسبة العمولة/المصنعية (%)</label>
+                                    <input type="number" id="setting-commission" step="0.1" 
+                                        class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-indigo-500 focus:outline-none"
+                                        placeholder="1.5">
+                                    <p class="text-xs text-slate-500 mt-1">هامش الربح الذي يُضاف فوق السعر الأساسي</p>
+                                </div>
+                                
+                                <!-- عمولة ثابتة -->
+                                <div>
+                                    <label class="block text-slate-300 mb-2">عمولة ثابتة إضافية (د.ك)</label>
+                                    <input type="number" id="setting-commission-fixed" step="0.001" 
+                                        class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-indigo-500 focus:outline-none"
+                                        placeholder="0">
+                                    <p class="text-xs text-slate-500 mt-1">مبلغ ثابت يُضاف للجرام (اختياري)</p>
+                                </div>
+                                
+                                <!-- الفرق بين الشراء والبيع -->
+                                <div>
+                                    <label class="block text-slate-300 mb-2">فرق الشراء/البيع - Spread (%)</label>
+                                    <input type="number" id="setting-spread" step="0.1" 
+                                        class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-indigo-500 focus:outline-none"
+                                        placeholder="1.5">
+                                    <p class="text-xs text-slate-500 mt-1">الفرق بين سعر الشراء والبيع</p>
+                                </div>
+                                
+                                <!-- فترة التحديث -->
+                                <div>
+                                    <label class="block text-slate-300 mb-2">فترة التحديث (ثانية)</label>
+                                    <input type="number" id="setting-refresh" min="5" max="60" 
+                                        class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white focus:border-indigo-500 focus:outline-none"
+                                        placeholder="10">
+                                    <p class="text-xs text-slate-500 mt-1">كم ثانية بين كل تحديث للسعر (5-60)</p>
+                                </div>
+                                
+                                <button onclick="savePriceSettings()" class="btn-primary w-full py-3 rounded-xl text-white font-medium mt-4">
+                                    💾 حفظ الإعدادات
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- معاينة الأسعار -->
+                        <div class="setting-card rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                                <span class="text-emerald-400">📊</span>
+                                معاينة الأسعار الحالية
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-slate-800/50 rounded-xl p-4">
+                                    <div class="text-center mb-4">
+                                        <p class="text-slate-400 text-sm">المعادلة المستخدمة</p>
+                                        <p class="text-white text-sm mt-2 font-mono bg-slate-900 rounded-lg p-3">
+                                            السعر = (الأونصة ÷ 31.1035) × الصرف + العمولة
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 text-center">
+                                        <p class="text-slate-400 text-xs mb-1">عيار 24K</p>
+                                        <p id="preview-24k-sell" class="text-xl font-bold text-amber-400">-- د.ك</p>
+                                        <p class="text-xs text-slate-500">بيع</p>
+                                    </div>
+                                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 text-center">
+                                        <p class="text-slate-400 text-xs mb-1">عيار 24K</p>
+                                        <p id="preview-24k-buy" class="text-xl font-bold text-emerald-400">-- د.ك</p>
+                                        <p class="text-xs text-slate-500">شراء</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="bg-slate-800/50 rounded-xl p-3 text-center">
+                                        <p class="text-slate-400 text-xs mb-1">22K</p>
+                                        <p id="preview-22k" class="text-lg font-bold text-white">--</p>
+                                    </div>
+                                    <div class="bg-slate-800/50 rounded-xl p-3 text-center">
+                                        <p class="text-slate-400 text-xs mb-1">21K</p>
+                                        <p id="preview-21k" class="text-lg font-bold text-white">--</p>
+                                    </div>
+                                    <div class="bg-slate-800/50 rounded-xl p-3 text-center">
+                                        <p class="text-slate-400 text-xs mb-1">18K</p>
+                                        <p id="preview-18k" class="text-lg font-bold text-white">--</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-indigo-500/10 border border-indigo-500/30 rounded-xl p-4">
+                                    <h4 class="text-indigo-400 font-medium mb-2">💡 ملاحظة</h4>
+                                    <p class="text-slate-300 text-sm">
+                                        الأسعار المعروضة تُحدّث تلقائياً من سعر الذهب العالمي (TradingView) 
+                                        وتُحسب بناءً على الإعدادات أعلاه لتطابق أسعار دار السبائك.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Alerts Section -->
+                <section id="section-alerts" class="section-content hidden">
+                    <div class="chart-container rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-6">إدارة التنبيهات</h3>
+                        <p class="text-slate-400">قريباً - إدارة تنبيهات المستخدمين</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/auth.js"></script>
+    <script src="../js/kuwait-gold-pricing.js"></script>
+    <script>
+        // التحقق من صلاحيات الأدمن
+        if (!AuthService.isAdmin()) {
+            window.location.href = '../pages/login.html';
+        }
+        
+        // تحميل بيانات المستخدم
+        const currentUser = AuthService.getCurrentUser();
+        if (currentUser) {
+            document.getElementById('admin-name').textContent = currentUser.name;
+        }
+        
+        // تحميل الإحصائيات
+        function loadStats() {
+            const stats = AuthService.getStats();
+            document.getElementById('stat-users').textContent = stats.total;
+            document.getElementById('stat-new-users').textContent = stats.thisMonth;
+            document.getElementById('report-total-users').textContent = stats.total;
+            document.getElementById('report-admins').textContent = stats.admins;
+            document.getElementById('report-users').textContent = stats.users;
+            document.getElementById('report-this-month').textContent = stats.thisMonth;
+        }
+        
+        // تحميل قائمة المستخدمين
+        function loadUsers() {
+            const users = AuthService.getUsers();
+            const tbody = document.getElementById('users-table-body');
+            
+            tbody.innerHTML = users.map(user => `
+                <tr class="border-b border-slate-700/50">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                ${user.name.charAt(0)}
+                            </div>
+                            <span>${user.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">${user.email}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 rounded-full text-xs ${user.role === 'admin' ? 'bg-indigo-500/20 text-indigo-400' : 'bg-slate-600/50 text-slate-300'}">
+                            ${user.role === 'admin' ? 'مسؤول' : 'مستخدم'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">${new Date(user.createdAt).toLocaleDateString('ar-KW')}</td>
+                    <td class="px-6 py-4">
+                        ${user.role !== 'admin' ? `
+                            <button onclick="deleteUser('${user.id}')" class="text-rose-400 hover:text-rose-300 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        ` : '<span class="text-slate-500">-</span>'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        // حذف مستخدم
+        function deleteUser(userId) {
+            if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
+                const result = AuthService.deleteUser(userId);
+                if (result.success) {
+                    loadUsers();
+                    loadStats();
+                } else {
+                    alert(result.error);
+                }
+            }
+        }
+        
+        // تبديل الأقسام
+        function showSection(sectionId) {
+            // إخفاء جميع الأقسام
+            document.querySelectorAll('.section-content').forEach(s => s.classList.add('hidden'));
+            // إظهار القسم المطلوب
+            document.getElementById(`section-${sectionId}`).classList.remove('hidden');
+            
+            // تحديث التنقل
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelector(`[href="#${sectionId}"]`).classList.add('active');
+            
+            // تحديث العنوان
+            const titles = {
+                dashboard: { title: 'لوحة التحكم', subtitle: 'مرحباً بك في لوحة تحكم SabeekaGold' },
+                users: { title: 'المستخدمين', subtitle: 'إدارة حسابات المستخدمين' },
+                reports: { title: 'التقارير', subtitle: 'تقارير وإحصائيات النظام' },
+                settings: { title: 'الإعدادات', subtitle: 'إعدادات النظام والتطبيق' },
+                alerts: { title: 'التنبيهات', subtitle: 'إدارة تنبيهات المستخدمين' }
+            };
+            
+            document.getElementById('page-title').textContent = titles[sectionId].title;
+            document.getElementById('page-subtitle').textContent = titles[sectionId].subtitle;
+        }
+        
+        // حفظ مفتاح API
+        function saveApiKey() {
+            const key = document.getElementById('gemini-key').value;
+            if (key) {
+                localStorage.setItem('gemini_api_key', key);
+                alert('تم حفظ المفتاح بنجاح');
+            }
+        }
+        
+        // تسجيل الخروج
+        function logout() {
+            AuthService.logout();
+            window.location.href = '../pages/login.html';
+        }
+        
+        // ═══════════════════════════════════════════════════════════════════
+        // إدارة أسعار الذهب الكويتي
+        // ═══════════════════════════════════════════════════════════════════
+        
+        const PRICE_SETTINGS_KEY = 'kuwait_gold_settings';
+        
+        // الإعدادات الافتراضية
+        const DEFAULT_PRICE_SETTINGS = {
+            exchangeRate: 0.3075,
+            commissionPercent: 1.5,
+            commissionFixed: 0,
+            spreadBuySell: 1.5,
+            refreshInterval: 14  // 14 ثانية كما في دار السبائك
+        };
+        
+        // تحميل إعدادات الأسعار
+        function loadPriceSettings() {
+            let settings = DEFAULT_PRICE_SETTINGS;
+            try {
+                const saved = localStorage.getItem(PRICE_SETTINGS_KEY);
+                if (saved) {
+                    settings = { ...DEFAULT_PRICE_SETTINGS, ...JSON.parse(saved) };
+                }
+            } catch (e) {}
+            
+            document.getElementById('setting-exchange-rate').value = settings.exchangeRate;
+            document.getElementById('setting-commission').value = settings.commissionPercent;
+            document.getElementById('setting-commission-fixed').value = settings.commissionFixed;
+            document.getElementById('setting-spread').value = settings.spreadBuySell;
+            document.getElementById('setting-refresh').value = settings.refreshInterval;
+            document.getElementById('price-interval').textContent = settings.refreshInterval;
+            
+            updatePricePreview();
+        }
+        
+        // حفظ إعدادات الأسعار
+        function savePriceSettings() {
+            const settings = {
+                exchangeRate: parseFloat(document.getElementById('setting-exchange-rate').value) || 0.3075,
+                commissionPercent: parseFloat(document.getElementById('setting-commission').value) || 1.5,
+                commissionFixed: parseFloat(document.getElementById('setting-commission-fixed').value) || 0,
+                spreadBuySell: parseFloat(document.getElementById('setting-spread').value) || 1.5,
+                refreshInterval: parseInt(document.getElementById('setting-refresh').value) || 10
+            };
+            
+            localStorage.setItem(PRICE_SETTINGS_KEY, JSON.stringify(settings));
+            document.getElementById('price-interval').textContent = settings.refreshInterval;
+            
+            // تحديث المعاينة
+            updatePricePreview();
+            
+            // إشعار KuwaitGoldPricing إذا كان موجوداً
+            if (window.KuwaitGoldPricing) {
+                window.KuwaitGoldPricing.updateSettings(settings);
+            }
+            
+            alert('✅ تم حفظ إعدادات الأسعار بنجاح');
+        }
+        
+        // حساب سعر الجرام
+        function calculateGramPrice(ouncePrice, karat = '24') {
+            const settings = JSON.parse(localStorage.getItem(PRICE_SETTINGS_KEY) || '{}');
+            const { exchangeRate = 0.3075, commissionPercent = 1.5, commissionFixed = 0, spreadBuySell = 1.5 } = settings;
+            
+            const purity = { '24': 0.999, '22': 0.916, '21': 0.875, '18': 0.750 }[karat] || 0.999;
+            
+            const gramUSD = ouncePrice / 31.1035;
+            const gramKWD = gramUSD * purity * exchangeRate;
+            const commission = (gramKWD * commissionPercent / 100) + commissionFixed;
+            const sellPrice = gramKWD + commission;
+            const buyPrice = sellPrice * (1 - spreadBuySell / 100);
+            
+            return { sellPrice, buyPrice };
+        }
+        
+        // تحديث المعاينة
+        function updatePricePreview() {
+            // 🔴 جلب سعر الأونصة من KuwaitGoldPricing أولاً
+            let ouncePrice = 0;
+            
+            // المصدر 1: KuwaitGoldPricing
+            if (window.KuwaitGoldPricing && window.KuwaitGoldPricing.state.currentOuncePrice > 0) {
+                ouncePrice = window.KuwaitGoldPricing.state.currentOuncePrice;
+            }
+            
+            // المصدر 2: window.currentGoldPrice
+            if (!ouncePrice && window.currentGoldPrice > 0) {
+                ouncePrice = window.currentGoldPrice;
+            }
+            
+            // المصدر 3: localStorage
+            if (!ouncePrice) {
+                ouncePrice = parseFloat(localStorage.getItem('current_gold_ounce_price')) || 0;
+            }
+            
+            // 🔴 محاولة قراءة السعر من TradingView widget في الصفحة
+            if (!ouncePrice) {
+                const allText = document.body.innerText || '';
+                const matches = allText.match(/(\d{1},\d{3}\.\d{2})/g);
+                if (matches) {
+                    for (const match of matches) {
+                        const price = parseFloat(match.replace(/,/g, ''));
+                        if (price > 2000 && price < 10000) {
+                            ouncePrice = price;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            document.getElementById('price-current-ounce').textContent = ouncePrice > 0 ? `$${ouncePrice.toFixed(2)}` : '$--';
+            
+            if (ouncePrice > 0) {
+                const p24 = calculateGramPrice(ouncePrice, '24');
+                const p22 = calculateGramPrice(ouncePrice, '22');
+                const p21 = calculateGramPrice(ouncePrice, '21');
+                const p18 = calculateGramPrice(ouncePrice, '18');
+                
+                document.getElementById('price-current-24k').textContent = `${p24.sellPrice.toFixed(3)} د.ك`;
+                document.getElementById('preview-24k-sell').textContent = `${p24.sellPrice.toFixed(3)} د.ك`;
+                document.getElementById('preview-24k-buy').textContent = `${p24.buyPrice.toFixed(3)} د.ك`;
+                document.getElementById('preview-22k').textContent = p22.sellPrice.toFixed(3);
+                document.getElementById('preview-21k').textContent = p21.sellPrice.toFixed(3);
+                document.getElementById('preview-18k').textContent = p18.sellPrice.toFixed(3);
+            }
+            
+            document.getElementById('price-last-update').textContent = new Date().toLocaleTimeString('ar-KW');
+        }
+        
+        // جلب سعر الصرف الحالي (محاكاة)
+        function fetchCurrentExchangeRate() {
+            // في الإنتاج، يمكن جلب السعر من API البنك المركزي
+            alert('💡 سعر الصرف الحالي تقريباً: 0.3075 د.ك/$\n\nيمكنك تحديثه يدوياً من موقع البنك المركزي الكويتي.');
+        }
+        
+        // تحديث الأسعار كل فترة
+        let priceUpdateInterval = null;
+        function startPriceUpdates() {
+            const settings = JSON.parse(localStorage.getItem(PRICE_SETTINGS_KEY) || '{}');
+            const interval = (settings.refreshInterval || 10) * 1000;
+            
+            if (priceUpdateInterval) clearInterval(priceUpdateInterval);
+            
+            priceUpdateInterval = setInterval(() => {
+                updatePricePreview();
+            }, interval);
+        }
+        
+        // تحميل مفتاح API المحفوظ
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) {
+            document.getElementById('gemini-key').value = savedKey;
+        }
+        
+        // إضافة prices للعناوين
+        const titles = {
+            dashboard: { title: 'لوحة التحكم', subtitle: 'مرحباً بك في لوحة تحكم SabeekaGold' },
+            users: { title: 'المستخدمين', subtitle: 'إدارة حسابات المستخدمين' },
+            reports: { title: 'التقارير', subtitle: 'تقارير وإحصائيات النظام' },
+            settings: { title: 'الإعدادات', subtitle: 'إعدادات النظام والتطبيق' },
+            prices: { title: 'إدارة الأسعار', subtitle: 'إعدادات حساب سعر الذهب الكويتي' },
+            alerts: { title: 'التنبيهات', subtitle: 'إدارة تنبيهات المستخدمين' }
+        };
+        
+        // تحديث دالة showSection
+        const originalShowSection = showSection;
+        showSection = function(sectionId) {
+            // إخفاء جميع الأقسام
+            document.querySelectorAll('.section-content').forEach(s => s.classList.add('hidden'));
+            // إظهار القسم المطلوب
+            const section = document.getElementById(`section-${sectionId}`);
+            if (section) section.classList.remove('hidden');
+            
+            // تحديث التنقل
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            const navItem = document.querySelector(`[href="#${sectionId}"]`);
+            if (navItem) navItem.classList.add('active');
+            
+            // تحديث العنوان
+            const titleData = titles[sectionId] || { title: sectionId, subtitle: '' };
+            document.getElementById('page-title').textContent = titleData.title;
+            document.getElementById('page-subtitle').textContent = titleData.subtitle;
+            
+            // تحميل بيانات قسم الأسعار
+            if (sectionId === 'prices') {
+                loadPriceSettings();
+                startPriceUpdates();
+            }
+        };
+        
+        // تحميل البيانات عند بدء الصفحة
+        loadStats();
+        loadUsers();
+    </script>
+</body>
+</html>
+
+
+
+
+

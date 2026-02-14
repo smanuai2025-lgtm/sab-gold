@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - SabeekaGold</title>
+    <meta name="description" content="إعدادات وتخصيص منصة SabeekaGold">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background: var(--bg-primary);
+        }
+        
+        .setting-card {
+            background: linear-gradient(145deg, rgba(13, 19, 33, 0.9), rgba(10, 14, 23, 0.95));
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .setting-card:hover {
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+        
+        /* Custom Toggle */
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #374151;
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(22px);
+        }
+    </style>
+</head>
+
+<body class="text-white font-cairo min-h-screen">
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <!-- Logo -->
+                <a href="../index.html" class="flex items-center gap-3">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-10 lg:h-12 w-auto">
+                    <span class="text-lg lg:text-xl font-bold text-gold-400 hidden sm:block">SabeekaGold</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="../index.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">الرئيسية</a>
+                    <a href="analysis.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">التحليلات</a>
+                    <a href="calculator.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">الحاسبة</a>
+                    <a href="news.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">الأخبار</a>
+                    <a href="alerts.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">التنبيهات</a>
+                    <a href="reports.html" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-gold-400 transition-all">التقارير</a>
+                    <a href="settings.html" class="nav-link active px-4 py-2 rounded-lg text-gold-400">الإعدادات</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden p-2 text-gold-400" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <aside id="mobile-menu" class="fixed top-0 left-0 w-72 h-full bg-primary-light/98 backdrop-blur-xl z-[60] transform -translate-x-full transition-transform duration-300 lg:hidden border-l border-gold-500/20">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-10 w-auto">
+                    <span class="font-bold text-gold-400">SabeekaGold</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="space-y-2">
+                <a href="../index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">🏠</span><span>الرئيسية</span>
+                </a>
+                <a href="analysis.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">📈</span><span>التحليلات</span>
+                </a>
+                <a href="calculator.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">🧮</span><span>الحاسبة</span>
+                </a>
+                <a href="news.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">📰</span><span>الأخبار</span>
+                </a>
+                <a href="alerts.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">🔔</span><span>التنبيهات</span>
+                </a>
+                <a href="reports.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gold-500/10 hover:text-gold-400 transition-all">
+                    <span class="text-xl">📋</span><span>التقارير</span>
+                </a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gold-500/10 text-gold-400 border border-gold-500/20">
+                    <span class="text-xl">⚙️</span><span>الإعدادات</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] hidden lg:hidden" onclick="toggleMobileMenu()"></div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen pt-20 lg:pt-24">
+        <!-- Page Header -->
+        <header class="border-b border-gold-500/10 bg-primary-light/50 backdrop-blur-xl">
+            <div class="container mx-auto px-4 lg:px-8 py-6">
+                <div>
+                    <h1 class="text-2xl lg:text-3xl font-bold flex items-center gap-3">
+                        <span class="text-3xl">⚙️</span>
+                        <span class="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">الإعدادات</span>
+                    </h1>
+                    <p class="text-gray-400 text-sm mt-1">تخصيص تجربتك في SabeekaGold</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="container mx-auto px-4 lg:px-8 py-6 lg:py-8 max-w-3xl">
+            <!-- Notification Settings -->
+            <div class="setting-card rounded-2xl p-6 mb-6">
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-gold-500/20 rounded-xl flex items-center justify-center text-xl">🔔</span>
+                    <span>إعدادات الإشعارات</span>
+                </h3>
+
+                <div class="space-y-4">
+                    <!-- Sound Toggle -->
+                    <div class="flex items-center justify-between p-4 bg-primary/50 rounded-xl hover:bg-primary/70 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">🔊</span>
+                            <div>
+                                <p class="font-medium">الأصوات</p>
+                                <p class="text-sm text-gray-500">تشغيل صوت عند وصول إشعار</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Price Alerts -->
+                    <div class="flex items-center justify-between p-4 bg-primary/50 rounded-xl hover:bg-primary/70 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">💰</span>
+                            <div>
+                                <p class="font-medium">تنبيهات الأسعار</p>
+                                <p class="text-sm text-gray-500">إشعارات تغير الأسعار</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="price-alerts-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- News Alerts -->
+                    <div class="flex items-center justify-between p-4 bg-primary/50 rounded-xl hover:bg-primary/70 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">📰</span>
+                            <div>
+                                <p class="font-medium">تنبيهات الأخبار</p>
+                                <p class="text-sm text-gray-500">إشعارات الأخبار المؤثرة</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="news-alerts-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Recommendation Alerts -->
+                    <div class="flex items-center justify-between p-4 bg-primary/50 rounded-xl hover:bg-primary/70 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">💡</span>
+                            <div>
+                                <p class="font-medium">تنبيهات التوصيات</p>
+                                <p class="text-sm text-gray-500">إشعارات التوصيات الجديدة</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="rec-alerts-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Settings -->
+            <div class="setting-card rounded-2xl p-6 mb-6">
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center text-xl">🔌</span>
+                    <span>إعدادات API</span>
+                </h3>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">رابط API</label>
+                        <input type="text" id="api-url"
+                            class="w-full bg-primary border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-gold-500 outline-none transition-colors"
+                            value="http://localhost:5276/api">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">رابط SignalR</label>
+                        <input type="text" id="signalr-url"
+                            class="w-full bg-primary border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-gold-500 outline-none transition-colors"
+                            value="http://localhost:5276/hubs/goldprice">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">مفتاح Gemini API</label>
+                        <input type="password" id="gemini-api-key"
+                            class="w-full bg-primary border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-gold-500 outline-none transition-colors"
+                            placeholder="AIza...">
+                        <p class="text-xs text-gray-500 mt-2">
+                            احصل على مفتاح من 
+                            <a href="https://aistudio.google.com/apikey" target="_blank" class="text-gold-400 hover:underline">Google AI Studio</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gemini AI Settings -->
+            <div class="setting-card rounded-2xl p-6 mb-6">
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center text-xl">🤖</span>
+                    <span>إعدادات Gemini AI</span>
+                </h3>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-primary/50 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">🧠</span>
+                            <div>
+                                <p class="font-medium">تحليل ذكي للأخبار</p>
+                                <p class="text-sm text-gray-500">استخدام AI لتحليل تأثير الأخبار</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="ai-news-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-primary/50 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl">📊</span>
+                            <div>
+                                <p class="font-medium">توصيات تلقائية</p>
+                                <p class="text-sm text-gray-500">توليد توصيات شراء/بيع تلقائياً</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="ai-rec-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About -->
+            <div class="setting-card rounded-2xl p-6">
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-gold-500/20 rounded-xl flex items-center justify-center text-xl">ℹ️</span>
+                    <span>حول المنصة</span>
+                </h3>
+
+                <div class="text-center py-6">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="w-24 h-24 mx-auto mb-4 rounded-2xl shadow-lg shadow-gold-500/20">
+                    <h4 class="text-2xl font-bold bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">SabeekaGold</h4>
+                    <p class="text-gray-500 mt-1">منصة الاستثمار الذكي في الذهب</p>
+                    <p class="text-gray-600 text-sm mt-2">الإصدار 2.0.0</p>
+                    
+                    <div class="flex items-center justify-center gap-4 mt-6">
+                        <div class="text-center">
+                            <p class="text-2xl">🇰🇼</p>
+                            <p class="text-xs text-gray-500 mt-1">الكويت</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-2xl">🤖</p>
+                            <p class="text-xs text-gray-500 mt-1">Gemini AI</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-2xl">📊</p>
+                            <p class="text-xs text-gray-500 mt-1">تحليل متقدم</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gold-500/10 py-8 mt-12">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-8 w-auto">
+                    <span class="text-gray-400 text-sm">© 2025 SabeekaGold. جميع الحقوق محفوظة</span>
+                </div>
+                <div class="flex items-center gap-4 text-sm text-gray-500">
+                    <a href="analysis.html" class="hover:text-gold-400 transition-colors">التحليلات</a>
+                    <a href="news.html" class="hover:text-gold-400 transition-colors">الأخبار</a>
+                    <a href="reports.html" class="hover:text-gold-400 transition-colors">التقارير</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-6 bg-green-500 text-white px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2 z-50">
+        <span>✓</span>
+        <span>تم حفظ الإعدادات</span>
+    </div>
+
+    <script>
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-overlay');
+            menu.classList.toggle('-translate-x-full');
+            menu.classList.toggle('translate-x-0');
+            overlay.classList.toggle('hidden');
+            document.body.style.overflow = menu.classList.contains('translate-x-0') ? 'hidden' : '';
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Load settings from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const settings = JSON.parse(localStorage.getItem('sabeekaGold_settings') || '{}');
+
+            document.getElementById('sound-toggle').checked = settings.soundEnabled !== false;
+            document.getElementById('price-alerts-toggle').checked = settings.priceAlerts !== false;
+            document.getElementById('news-alerts-toggle').checked = settings.newsAlerts !== false;
+            document.getElementById('rec-alerts-toggle').checked = settings.recAlerts !== false;
+            document.getElementById('ai-news-toggle').checked = settings.aiNewsAnalysis !== false;
+            document.getElementById('ai-rec-toggle').checked = settings.aiRecommendations !== false;
+
+            if (settings.apiUrl) document.getElementById('api-url').value = settings.apiUrl;
+            if (settings.signalrUrl) document.getElementById('signalr-url').value = settings.signalrUrl;
+            
+            // Load Gemini API key
+            const geminiKey = localStorage.getItem('gemini_api_key') || '';
+            if (geminiKey) document.getElementById('gemini-api-key').value = geminiKey;
+
+            // Save on change
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('change', saveSettings);
+            });
+        });
+
+        function saveSettings() {
+            const settings = {
+                soundEnabled: document.getElementById('sound-toggle').checked,
+                priceAlerts: document.getElementById('price-alerts-toggle').checked,
+                newsAlerts: document.getElementById('news-alerts-toggle').checked,
+                recAlerts: document.getElementById('rec-alerts-toggle').checked,
+                aiNewsAnalysis: document.getElementById('ai-news-toggle').checked,
+                aiRecommendations: document.getElementById('ai-rec-toggle').checked,
+                apiUrl: document.getElementById('api-url').value,
+                signalrUrl: document.getElementById('signalr-url').value
+            };
+
+            localStorage.setItem('sabeekaGold_settings', JSON.stringify(settings));
+            
+            // Save Gemini API key separately
+            const geminiKey = document.getElementById('gemini-api-key').value;
+            if (geminiKey) {
+                localStorage.setItem('gemini_api_key', geminiKey);
+            }
+
+            // Show toast
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+

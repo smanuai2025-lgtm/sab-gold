@@ -1,0 +1,692 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحليل الفني - SabeekaGold</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .indicator-bar { height: 8px; background: linear-gradient(90deg, #f43f5e 0%, #fbbf24 50%, #10b981 100%); }
+        .signal-strong { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        /* Tab Styles */
+        .tab-active {
+            background: linear-gradient(to bottom, rgba(245, 158, 11, 0.1), transparent);
+            border-bottom: 3px solid #f59e0b;
+            color: #fbbf24;
+        }
+        button[id^="tab-"]:not(.tab-active):hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="font-cairo bg-primary text-white min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-primary-light/95 backdrop-blur border-b border-gold-500/10">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center gap-3">
+                    <img src="../images/logo.png" alt="SabeekaGold" class="h-10 w-auto">
+                    <span class="text-lg font-bold text-gold-400 hidden md:inline">SabeekaGold</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <a href="../index.html" class="text-sm text-gray-300 hover:text-gold-400">الرئيسية</a>
+                    <a href="analysis.html" class="text-sm text-gold-400 font-bold">التحليل</a>
+                    <a href="calculator.html" class="text-sm text-gray-300 hover:text-gold-400">الحاسبة</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12">
+        <div class="container mx-auto px-4 lg:px-8 max-w-6xl space-y-6">
+
+            <!-- Header + Disclaimer -->
+            <header class="bg-gradient-to-r from-zinc-900 to-zinc-800 border border-zinc-700 rounded-2xl p-6">
+                <div class="flex items-start justify-between gap-4 mb-4">
+                    <div class="flex-1">
+                        <h1 class="text-2xl lg:text-3xl font-bold mb-2">
+                            <span class="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">التحليل الفني للذهب</span>
+                        </h1>
+                        <p class="text-sm text-gray-400">تحليل مبني على بيانات حقيقية ومؤشرات فنية</p>
+                    </div>
+                    <button onclick="refreshAnalysis()" class="px-4 py-2 bg-gold-500 hover:bg-gold-600 text-black font-bold rounded-lg transition-all">
+                        <span id="refresh-icon">🔄</span> تحديث
+                    </button>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">⚠️</span>
+                        <div class="flex-1">
+                            <p class="text-amber-400 font-bold mb-1">إخلاء المسؤولية</p>
+                            <p class="text-xs text-zinc-300">هذا التحليل للأغراض التعليمية فقط وليس نصيحة استثمارية. الأسواق متقلبة والخسارة واردة. استشر خبير مالي قبل اتخاذ أي قرار استثماري.</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Current Price + Chart -->
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Price Card -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span>💰</span> السعر الحالي
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm text-gray-400 mb-1">سعر الأونصة (عالمي)</p>
+                            <div class="flex items-baseline gap-2">
+                                <p id="ounce-price" class="text-4xl font-bold text-gold-400">$--</p>
+                                <p id="ounce-change" class="text-lg">--</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-zinc-700"></div>
+                        <div>
+                            <p class="text-sm text-gray-400 mb-1">سعر الجرام 24K (الكويت)</p>
+                            <div class="flex items-baseline gap-2">
+                                <p id="gram-price" class="text-3xl font-bold text-emerald-400">-- د.ك</p>
+                                <p id="gram-change" class="text-sm">--</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">
+                            آخر تحديث: <span id="last-update">--:--:--</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TradingView Chart -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden" style="height: 320px;">
+                    <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+                        <div class="tradingview-widget-container__widget" style="height: 100%; width: 100%;"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                        {
+                            "symbols": [["GOLD", "OANDA:XAUUSD|1D"]],
+                            "chartOnly": false,
+                            "width": "100%",
+                            "height": "100%",
+                            "locale": "ar_AE",
+                            "colorTheme": "dark",
+                            "autosize": true,
+                            "showVolume": false,
+                            "backgroundColor": "rgba(24, 24, 27, 1)",
+                            "lineWidth": 2,
+                            "chartType": "area"
+                        }
+                        </script>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Indicators with Tabs -->
+            <section class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
+                <!-- Tabs Header -->
+                <div class="flex border-b border-zinc-800">
+                    <button id="tab-local" class="flex-1 px-6 py-4 text-sm font-bold transition-all tab-active" onclick="switchTab('local')">
+                        📊 التحليل المحلي المتقدم
+                    </button>
+                    <button id="tab-comparison" class="flex-1 px-6 py-4 text-sm font-bold transition-all text-gray-400" onclick="switchTab('comparison')">
+                        🤖 المقارنة مع Gemini
+                    </button>
+                </div>
+
+                <!-- Tab Content: Local Analysis -->
+                <div id="content-local" class="p-6">
+                    <!-- Summary Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-zinc-800/50 rounded-xl p-4 text-center">
+                            <p class="text-xs text-gray-400 mb-1">الاتجاه العام</p>
+                            <p id="overall-trend" class="text-lg font-bold">--</p>
+                        </div>
+                        <div class="bg-zinc-800/50 rounded-xl p-4 text-center">
+                            <p class="text-xs text-gray-400 mb-1">مستوى الثقة</p>
+                            <p id="overall-confidence" class="text-lg font-bold">--</p>
+                        </div>
+                        <div class="bg-zinc-800/50 rounded-xl p-4 text-center">
+                            <p class="text-xs text-gray-400 mb-1">إشارات إيجابية</p>
+                            <p id="positive-signals" class="text-lg font-bold text-emerald-400">--</p>
+                        </div>
+                        <div class="bg-zinc-800/50 rounded-xl p-4 text-center">
+                            <p class="text-xs text-gray-400 mb-1">إشارات سلبية</p>
+                            <p id="negative-signals" class="text-lg font-bold text-rose-400">--</p>
+                        </div>
+                    </div>
+
+                    <!-- Main Indicators Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- RSI Gauge -->
+                        <div class="bg-zinc-800/50 rounded-xl p-4">
+                            <h4 class="text-sm font-bold mb-3 flex items-center justify-between">
+                                <span>مؤشر القوة النسبية (RSI)</span>
+                                <span id="rsi-signal-badge" class="text-xs px-2 py-1 rounded-full">--</span>
+                            </h4>
+                            <div id="rsi-gauge-container" class="h-48"></div>
+                            <p id="rsi-description" class="text-xs text-gray-400 mt-2 text-center">--</p>
+                        </div>
+
+                        <!-- MACD -->
+                        <div class="bg-zinc-800/50 rounded-xl p-4">
+                            <h4 class="text-sm font-bold mb-3 flex items-center justify-between">
+                                <span>MACD</span>
+                                <span id="macd-signal-badge" class="text-xs px-2 py-1 rounded-full">--</span>
+                            </h4>
+                            <div id="macd-container" class="space-y-3"></div>
+                            <p id="macd-description" class="text-xs text-gray-400 mt-2">--</p>
+                        </div>
+
+                        <!-- Bollinger Bands -->
+                        <div class="bg-zinc-800/50 rounded-xl p-4">
+                            <h4 class="text-sm font-bold mb-3 flex items-center justify-between">
+                                <span>بولينجر باند</span>
+                                <span id="bollinger-signal-badge" class="text-xs px-2 py-1 rounded-full">--</span>
+                            </h4>
+                            <div id="bollinger-container" class="space-y-3"></div>
+                            <p id="bollinger-description" class="text-xs text-gray-400 mt-2">--</p>
+                        </div>
+
+                        <!-- Support & Resistance -->
+                        <div class="bg-zinc-800/50 rounded-xl p-4">
+                            <h4 class="text-sm font-bold mb-3">مستويات الدعم والمقاومة</h4>
+                            <div id="sr-container" class="h-48"></div>
+                            <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+                                <div class="bg-rose-500/10 border border-rose-500/30 rounded p-2">
+                                    <p class="text-rose-400 mb-1">🛡️ الدعم</p>
+                                    <p id="sr-support" class="font-bold">$--</p>
+                                </div>
+                                <div class="bg-emerald-500/10 border border-emerald-500/30 rounded p-2">
+                                    <p class="text-emerald-400 mb-1">🎯 المقاومة</p>
+                                    <p id="sr-resistance" class="font-bold">$--</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Patterns Section -->
+                    <div class="bg-zinc-800/30 rounded-xl p-4 mb-6">
+                        <h4 class="text-sm font-bold mb-3">🔍 الأنماط المكتشفة</h4>
+                        <div id="patterns-container" class="space-y-2">
+                            <p class="text-xs text-gray-500 text-center py-4">جاري البحث عن الأنماط...</p>
+                        </div>
+                    </div>
+
+                    <!-- Moving Averages Details -->
+                    <div class="bg-zinc-800/30 rounded-xl p-4">
+                        <h4 class="text-sm font-bold mb-3">📈 المتوسطات المتحركة</h4>
+                        <div id="ma-details-container" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <!-- Will be populated by JS -->
+                        </div>
+                        <div id="ma-cross-signal" class="mt-3 p-3 rounded-lg text-sm text-center">
+                            <!-- Golden/Death Cross signal -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Comparison -->
+                <div id="content-comparison" class="p-6 hidden">
+                    <div class="text-center mb-6">
+                        <button onclick="performComparison()" class="px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-black font-bold rounded-lg transition-all">
+                            🔄 بدء المقارنة مع Gemini
+                        </button>
+                        <p class="text-xs text-gray-400 mt-2">سيتم مقارنة التحليل المحلي مع تحليل نموذج Gemini AI</p>
+                    </div>
+
+                    <div id="comparison-results" class="space-y-4">
+                        <p class="text-center text-gray-500 py-8">اضغط على الزر أعلاه لبدء المقارنة</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Summary -->
+            <section class="bg-gradient-to-br from-zinc-900 via-zinc-900 to-violet-950/30 border border-violet-500/20 rounded-2xl p-6">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span>🎯</span> الإشارة الفنية
+                </h3>
+
+                <!-- Signal Indicator -->
+                <div class="relative mb-6">
+                    <div class="indicator-bar rounded-full"></div>
+                    <div id="signal-pointer" class="absolute top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-lg border-4 border-zinc-900 transition-all duration-500" style="left: 50%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400 mb-6">
+                    <span>🔴 بيع قوي</span>
+                    <span>⚪ محايد</span>
+                    <span>🟢 شراء قوي</span>
+                </div>
+
+                <!-- Signal Details -->
+                <div class="bg-zinc-800/50 rounded-xl p-6 text-center">
+                    <p class="text-sm text-gray-400 mb-2">الإشارة الحالية</p>
+                    <p id="signal-action" class="text-4xl font-bold mb-3">--</p>
+                    <p id="signal-strength" class="text-sm mb-4">--</p>
+                    <div id="signal-reasons" class="text-left space-y-2">
+                        <!-- Will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Risk Warning -->
+                <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl">
+                    <p class="text-xs text-amber-400">
+                        💡 <strong>ملاحظة:</strong> هذا التحليل مبني على المؤشرات الفنية فقط. يُنصح بمراعاة الأخبار الاقتصادية والعوامل الجيوسياسية قبل اتخاذ أي قرار.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Price History Table -->
+            <section class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+                <h3 class="text-lg font-bold mb-4">📈 سجل الأسعار (آخر 24 ساعة)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-zinc-800/50">
+                            <tr>
+                                <th class="text-right p-3">الوقت</th>
+                                <th class="text-right p-3">السعر</th>
+                                <th class="text-right p-3">التغير</th>
+                                <th class="text-right p-3">الاتجاه</th>
+                            </tr>
+                        </thead>
+                        <tbody id="price-history-table">
+                            <tr><td colspan="4" class="text-center p-4 text-gray-500">جاري التحميل...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../js/technical-indicators.js"></script>
+    <script>
+        // ═══════════════════════════════════════════════════════════════════
+        // State Management
+        // ═══════════════════════════════════════════════════════════════════
+        const state = {
+            currentPrice: 0,
+            analysisData: null,
+            currentTab: 'local'
+        };
+
+        // Initialize Technical Indicators Service
+        const technicalService = TechnicalIndicatorsService;
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Tab Management
+        // ═══════════════════════════════════════════════════════════════════
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.getElementById('tab-local').classList.remove('tab-active');
+            document.getElementById('tab-comparison').classList.remove('tab-active');
+            document.getElementById(`tab-${tabName}`).classList.add('tab-active');
+
+            // Update tab content
+            document.getElementById('content-local').classList.add('hidden');
+            document.getElementById('content-comparison').classList.add('hidden');
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+
+            state.currentTab = tabName;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Real Data Fetching
+        // ═══════════════════════════════════════════════════════════════════
+        async function fetchRealPrice() {
+            try {
+                const response = await fetch(`${CONFIG.API_URL}/prices/global`);
+                if (response.ok) {
+                    const result = await response.json();
+                    const data = result.Data || result.data;
+                    if (data) {
+                        return data.Close || data.close || data.ouncePrice || data.OuncePrice;
+                    }
+                }
+            } catch (error) {
+                console.warn('Backend API unavailable:', error);
+            }
+
+            try {
+                const response = await fetch('http://localhost:3001/api/gold/price');
+                const result = await response.json();
+                const data = result.data || result.Data;
+                if (data) {
+                    return parseFloat(data.ounce || data.Ounce);
+                }
+            } catch (error) {
+                console.error('Failed to fetch price:', error);
+            }
+
+            return null;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Advanced Analysis using Backend API
+        // ═══════════════════════════════════════════════════════════════════
+        async function loadAdvancedAnalysis() {
+            try {
+                const data = await technicalService.getComprehensiveAnalysis();
+                state.analysisData = data;
+                return data;
+            } catch (error) {
+                console.error('Failed to load advanced analysis:', error);
+                return null;
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // UI Updates
+        // ═══════════════════════════════════════════════════════════════════
+        function updatePriceDisplay(currentPrice) {
+            // Update ounce price
+            document.getElementById('ounce-price').textContent = `$${currentPrice.toFixed(2)}`;
+
+            // Calculate Kuwait price (24K)
+            const kwdRate = 0.3075;
+            const gramWeight = 31.1035;
+            const commission = 0.015;
+            const gramPrice = (currentPrice / gramWeight) * kwdRate * (1 + commission);
+            document.getElementById('gram-price').textContent = `${gramPrice.toFixed(3)} د.ك`;
+
+            document.getElementById('last-update').textContent = new Date().toLocaleTimeString('ar-KW');
+        }
+
+        function updateLocalAnalysisUI(data) {
+            if (!data) return;
+
+            const currentPrice = state.currentPrice;
+
+            // Update Summary Stats
+            const summary = data.summary || {};
+            document.getElementById('overall-trend').textContent = summary.trend || '--';
+            document.getElementById('overall-confidence').textContent = summary.confidence ? `${summary.confidence}%` : '--';
+
+            // Count signals
+            const positiveCount = [data.rsi, data.macd, data.bollingerBands, data.movingAverages]
+                .filter(ind => ind && (ind.signal === 'شراء' || ind.signal === 'صاعد')).length;
+            const negativeCount = [data.rsi, data.macd, data.bollingerBands, data.movingAverages]
+                .filter(ind => ind && (ind.signal === 'بيع' || ind.signal === 'هابط')).length;
+
+            document.getElementById('positive-signals').textContent = positiveCount;
+            document.getElementById('negative-signals').textContent = negativeCount;
+
+            // Render RSI Gauge
+            if (data.rsi) {
+                technicalService.renderRSIGauge('rsi-gauge-container', data.rsi);
+                const badge = document.getElementById('rsi-signal-badge');
+                badge.textContent = data.rsi.signal;
+                badge.className = `text-xs px-2 py-1 rounded-full ${getBadgeClass(data.rsi.signal)}`;
+                document.getElementById('rsi-description').textContent = data.rsi.description || '';
+            }
+
+            // Render MACD
+            if (data.macd) {
+                technicalService.renderMACD('macd-container', data.macd);
+                const badge = document.getElementById('macd-signal-badge');
+                badge.textContent = data.macd.signal;
+                badge.className = `text-xs px-2 py-1 rounded-full ${getBadgeClass(data.macd.signal)}`;
+                document.getElementById('macd-description').textContent = data.macd.description || '';
+            }
+
+            // Render Bollinger Bands
+            if (data.bollingerBands) {
+                technicalService.renderBollingerBands('bollinger-container', data.bollingerBands);
+                const badge = document.getElementById('bollinger-signal-badge');
+                badge.textContent = data.bollingerBands.signal;
+                badge.className = `text-xs px-2 py-1 rounded-full ${getBadgeClass(data.bollingerBands.signal)}`;
+                document.getElementById('bollinger-description').textContent = data.bollingerBands.description || '';
+            }
+
+            // Render Support & Resistance
+            if (data.supportResistance) {
+                technicalService.renderSupportResistance('sr-container', data.supportResistance, currentPrice);
+                document.getElementById('sr-support').textContent = `$${data.supportResistance.support.toFixed(2)}`;
+                document.getElementById('sr-resistance').textContent = `$${data.supportResistance.resistance.toFixed(2)}`;
+            }
+
+            // Render Patterns
+            if (data.patterns) {
+                technicalService.renderPatterns('patterns-container', data.patterns);
+            }
+
+            // Render Moving Averages Details
+            if (data.movingAverages) {
+                renderMovingAveragesDetails(data.movingAverages, currentPrice);
+            }
+        }
+
+        function renderMovingAveragesDetails(maData, currentPrice) {
+            const container = document.getElementById('ma-details-container');
+            container.innerHTML = `
+                <div class="bg-zinc-900/50 rounded p-2 text-center">
+                    <p class="text-xs text-gray-400">SMA(20)</p>
+                    <p class="text-sm font-bold">${maData.sma20 ? '$' + maData.sma20.toFixed(2) : '--'}</p>
+                </div>
+                <div class="bg-zinc-900/50 rounded p-2 text-center">
+                    <p class="text-xs text-gray-400">SMA(50)</p>
+                    <p class="text-sm font-bold">${maData.sma50 ? '$' + maData.sma50.toFixed(2) : '--'}</p>
+                </div>
+                <div class="bg-zinc-900/50 rounded p-2 text-center">
+                    <p class="text-xs text-gray-400">EMA(12)</p>
+                    <p class="text-sm font-bold">${maData.ema12 ? '$' + maData.ema12.toFixed(2) : '--'}</p>
+                </div>
+                <div class="bg-zinc-900/50 rounded p-2 text-center">
+                    <p class="text-xs text-gray-400">EMA(26)</p>
+                    <p class="text-sm font-bold">${maData.ema26 ? '$' + maData.ema26.toFixed(2) : '--'}</p>
+                </div>
+            `;
+
+            // Golden/Death Cross Signal
+            const crossContainer = document.getElementById('ma-cross-signal');
+            if (maData.goldenCross) {
+                crossContainer.className = 'mt-3 p-3 rounded-lg text-sm text-center bg-emerald-500/10 border border-emerald-500/30 text-emerald-400';
+                crossContainer.innerHTML = '✨ تقاطع ذهبي: SMA(20) عبر فوق SMA(50) - إشارة صعود';
+            } else if (maData.deathCross) {
+                crossContainer.className = 'mt-3 p-3 rounded-lg text-sm text-center bg-rose-500/10 border border-rose-500/30 text-rose-400';
+                crossContainer.innerHTML = '⚠️ تقاطع الموت: SMA(20) عبر تحت SMA(50) - إشارة هبوط';
+            } else {
+                crossContainer.className = 'mt-3 p-3 rounded-lg text-sm text-center bg-zinc-800/50 text-gray-400';
+                crossContainer.innerHTML = 'لا يوجد تقاطع حالياً';
+            }
+        }
+
+        function getBadgeClass(signal) {
+            signal = (signal || '').toLowerCase();
+            if (signal.includes('شراء') || signal.includes('صاعد')) {
+                return 'bg-emerald-500/20 text-emerald-400';
+            } else if (signal.includes('بيع') || signal.includes('هابط')) {
+                return 'bg-rose-500/20 text-rose-400';
+            } else {
+                return 'bg-gray-500/20 text-gray-400';
+            }
+        }
+
+        function updateAnalysisSummary(data) {
+            if (!data || !data.summary) return;
+
+            const summary = data.summary;
+            const analysis = {
+                action: summary.recommendation || 'محايد',
+                strength: summary.rationale || '',
+                score: summary.confidence || 50,
+                signals: []
+            };
+
+            // Add signal sources
+            if (data.rsi) analysis.signals.push({ text: `RSI: ${data.rsi.signal}`, impact: getImpact(data.rsi.signal) });
+            if (data.macd) analysis.signals.push({ text: `MACD: ${data.macd.signal}`, impact: getImpact(data.macd.signal) });
+            if (data.bollingerBands) analysis.signals.push({ text: `Bollinger: ${data.bollingerBands.signal}`, impact: getImpact(data.bollingerBands.signal) });
+            if (data.movingAverages) analysis.signals.push({ text: `MA: ${data.movingAverages.signal}`, impact: getImpact(data.movingAverages.signal) });
+
+            // Determine color
+            const action = analysis.action.toLowerCase();
+            let color = 'text-gray-400';
+            if (action.includes('شراء')) color = 'text-emerald-400';
+            else if (action.includes('بيع')) color = 'text-rose-400';
+
+            // Update UI
+            document.getElementById('signal-action').textContent = analysis.action;
+            document.getElementById('signal-action').className = `text-4xl font-bold mb-3 ${color}`;
+            document.getElementById('signal-strength').textContent = analysis.strength;
+
+            // Signal pointer
+            const pointerPos = analysis.score;
+            document.getElementById('signal-pointer').style.left = `${pointerPos}%`;
+
+            // Reasons
+            const reasonsEl = document.getElementById('signal-reasons');
+            reasonsEl.innerHTML = analysis.signals.map(s => `
+                <div class="flex items-start gap-2 text-sm">
+                    <span class="${s.impact > 0 ? 'text-emerald-400' : s.impact < 0 ? 'text-rose-400' : 'text-gray-400'}">●</span>
+                    <span class="text-gray-300">${s.text}</span>
+                </div>
+            `).join('');
+        }
+
+        function getImpact(signal) {
+            signal = (signal || '').toLowerCase();
+            if (signal.includes('شراء') || signal.includes('صاعد')) return 10;
+            if (signal.includes('بيع') || signal.includes('هابط')) return -10;
+            return 0;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Comparison with Gemini
+        // ═══════════════════════════════════════════════════════════════════
+        async function performComparison() {
+            const resultsContainer = document.getElementById('comparison-results');
+            resultsContainer.innerHTML = '<p class="text-center text-gray-400 py-8">⏳ جاري المقارنة مع Gemini AI...</p>';
+
+            try {
+                // Mock Gemini analysis (replace with real API call)
+                const geminiAnalysis = {
+                    recommendation: 'شراء',
+                    confidence: 75,
+                    signals: {
+                        rsi: 'محايد',
+                        macd: 'صاعد',
+                        trend: 'صاعد'
+                    }
+                };
+
+                const comparison = await technicalService.compareWithGemini(geminiAnalysis);
+
+                // Render comparison results
+                resultsContainer.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="bg-zinc-800/50 rounded-xl p-4 border-2 border-blue-500/30">
+                            <h4 class="text-sm font-bold mb-3 text-blue-400">🏠 التحليل المحلي</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">التوصية:</span>
+                                    <span class="font-bold">${comparison.local.recommendation}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">الثقة:</span>
+                                    <span class="font-bold">${comparison.local.confidence}%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-zinc-800/50 rounded-xl p-4 border-2 border-purple-500/30">
+                            <h4 class="text-sm font-bold mb-3 text-purple-400">🤖 Gemini AI</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">التوصية:</span>
+                                    <span class="font-bold">${comparison.gemini.recommendation}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">الثقة:</span>
+                                    <span class="font-bold">${comparison.gemini.confidence}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-800/50 rounded-xl p-4">
+                        <h4 class="text-sm font-bold mb-3">📊 نتيجة المقارنة</h4>
+                        <div class="space-y-3">
+                            ${comparison.differences.map(diff => `
+                                <div class="flex items-start gap-2 text-sm">
+                                    <span class="${diff.severity === 'high' ? 'text-rose-400' : diff.severity === 'medium' ? 'text-amber-400' : 'text-emerald-400'}">●</span>
+                                    <div>
+                                        <p class="text-gray-300 font-bold">${diff.indicator}</p>
+                                        <p class="text-gray-400 text-xs">${diff.description}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="mt-4 p-3 rounded-lg text-center ${comparison.agreement > 70 ? 'bg-emerald-500/10 text-emerald-400' : comparison.agreement > 40 ? 'bg-amber-500/10 text-amber-400' : 'bg-rose-500/10 text-rose-400'}">
+                            نسبة التوافق: ${comparison.agreement}%
+                        </div>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Comparison failed:', error);
+                resultsContainer.innerHTML = `
+                    <div class="text-center text-rose-400 py-8">
+                        <p class="text-2xl mb-2">❌</p>
+                        <p>فشلت المقارنة. تأكد من تشغيل Backend API.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Main Logic
+        // ═══════════════════════════════════════════════════════════════════
+        async function refreshAnalysis() {
+            const icon = document.getElementById('refresh-icon');
+            icon.classList.add('animate-spin');
+
+            try {
+                // Fetch current price
+                const price = await fetchRealPrice();
+                if (!price) {
+                    alert('فشل تحميل السعر. تأكد من تشغيل Backend API.');
+                    icon.classList.remove('animate-spin');
+                    return;
+                }
+
+                state.currentPrice = price;
+                updatePriceDisplay(price);
+
+                // Load advanced analysis from Backend
+                const analysisData = await loadAdvancedAnalysis();
+                if (analysisData) {
+                    updateLocalAnalysisUI(analysisData);
+                    updateAnalysisSummary(analysisData);
+                }
+
+            } catch (error) {
+                console.error('Refresh failed:', error);
+                alert('حدث خطأ أثناء التحديث');
+            } finally {
+                icon.classList.remove('animate-spin');
+            }
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshAnalysis, 30000);
+
+        // Initial load
+        window.addEventListener('DOMContentLoaded', () => {
+            refreshAnalysis();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,15 @@
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\bin\Release\net8.0\MrGoldenBader.Application.deps.json
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\bin\Release\net8.0\MrGoldenBader.Application.dll
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\bin\Release\net8.0\MrGoldenBader.Application.pdb
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\bin\Release\net8.0\MrGoldenBader.Domain.dll
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\bin\Release\net8.0\MrGoldenBader.Domain.pdb
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGoldenBader.Application.csproj.AssemblyReference.cache
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGoldenBader.Application.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGoldenBader.Application.AssemblyInfoInputs.cache
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGoldenBader.Application.AssemblyInfo.cs
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGoldenBader.Application.csproj.CoreCompileInputs.cache
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGolden.FF93F6D6.Up2Date
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGoldenBader.Application.dll
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\refint\MrGoldenBader.Application.dll
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\MrGoldenBader.Application.pdb
+c:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Application\obj\Release\net8.0\ref\MrGoldenBader.Application.dll

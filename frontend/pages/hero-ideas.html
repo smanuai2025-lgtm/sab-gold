@@ -1,0 +1,859 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أفكار تصميم Hero Section - SabeekaGold</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * { scroll-behavior: smooth; }
+        
+        /* ═══════════════════════════════════════════════════════════════════
+           التصميم الأول - كلاسيكي ملكي (رسمي)
+        ═══════════════════════════════════════════════════════════════════ */
+        .hero-1 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        .hero-1 .gold-frame {
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #d4af37, #f4e4bc, #d4af37) 1;
+            position: relative;
+        }
+        
+        .hero-1 .gold-frame::before,
+        .hero-1 .gold-frame::after {
+            content: '◆';
+            position: absolute;
+            color: #d4af37;
+            font-size: 1.5rem;
+        }
+        
+        .hero-1 .gold-frame::before { top: -12px; left: 50%; transform: translateX(-50%); }
+        .hero-1 .gold-frame::after { bottom: -12px; left: 50%; transform: translateX(-50%); }
+        
+        .hero-1 .ornament {
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            height: 1px;
+        }
+        
+        .hero-1 .crown-icon {
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════
+           التصميم الثاني - مؤسسي أنيق (رسمي)
+        ═══════════════════════════════════════════════════════════════════ */
+        .hero-2 {
+            background: linear-gradient(180deg, #0c1929 0%, #1a2f4a 50%, #0c1929 100%);
+            position: relative;
+        }
+        
+        .hero-2::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a227' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-2 .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .hero-2 .stat-pill {
+            background: linear-gradient(135deg, #c9a227 0%, #e8d48b 50%, #c9a227 100%);
+            background-size: 200% 200%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .hero-2 .vertical-line {
+            width: 1px;
+            background: linear-gradient(180deg, transparent, #c9a227, transparent);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════
+           التصميم الثالث - بنكي فاخر (رسمي)
+        ═══════════════════════════════════════════════════════════════════ */
+        .hero-3 {
+            background: 
+                linear-gradient(135deg, rgba(20, 30, 48, 0.97) 0%, rgba(36, 59, 85, 0.97) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23b8860b' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .hero-3 .gold-accent {
+            background: linear-gradient(90deg, #b8860b, #daa520, #ffd700, #daa520, #b8860b);
+            background-size: 200% 100%;
+            animation: goldFlow 4s linear infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes goldFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        .hero-3 .price-display {
+            background: linear-gradient(145deg, rgba(184, 134, 11, 0.15), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 215, 0, 0.1);
+        }
+        
+        .hero-3 .chart-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 3s ease forwards;
+        }
+        
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════
+           التصميم الرابع - نيون مستقبلي (تريندي)
+        ═══════════════════════════════════════════════════════════════════ */
+        .hero-4 {
+            background: #0a0a0f;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-4::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 128, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero-4 .neon-text {
+            text-shadow: 
+                0 0 10px #ffd700,
+                0 0 20px #ffd700,
+                0 0 40px #ffd700,
+                0 0 80px #ffd700;
+        }
+        
+        .hero-4 .neon-border {
+            border: 2px solid #ffd700;
+            box-shadow: 
+                0 0 10px #ffd700,
+                0 0 20px rgba(255, 215, 0, 0.5),
+                inset 0 0 10px rgba(255, 215, 0, 0.1);
+        }
+        
+        .hero-4 .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        
+        .hero-4 .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+        
+        .hero-4 .glitch {
+            position: relative;
+        }
+        
+        .hero-4 .glitch::before,
+        .hero-4 .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-4 .glitch::before {
+            animation: glitch-1 2s infinite linear alternate-reverse;
+            color: #00ffff;
+            z-index: -1;
+        }
+        
+        .hero-4 .glitch::after {
+            animation: glitch-2 3s infinite linear alternate-reverse;
+            color: #ff0080;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+            40% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
+            60% { clip-path: inset(60% 0 20% 0); transform: translate(-1px, 1px); }
+            80% { clip-path: inset(80% 0 0 0); transform: translate(1px, -1px); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(80% 0 0 0); transform: translate(2px, -2px); }
+            40% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+            60% { clip-path: inset(40% 0 40% 0); transform: translate(1px, -1px); }
+            80% { clip-path: inset(20% 0 60% 0); transform: translate(-1px, 1px); }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════
+           التصميم الخامس - غروب ذهبي (تريندي)
+        ═══════════════════════════════════════════════════════════════════ */
+        .hero-5 {
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 25%, #4a1942 50%, #6b2d3a 75%, #8b4513 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-5::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(255, 165, 0, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 40%);
+            animation: aurora 15s ease-in-out infinite;
+        }
+        
+        @keyframes aurora {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+        
+        .hero-5 .gradient-text {
+            background: linear-gradient(135deg, #ffd700, #ff8c00, #ff6347, #ff4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-5 .morph-blob {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 15s ease-in-out infinite;
+        }
+        
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            25% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            50% { border-radius: 50% 60% 30% 60% / 70% 40% 70% 30%; }
+            75% { border-radius: 30% 40% 70% 70% / 50% 60% 30% 60%; }
+        }
+        
+        .hero-5 .glass-morph {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-5 .shine-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-5 .shine-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+        
+        /* Navigation */
+        .nav-dot {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            transform: scale(1.5);
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="font-cairo">
+    <!-- Navigation Dots -->
+    <nav class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
+        <a href="#hero-1" class="nav-dot w-3 h-3 rounded-full bg-yellow-400 active" title="كلاسيكي ملكي"></a>
+        <a href="#hero-2" class="nav-dot w-3 h-3 rounded-full bg-yellow-400/50 hover:bg-yellow-400" title="مؤسسي أنيق"></a>
+        <a href="#hero-3" class="nav-dot w-3 h-3 rounded-full bg-yellow-400/50 hover:bg-yellow-400" title="بنكي فاخر"></a>
+        <a href="#hero-4" class="nav-dot w-3 h-3 rounded-full bg-yellow-400/50 hover:bg-yellow-400" title="نيون مستقبلي"></a>
+        <a href="#hero-5" class="nav-dot w-3 h-3 rounded-full bg-yellow-400/50 hover:bg-yellow-400" title="غروب ذهبي"></a>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         التصميم الأول - كلاسيكي ملكي (رسمي)
+    ═══════════════════════════════════════════════════════════════════ -->
+    <section id="hero-1" class="hero-1 min-h-screen flex items-center justify-center relative">
+        <!-- Label -->
+        <div class="absolute top-4 left-4 px-4 py-2 bg-amber-900/50 rounded-full text-amber-200 text-sm border border-amber-700/50">
+            التصميم 1 - كلاسيكي ملكي (رسمي)
+        </div>
+        
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Crown Icon -->
+                <div class="crown-icon text-7xl mb-6">👑</div>
+                
+                <!-- Ornament -->
+                <div class="ornament w-48 mx-auto mb-8"></div>
+                
+                <!-- Main Content -->
+                <div class="gold-frame p-8 lg:p-12 mx-4">
+                    <p class="text-amber-300/80 text-lg mb-4 tracking-widest">منذ عام 1985</p>
+                    
+                    <h1 class="font-playfair text-4xl lg:text-6xl xl:text-7xl font-bold text-white mb-6">
+                        <span class="block text-amber-400" style="text-shadow: 0 4px 30px rgba(212, 175, 55, 0.4);">SabeekaGold</span>
+                        <span class="block text-2xl lg:text-3xl mt-4 text-gray-300 font-cairo font-light">صُنّاع الذهب الأوائل في الخليج</span>
+                    </h1>
+                    
+                    <div class="ornament w-32 mx-auto my-8"></div>
+                    
+                    <p class="text-gray-400 text-lg lg:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+                        نحافظ على إرث أجدادنا في صناعة أجود أنواع الذهب الكويتي، 
+                        بمعايير جودة عالمية وتصاميم تُخلّد للأجيال
+                    </p>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 mb-10">
+                        <div class="text-center">
+                            <p class="text-3xl lg:text-4xl font-bold text-amber-400">40+</p>
+                            <p class="text-gray-500 text-sm">عاماً من الخبرة</p>
+                        </div>
+                        <div class="text-center border-x border-amber-700/30">
+                            <p class="text-3xl lg:text-4xl font-bold text-amber-400">15K+</p>
+                            <p class="text-gray-500 text-sm">عميل راضٍ</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl lg:text-4xl font-bold text-amber-400">99.9%</p>
+                            <p class="text-gray-500 text-sm">نقاء الذهب</p>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-bold rounded-none border border-amber-400 hover:from-amber-500 hover:to-amber-400 transition-all">
+                            اكتشف المجموعة الملكية
+                        </button>
+                        <button class="px-8 py-4 bg-transparent text-amber-400 font-bold rounded-none border border-amber-700 hover:bg-amber-900/30 transition-all">
+                            تواصل معنا
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Ornament -->
+                <div class="ornament w-48 mx-auto mt-8"></div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <a href="#hero-2" class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 text-amber-400">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </a>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         التصميم الثاني - مؤسسي أنيق (رسمي)
+    ═══════════════════════════════════════════════════════════════════ -->
+    <section id="hero-2" class="hero-2 min-h-screen flex items-center relative">
+        <!-- Label -->
+        <div class="absolute top-4 left-4 px-4 py-2 bg-yellow-900/50 rounded-full text-yellow-200 text-sm border border-yellow-700/50 z-20">
+            التصميم 2 - مؤسسي أنيق (رسمي)
+        </div>
+        
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-right">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-yellow-600"></div>
+                        <span class="text-yellow-500 text-sm tracking-[0.3em]">PREMIUM GOLD</span>
+                    </div>
+                    
+                    <h1 class="font-montserrat text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
+                        استثمر في
+                        <span class="block text-yellow-400">الذهب الحقيقي</span>
+                    </h1>
+                    
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        منصة متكاملة لتتبع أسعار الذهب لحظياً مع تحليلات ذكية 
+                        وتوصيات مبنية على الذكاء الاصطناعي
+                    </p>
+                    
+                    <!-- Features -->
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400">✓</div>
+                            <span class="text-gray-300">أسعار لحظية من السوق العالمي</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400">✓</div>
+                            <span class="text-gray-300">تحليلات Gemini AI المتقدمة</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400">✓</div>
+                            <span class="text-gray-300">تنبيهات فورية عند تغير الأسعار</span>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA -->
+                    <div class="flex flex-wrap gap-4">
+                        <button class="stat-pill px-8 py-4 text-black font-bold rounded-xl shadow-lg shadow-yellow-500/20">
+                            ابدأ التحليل الآن
+                        </button>
+                        <button class="px-8 py-4 glass-card text-white font-bold rounded-xl hover:bg-white/10 transition-all">
+                            شاهد العرض التوضيحي
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Stats Card -->
+                <div class="relative">
+                    <div class="glass-card rounded-3xl p-8 lg:p-10">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-8">
+                            <div>
+                                <p class="text-gray-500 text-sm">السعر الحالي</p>
+                                <p class="text-3xl font-bold text-white">47.370 <span class="text-lg text-gray-400">د.ك</span></p>
+                            </div>
+                            <div class="text-left">
+                                <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">+0.36%</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Mini Chart Placeholder -->
+                        <div class="h-32 mb-8 flex items-end gap-1">
+                            <div class="flex-1 bg-yellow-500/30 rounded-t" style="height: 40%"></div>
+                            <div class="flex-1 bg-yellow-500/40 rounded-t" style="height: 55%"></div>
+                            <div class="flex-1 bg-yellow-500/50 rounded-t" style="height: 45%"></div>
+                            <div class="flex-1 bg-yellow-500/60 rounded-t" style="height: 70%"></div>
+                            <div class="flex-1 bg-yellow-500/70 rounded-t" style="height: 60%"></div>
+                            <div class="flex-1 bg-yellow-500/80 rounded-t" style="height: 85%"></div>
+                            <div class="flex-1 bg-yellow-500 rounded-t" style="height: 100%"></div>
+                        </div>
+                        
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/5 rounded-xl p-4">
+                                <p class="text-gray-500 text-xs mb-1">أعلى سعر اليوم</p>
+                                <p class="text-xl font-bold text-emerald-400">47.520 د.ك</p>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-4">
+                                <p class="text-gray-500 text-xs mb-1">أدنى سعر اليوم</p>
+                                <p class="text-xl font-bold text-rose-400">47.180 د.ك</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-500/20 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vertical Lines -->
+        <div class="vertical-line absolute left-20 top-0 bottom-0 hidden lg:block"></div>
+        <div class="vertical-line absolute right-20 top-0 bottom-0 hidden lg:block"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         التصميم الثالث - بنكي فاخر (رسمي)
+    ═══════════════════════════════════════════════════════════════════ -->
+    <section id="hero-3" class="hero-3 min-h-screen flex items-center relative">
+        <!-- Label -->
+        <div class="absolute top-4 left-4 px-4 py-2 bg-amber-900/50 rounded-full text-amber-200 text-sm border border-amber-700/50 z-20">
+            التصميم 3 - بنكي فاخر (رسمي)
+        </div>
+        
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <!-- Top Bar -->
+                <div class="flex items-center justify-between mb-12 pb-6 border-b border-amber-900/30">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-700 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">🏆</span>
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-xl text-white">SabeekaGold</h2>
+                            <p class="text-amber-600 text-sm">Premium Trading Platform</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center gap-6 text-gray-400 text-sm">
+                        <span>🕐 متصل</span>
+                        <span>📡 تحديث لحظي</span>
+                        <span>🔒 مؤمّن</span>
+                    </div>
+                </div>
+                
+                <!-- Main Content Grid -->
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Main Price Display -->
+                    <div class="lg:col-span-2">
+                        <div class="price-display rounded-2xl p-8 lg:p-12">
+                            <div class="flex items-start justify-between mb-8">
+                                <div>
+                                    <p class="text-amber-600 text-sm mb-2">سعر الأونصة العالمي</p>
+                                    <h1 class="gold-accent text-5xl lg:text-7xl font-bold font-montserrat">
+                                        $4,836.46
+                                    </h1>
+                                    <div class="flex items-center gap-3 mt-4">
+                                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded text-sm font-bold">▲ +32.15</span>
+                                        <span class="text-gray-500">+0.67%</span>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <p class="text-gray-500 text-sm">آخر تحديث</p>
+                                    <p class="text-white font-mono">03:42:10</p>
+                                </div>
+                            </div>
+                            
+                            <!-- SVG Chart -->
+                            <svg class="w-full h-32" viewBox="0 0 400 80">
+                                <defs>
+                                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#b8860b"/>
+                                        <stop offset="50%" style="stop-color:#ffd700"/>
+                                        <stop offset="100%" style="stop-color:#b8860b"/>
+                                    </linearGradient>
+                                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.3"/>
+                                        <stop offset="100%" style="stop-color:#ffd700;stop-opacity:0"/>
+                                    </linearGradient>
+                                </defs>
+                                <path class="chart-line" d="M0,60 Q50,50 100,55 T200,40 T300,45 T400,20" fill="none" stroke="url(#lineGradient)" stroke-width="3"/>
+                                <path d="M0,60 Q50,50 100,55 T200,40 T300,45 T400,20 V80 H0 Z" fill="url(#areaGradient)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Stats -->
+                    <div class="space-y-4">
+                        <div class="price-display rounded-xl p-6">
+                            <p class="text-amber-600 text-xs mb-2">ذهب عيار 24</p>
+                            <p class="text-2xl font-bold text-white">47.370 <span class="text-sm text-gray-500">د.ك/جرام</span></p>
+                        </div>
+                        <div class="price-display rounded-xl p-6">
+                            <p class="text-amber-600 text-xs mb-2">ذهب عيار 21</p>
+                            <p class="text-2xl font-bold text-white">41.449 <span class="text-sm text-gray-500">د.ك/جرام</span></p>
+                        </div>
+                        <div class="price-display rounded-xl p-6">
+                            <p class="text-amber-600 text-xs mb-2">ذهب عيار 18</p>
+                            <p class="text-2xl font-bold text-white">35.528 <span class="text-sm text-gray-500">د.ك/جرام</span></p>
+                        </div>
+                        
+                        <button class="w-full py-4 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-bold rounded-xl hover:from-amber-500 hover:to-amber-400 transition-all">
+                            فتح منصة التداول
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Bottom Features -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-amber-900/30">
+                    <div class="text-center">
+                        <p class="text-3xl mb-2">📊</p>
+                        <p class="text-white font-bold">تحليلات متقدمة</p>
+                        <p class="text-gray-500 text-sm">بالذكاء الاصطناعي</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl mb-2">⚡</p>
+                        <p class="text-white font-bold">تحديث لحظي</p>
+                        <p class="text-gray-500 text-sm">كل 15 ثانية</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl mb-2">🔔</p>
+                        <p class="text-white font-bold">تنبيهات ذكية</p>
+                        <p class="text-gray-500 text-sm">حسب أهدافك</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl mb-2">📱</p>
+                        <p class="text-white font-bold">متوافق</p>
+                        <p class="text-gray-500 text-sm">جميع الأجهزة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         التصميم الرابع - نيون مستقبلي (تريندي)
+    ═══════════════════════════════════════════════════════════════════ -->
+    <section id="hero-4" class="hero-4 min-h-screen flex items-center relative">
+        <!-- Label -->
+        <div class="absolute top-4 left-4 px-4 py-2 bg-pink-900/50 rounded-full text-pink-200 text-sm border border-pink-700/50 z-20">
+            التصميم 4 - نيون مستقبلي (تريندي)
+        </div>
+        
+        <!-- Cyber Grid -->
+        <div class="cyber-grid absolute inset-0"></div>
+        
+        <!-- Floating Orbs -->
+        <div class="floating-orb w-64 h-64 bg-yellow-500/20 top-20 right-20"></div>
+        <div class="floating-orb w-48 h-48 bg-cyan-500/20 bottom-20 left-20" style="animation-delay: -4s;"></div>
+        <div class="floating-orb w-32 h-32 bg-pink-500/20 top-1/2 left-1/3" style="animation-delay: -2s;"></div>
+        
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="max-w-5xl mx-auto text-center">
+                <!-- Glitch Title -->
+                <h1 class="glitch neon-text text-5xl lg:text-7xl xl:text-8xl font-black text-yellow-400 mb-6" data-text="SABEEKA">
+                    SABEEKA
+                </h1>
+                <h2 class="text-2xl lg:text-4xl font-bold text-white mb-4">
+                    <span class="text-cyan-400">GOLD</span> × <span class="text-pink-400">TECH</span>
+                </h2>
+                
+                <p class="text-gray-400 text-lg lg:text-xl mb-12 max-w-2xl mx-auto">
+                    مستقبل تداول الذهب. تقنيات الجيل القادم. 
+                    <span class="text-yellow-400">AI-Powered.</span>
+                </p>
+                
+                <!-- Neon Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="neon-border rounded-2xl p-6 bg-black/50">
+                        <p class="text-gray-500 text-sm mb-2">// LIVE_PRICE</p>
+                        <p class="text-3xl lg:text-4xl font-mono font-bold text-yellow-400">$4,836</p>
+                        <p class="text-cyan-400 text-sm mt-2">per_ounce</p>
+                    </div>
+                    <div class="neon-border rounded-2xl p-6 bg-black/50">
+                        <p class="text-gray-500 text-sm mb-2">// CHANGE_24H</p>
+                        <p class="text-3xl lg:text-4xl font-mono font-bold text-emerald-400">+0.67%</p>
+                        <p class="text-cyan-400 text-sm mt-2">bullish_trend</p>
+                    </div>
+                    <div class="neon-border rounded-2xl p-6 bg-black/50">
+                        <p class="text-gray-500 text-sm mb-2">// AI_CONFIDENCE</p>
+                        <p class="text-3xl lg:text-4xl font-mono font-bold text-pink-400">85%</p>
+                        <p class="text-cyan-400 text-sm mt-2">buy_signal</p>
+                    </div>
+                </div>
+                
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="group relative px-10 py-5 bg-yellow-400 text-black font-bold rounded-xl overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2">
+                            <span>🚀</span>
+                            <span>LAUNCH APP</span>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </button>
+                    <button class="px-10 py-5 bg-transparent text-white font-bold rounded-xl border-2 border-cyan-400 hover:bg-cyan-400/10 transition-all">
+                        <span class="flex items-center gap-2">
+                            <span>📺</span>
+                            <span>WATCH DEMO</span>
+                        </span>
+                    </button>
+                </div>
+                
+                <!-- Tech Tags -->
+                <div class="flex flex-wrap justify-center gap-3 mt-12">
+                    <span class="px-4 py-2 bg-white/5 rounded-full text-gray-400 text-sm border border-white/10">Gemini AI</span>
+                    <span class="px-4 py-2 bg-white/5 rounded-full text-gray-400 text-sm border border-white/10">Real-time Data</span>
+                    <span class="px-4 py-2 bg-white/5 rounded-full text-gray-400 text-sm border border-white/10">ML Predictions</span>
+                    <span class="px-4 py-2 bg-white/5 rounded-full text-gray-400 text-sm border border-white/10">Smart Alerts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         التصميم الخامس - غروب ذهبي (تريندي)
+    ═══════════════════════════════════════════════════════════════════ -->
+    <section id="hero-5" class="hero-5 min-h-screen flex items-center relative">
+        <!-- Label -->
+        <div class="absolute top-4 left-4 px-4 py-2 bg-orange-900/50 rounded-full text-orange-200 text-sm border border-orange-700/50 z-20">
+            التصميم 5 - غروب ذهبي (تريندي)
+        </div>
+        
+        <!-- Morphing Blobs -->
+        <div class="morph-blob absolute w-96 h-96 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 top-10 right-10 blur-3xl"></div>
+        <div class="morph-blob absolute w-80 h-80 bg-gradient-to-br from-pink-500/20 to-orange-500/20 bottom-10 left-10 blur-3xl" style="animation-delay: -5s;"></div>
+        
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-right order-2 lg:order-1">
+                    <div class="inline-block px-4 py-2 bg-white/10 rounded-full text-orange-300 text-sm mb-6 backdrop-blur-sm">
+                        ✨ الإصدار الجديد متاح الآن
+                    </div>
+                    
+                    <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
+                        <span class="gradient-text">اكتشف عالم</span>
+                        <span class="block text-white mt-2">الذهب الذكي</span>
+                    </h1>
+                    
+                    <p class="text-gray-300/80 text-lg mb-8 leading-relaxed">
+                        تجربة فريدة تجمع بين أناقة الذهب وقوة الذكاء الاصطناعي. 
+                        تحليلات دقيقة، توقعات ذكية، وقرارات مدروسة.
+                    </p>
+                    
+                    <!-- Feature Pills -->
+                    <div class="flex flex-wrap gap-3 mb-10">
+                        <span class="px-4 py-2 glass-morph rounded-full text-white text-sm">🔮 توقعات AI</span>
+                        <span class="px-4 py-2 glass-morph rounded-full text-white text-sm">📈 تحليل فني</span>
+                        <span class="px-4 py-2 glass-morph rounded-full text-white text-sm">🎯 توصيات</span>
+                    </div>
+                    
+                    <!-- CTA -->
+                    <div class="flex flex-wrap gap-4">
+                        <button class="shine-btn px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-bold rounded-2xl shadow-lg shadow-orange-500/30">
+                            ابدأ رحلتك الآن
+                        </button>
+                        <button class="px-8 py-4 glass-morph text-white font-bold rounded-2xl hover:bg-white/10 transition-all">
+                            استكشف المزيد
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Content - 3D Card -->
+                <div class="order-1 lg:order-2">
+                    <div class="glass-morph rounded-3xl p-8 transform hover:scale-105 transition-transform duration-500" style="transform-style: preserve-3d;">
+                        <!-- Card Header -->
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-xl flex items-center justify-center text-2xl">
+                                    🏅
+                                </div>
+                                <div>
+                                    <p class="text-white font-bold">Gold 24K</p>
+                                    <p class="text-gray-400 text-sm">Kuwait Price</p>
+                                </div>
+                            </div>
+                            <div class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">
+                                LIVE
+                            </div>
+                        </div>
+                        
+                        <!-- Price -->
+                        <div class="text-center mb-8">
+                            <p class="text-gray-400 text-sm mb-2">سعر الجرام</p>
+                            <p class="gradient-text text-5xl lg:text-6xl font-bold">47.370</p>
+                            <p class="text-gray-400 mt-2">دينار كويتي</p>
+                        </div>
+                        
+                        <!-- Mini Stats -->
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            <div class="text-center">
+                                <p class="text-emerald-400 text-lg font-bold">▲ 0.36%</p>
+                                <p class="text-gray-500 text-xs">اليوم</p>
+                            </div>
+                            <div class="text-center border-x border-white/10">
+                                <p class="text-orange-400 text-lg font-bold">7.56%</p>
+                                <p class="text-gray-500 text-xs">الشهر</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-yellow-400 text-lg font-bold">73.5%</p>
+                                <p class="text-gray-500 text-xs">السنة</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Recommendation -->
+                        <div class="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-xl p-4 border border-emerald-500/30">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🤖</span>
+                                <div>
+                                    <p class="text-emerald-400 font-bold">توصية Gemini AI</p>
+                                    <p class="text-gray-400 text-sm">شراء قوي - ثقة 85%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Script -->
+    <script>
+        // Update active nav dot on scroll
+        const sections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navDots.forEach(dot => {
+                dot.classList.remove('active', 'bg-yellow-400');
+                dot.classList.add('bg-yellow-400/50');
+                if (dot.getAttribute('href') === `#${current}`) {
+                    dot.classList.add('active', 'bg-yellow-400');
+                    dot.classList.remove('bg-yellow-400/50');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

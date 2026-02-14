@@ -1,0 +1,11 @@
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\bin\Debug\net8.0\MrGoldenBader.Domain.deps.json
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\bin\Debug\net8.0\MrGoldenBader.Domain.dll
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\bin\Debug\net8.0\MrGoldenBader.Domain.pdb
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\MrGoldenBader.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\MrGoldenBader.Domain.AssemblyInfoInputs.cache
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\MrGoldenBader.Domain.AssemblyInfo.cs
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\MrGoldenBader.Domain.csproj.CoreCompileInputs.cache
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\MrGoldenBader.Domain.dll
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\refint\MrGoldenBader.Domain.dll
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\MrGoldenBader.Domain.pdb
+C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.Domain\obj\Debug\net8.0\ref\MrGoldenBader.Domain.dll

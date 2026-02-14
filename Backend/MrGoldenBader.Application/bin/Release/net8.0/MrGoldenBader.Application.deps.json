@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "MrGoldenBader.Application/1.0.0": {
+        "dependencies": {
+          "MrGoldenBader.Domain": "1.0.0"
+        },
+        "runtime": {
+          "MrGoldenBader.Application.dll": {}
+        }
+      },
+      "MrGoldenBader.Domain/1.0.0": {
+        "runtime": {
+          "MrGoldenBader.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MrGoldenBader.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MrGoldenBader.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

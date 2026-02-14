@@ -1,0 +1,739 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SabeekaGold - Premium Gold Investment Platform
+   تصميم فاخر وعصري لمنصة الاستثمار في الذهب
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════
+   CSS Variables - المتغيرات الأساسية
+   ═══════════════════════════════════════════════════════════════════ */
+:root {
+    /* الألوان الأساسية من الشعار */
+    --bg-primary: #0A0E17;
+    --bg-secondary: #0D1321;
+    --bg-tertiary: #111827;
+    --bg-card: rgba(17, 24, 39, 0.8);
+    --bg-card-hover: rgba(25, 35, 55, 0.9);
+    
+    /* الذهبي */
+    --gold-100: #FEF3C7;
+    --gold-200: #FDE68A;
+    --gold-300: #FCD34D;
+    --gold-400: #FBBF24;
+    --gold-500: #F59E0B;
+    --gold-600: #D97706;
+    --gold-700: #B45309;
+    --gold-gradient: linear-gradient(135deg, #FFD700 0%, #F4C430 50%, #C9A227 100%);
+    
+    /* النصوص */
+    --text-primary: #FFFFFF;
+    --text-secondary: #E5E7EB;
+    --text-muted: #9CA3AF;
+    --text-dim: #6B7280;
+    
+    /* الحدود */
+    --border-color: rgba(255, 215, 0, 0.1);
+    --border-gold: rgba(255, 215, 0, 0.3);
+    
+    /* التأثيرات */
+    --glow-gold: 0 0 30px rgba(255, 215, 0, 0.2);
+    --glow-gold-strong: 0 0 50px rgba(255, 215, 0, 0.4);
+    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════════════════════ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* خلفية متدرجة مع تأثير */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse at top right, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+        var(--bg-primary);
+    z-index: -1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Scrollbar - شريط التمرير
+   ═══════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--gold-600), var(--gold-700));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--gold-500), var(--gold-600));
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Typography - الخطوط
+   ═══════════════════════════════════════════════════════════════════ */
+.gradient-text {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gold {
+    color: var(--gold-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Glassmorphism Cards - البطاقات الزجاجية
+   ═══════════════════════════════════════════════════════════════════ */
+.card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-gold);
+    transform: translateY(-4px);
+    box-shadow: var(--glow-gold);
+}
+
+.card-gold {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(17, 24, 39, 0.9) 100%);
+    border: 1px solid var(--border-gold);
+}
+
+.card-gold:hover {
+    box-shadow: var(--glow-gold-strong);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Glass Effect
+   ═══════════════════════════════════════════════════════════════════ */
+.glass {
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Navigation - التنقل العلوي
+   ═══════════════════════════════════════════════════════════════════ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    background: rgba(10, 14, 23, 0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    padding: 0.75rem 2rem;
+    background: rgba(10, 14, 23, 0.98);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+.nav-link:hover {
+    color: var(--gold-400);
+}
+
+.nav-link.active {
+    color: var(--gold-400);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gold-gradient);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Hero Section
+   ═══════════════════════════════════════════════════════════════════ */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Price Cards - بطاقات الأسعار
+   ═══════════════════════════════════════════════════════════════════ */
+.price-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 215, 0, 0.02) 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--glow-gold-strong);
+    border-color: var(--gold-400);
+}
+
+.price-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Buttons - الأزرار
+   ═══════════════════════════════════════════════════════════════════ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-gold {
+    background: var(--gold-gradient);
+    color: #000;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--gold-400);
+    border: 2px solid var(--gold-400);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Animations - الحركات
+   ═══════════════════════════════════════════════════════════════════ */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+    50% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)); }
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.pulse-gold {
+    animation: pulse-gold 2s infinite;
+}
+
+.shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+.glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Price Animation */
+@keyframes priceUp {
+    0% { color: #22c55e; transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { color: #22c55e; transform: scale(1); }
+}
+
+@keyframes priceDown {
+    0% { color: #ef4444; transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { color: #ef4444; transform: scale(1); }
+}
+
+.price-up { animation: priceUp 0.5s ease; }
+.price-down { animation: priceDown 0.5s ease; }
+
+/* تأثير وميض السعر عند التحديث */
+@keyframes priceFlash {
+    0% { text-shadow: 0 0 10px rgba(245, 158, 11, 0.8); }
+    50% { text-shadow: 0 0 20px rgba(245, 158, 11, 1), 0 0 30px rgba(245, 158, 11, 0.6); }
+    100% { text-shadow: 0 0 10px rgba(245, 158, 11, 0.8); }
+}
+
+.price-flash { animation: priceFlash 0.5s ease; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Trend Badges
+   ═══════════════════════════════════════════════════════════════════ */
+.trend-up {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.trend-down {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.trend-neutral {
+    background-color: rgba(161, 161, 170, 0.2);
+    color: #a1a1aa;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Features Section
+   ═══════════════════════════════════════════════════════════════════ */
+.feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover {
+    border-color: var(--border-gold);
+    transform: translateY(-8px);
+    box-shadow: var(--glow-gold);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+    box-shadow: var(--glow-gold);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Sidebar - القائمة الجانبية (للتوافق مع الكود القديم)
+   ═══════════════════════════════════════════════════════════════════ */
+#sidebar {
+    background: rgba(10, 14, 23, 0.98);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border-color);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Tables
+   ═══════════════════════════════════════════════════════════════════ */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(255, 215, 0, 0.05);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Alert Types
+   ═══════════════════════════════════════════════════════════════════ */
+.alert-price { border-right: 3px solid var(--gold-500); }
+.alert-news { border-right: 3px solid #3b82f6; }
+.alert-recommendation { border-right: 3px solid #22c55e; }
+.alert-critical { border-right: 3px solid #ef4444; background: rgba(239, 68, 68, 0.1); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Toast Notifications
+   ═══════════════════════════════════════════════════════════════════ */
+.toast {
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 9.7s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Loading Spinner
+   ═══════════════════════════════════════════════════════════════════ */
+.spinner {
+    border: 2px solid var(--bg-tertiary);
+    border-top: 2px solid var(--gold-500);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Progress Bar
+   ═══════════════════════════════════════════════════════════════════ */
+.progress-bar {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--gold-gradient);
+    transition: width 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Karat Badge
+   ═══════════════════════════════════════════════════════════════════ */
+.karat-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.karat-24 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; }
+.karat-22 { background: linear-gradient(135deg, #fcd34d, #fbbf24); color: #000; }
+.karat-21 { background: linear-gradient(135deg, #fde68a, #fcd34d); color: #000; }
+.karat-18 { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #000; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Connection Status
+   ═══════════════════════════════════════════════════════════════════ */
+#status-dot.connected { background-color: #22c55e; }
+#status-dot.disconnected { background-color: #ef4444; }
+#status-dot.connecting { background-color: var(--gold-500); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Recommendation Types
+   ═══════════════════════════════════════════════════════════════════ */
+.rec-buy {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.rec-sell {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.rec-hold {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════════════════════════════════ */
+.footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Responsive Design
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    #sidebar {
+        transform: translateX(100%);
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        z-index: 50;
+        width: 280px;
+        transition: transform 0.3s ease;
+    }
+
+    #sidebar.open {
+        transform: translateX(0);
+    }
+
+    main {
+        margin-right: 0 !important;
+    }
+
+    .mobile-menu-btn {
+        display: block !important;
+    }
+    
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    main .p-8 {
+        padding: 1rem !important;
+    }
+
+    .hero {
+        padding: 100px 1rem 2rem;
+        min-height: auto;
+    }
+    
+    .price-value {
+        font-size: 1.75rem;
+    }
+
+    .card {
+        border-radius: 1rem !important;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .price-value {
+        font-size: 1.5rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+    }
+}
+
+/* Mobile Menu Overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 40;
+    backdrop-filter: blur(4px);
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--gold-400);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+    .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Safe Area for notched phones */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Chart Period Buttons
+   ═══════════════════════════════════════════════════════════════════ */
+.chart-period-btn.active {
+    background: var(--gold-gradient) !important;
+    color: #000 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Scroll Animations
+   ═══════════════════════════════════════════════════════════════════ */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Decorative Elements
+   ═══════════════════════════════════════════════════════════════════ */
+.gold-line {
+    height: 2px;
+    background: var(--gold-gradient);
+    width: 60px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.section-title p {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}

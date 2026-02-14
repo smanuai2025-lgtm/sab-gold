@@ -1,0 +1,179 @@
+2026-01-14 00:11:57.180 +03:00 [INF] Start installing Hangfire SQL objects...
+2026-01-14 00:11:57.953 +03:00 [INF] Hangfire SQL objects installed.
+2026-01-14 00:11:58.136 +03:00 [INF] تم تسجيل المهام المتكررة في Hangfire
+2026-01-14 00:11:58.138 +03:00 [INF] ═══════════════════════════════════════════════════════════════════
+2026-01-14 00:11:58.138 +03:00 [INF]     Mr. Golden Bader - نظام متابعة وتحليل أسعار الذهب
+2026-01-14 00:11:58.139 +03:00 [INF] ═══════════════════════════════════════════════════════════════════
+2026-01-14 00:11:58.140 +03:00 [INF] بدء تشغيل النظام...
+2026-01-14 00:11:58.156 +03:00 [INF] User profile is available. Using 'C:\Users\OMAR1\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-01-14 00:11:58.267 +03:00 [INF] Now listening on: http://localhost:5276
+2026-01-14 00:11:58.272 +03:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: omar\SQLEXPRESS@MrGoldenBaderDb_Dev'
+2026-01-14 00:11:58.273 +03:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.
+2026-01-14 00:11:58.274 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 2
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-01-14 00:11:58.282 +03:00 [DBG] Execution loop BackgroundServerProcess:b35cdf0b has started in 2.2273 ms
+2026-01-14 00:11:58.283 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-14 00:11:58.285 +03:00 [INF] Hosting environment: Development
+2026-01-14 00:11:58.285 +03:00 [INF] Content root path: C:\Users\OMAR1\Desktop\Mr.Golden Bader\Backend\MrGoldenBader.API
+2026-01-14 00:11:58.302 +03:00 [INF] Server omar:22432:7b3d74b5 successfully announced in 17.9658 ms
+2026-01-14 00:11:58.305 +03:00 [DBG] Execution loop ServerHeartbeatProcess:322620a6 has started in 1.2699 ms
+2026-01-14 00:11:58.305 +03:00 [INF] Server omar:22432:7b3d74b5 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-01-14 00:11:58.306 +03:00 [DBG] Execution loop ServerWatchdog:a756aa6f has started in 0.271 ms
+2026-01-14 00:11:58.307 +03:00 [DBG] Execution loop ServerJobCancellationWatcher:998db620 has started in 0.2165 ms
+2026-01-14 00:11:58.308 +03:00 [DBG] Execution loop RecurringJobScheduler:359f336f has started in 0.1263 ms
+2026-01-14 00:11:58.307 +03:00 [DBG] Execution loop SqlServerHeartbeatProcess:5810469b has started in 0.2209 ms
+2026-01-14 00:11:58.307 +03:00 [DBG] Execution loop ExpirationManager:d7b2db01 has started in 0.2193 ms
+2026-01-14 00:11:58.307 +03:00 [DBG] Execution loop CountersAggregator:6c5ee0d5 has started in 0.1535 ms
+2026-01-14 00:11:58.307 +03:00 [DBG] Execution loop Worker:eccb00d1 has started in 0.1925 ms
+2026-01-14 00:11:58.308 +03:00 [DBG] Execution loop Worker:c912e88b has started in 0.3702 ms
+2026-01-14 00:11:58.308 +03:00 [DBG] Execution loop DelayedJobScheduler:819c2179 has started in 0.1681 ms
+2026-01-14 00:11:58.308 +03:00 [INF] Server omar:22432:7b3d74b5 all the dispatchers started
+2026-01-14 00:11:58.312 +03:00 [DBG] Aggregating records in 'Counter' table...
+2026-01-14 00:11:58.312 +03:00 [DBG] Removing outdated records from the 'AggregatedCounter' table...
+2026-01-14 00:11:58.341 +03:00 [DBG] Removing outdated records from the 'Job' table...
+2026-01-14 00:11:58.349 +03:00 [DBG] Removing outdated records from the 'List' table...
+2026-01-14 00:11:58.354 +03:00 [DBG] Removing outdated records from the 'Set' table...
+2026-01-14 00:11:58.359 +03:00 [DBG] Removing outdated records from the 'Hash' table...
+2026-01-14 00:12:09.307 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5276/ - null null
+2026-01-14 00:12:09.373 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5276/ - 301 0 null 66.384ms
+2026-01-14 00:12:09.389 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5276/index.html - null null
+2026-01-14 00:12:09.609 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5276/index.html - 200 null text/html;charset=utf-8 220.9411ms
+2026-01-14 00:12:09.632 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5276/swagger-ui-standalone-preset.js - null null
+2026-01-14 00:12:09.632 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5276/swagger-ui-bundle.js - null null
+2026-01-14 00:12:09.632 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5276/swagger-ui.css - null null
+2026-01-14 00:12:09.658 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-01-14 00:12:09.659 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-01-14 00:12:09.666 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-01-14 00:12:09.669 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5276/swagger-ui.css - 200 144929 text/css 36.8373ms
+2026-01-14 00:12:09.669 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5276/swagger-ui-standalone-preset.js - 200 312163 text/javascript 37.6889ms
+2026-01-14 00:12:09.671 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5276/swagger-ui-bundle.js - 200 1061536 text/javascript 38.1492ms
+2026-01-14 00:12:09.843 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5276/swagger/v1/swagger.json - null null
+2026-01-14 00:12:09.845 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5276/favicon-32x32.png - null null
+2026-01-14 00:12:09.848 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-01-14 00:12:09.850 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5276/favicon-32x32.png - 200 628 image/png 5.5726ms
+2026-01-14 00:12:10.008 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5276/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 165.4767ms
+2026-01-14 00:12:13.507 +03:00 [DBG] 1 recurring job(s) processed by scheduler.
+2026-01-14 00:12:14.518 +03:00 [INF] ═══════════════════════════════════════
+2026-01-14 00:12:14.519 +03:00 [INF] بدء مهمة تحديث الأسعار
+2026-01-14 00:12:14.522 +03:00 [INF] ═══════════════════════════════════════
+2026-01-14 00:12:14.527 +03:00 [INF] بدء تحديث الأسعار...
+2026-01-14 00:12:14.530 +03:00 [INF] جاري جلب سعر الذهب العالمي...
+2026-01-14 00:12:14.825 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p2='?' (DbType = DateTime2), @p3='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p4='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p5='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p6='?' (Size = 4000), @p7='?' (Size = 450), @p8='?' (DbType = DateTime2), @p9='?' (DbType = DateTime2), @p10='?' (Precision = 18) (Scale = 4) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [GoldPrices] ([Id], [Close], [CreatedAt], [High], [Low], [Open], [Source], [TimeFrame], [Timestamp], [UpdatedAt], [Volume])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-01-14 00:12:14.859 +03:00 [INF] تم جلب سعر الذهب: 2033.15 USD في "2026-01-13T21:12:14.5348478Z"
+2026-01-14 00:12:14.867 +03:00 [INF] تم بث السعر العالمي: 2033.15 USD
+2026-01-14 00:12:14.874 +03:00 [INF] جاري جلب أسعار الذهب في الكويت...
+2026-01-14 00:12:14.956 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p2='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p3='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Int32), @p6='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p7='?' (Size = 4000), @p8='?' (DbType = DateTime2), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Guid), @p11='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p12='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p13='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Int32), @p16='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p17='?' (Size = 4000), @p18='?' (DbType = DateTime2), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Guid), @p21='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p22='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p23='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p24='?' (DbType = DateTime2), @p25='?' (DbType = Int32), @p26='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p27='?' (Size = 4000), @p28='?' (DbType = DateTime2), @p29='?' (DbType = DateTime2), @p30='?' (DbType = Guid), @p31='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p32='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p33='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p34='?' (DbType = DateTime2), @p35='?' (DbType = Int32), @p36='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p37='?' (Size = 4000), @p38='?' (DbType = DateTime2), @p39='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [KuwaitGoldPrices] ([Id], [BuyPrice], [ChangePercent], [ChangeValue], [CreatedAt], [Karat], [SellPrice], [Source], [Timestamp], [UpdatedAt])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9),
+(@p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19),
+(@p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29),
+(@p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39);
+2026-01-14 00:12:14.964 +03:00 [INF] تم جلب 4 أسعار للكويت في "2026-01-13T21:12:14.9643660Z"
+2026-01-14 00:12:14.968 +03:00 [INF] تم بث 4 أسعار للكويت
+2026-01-14 00:12:14.969 +03:00 [INF] تم تحديث الأسعار بنجاح
+2026-01-14 00:12:28.330 +03:00 [DBG] Server omar:22432:7b3d74b5 heartbeat successfully sent
+2026-01-14 00:12:58.343 +03:00 [DBG] Server omar:22432:7b3d74b5 heartbeat successfully sent
+2026-01-14 00:13:13.597 +03:00 [DBG] 1 recurring job(s) processed by scheduler.
+2026-01-14 00:13:13.655 +03:00 [INF] ═══════════════════════════════════════
+2026-01-14 00:13:13.658 +03:00 [INF] بدء مهمة تحديث الأسعار
+2026-01-14 00:13:13.658 +03:00 [INF] ═══════════════════════════════════════
+2026-01-14 00:13:13.659 +03:00 [INF] بدء تحديث الأسعار...
+2026-01-14 00:13:13.660 +03:00 [INF] جاري جلب سعر الذهب العالمي...
+2026-01-14 00:13:13.668 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p2='?' (DbType = DateTime2), @p3='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p4='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p5='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p6='?' (Size = 4000), @p7='?' (Size = 450), @p8='?' (DbType = DateTime2), @p9='?' (DbType = DateTime2), @p10='?' (Precision = 18) (Scale = 4) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [GoldPrices] ([Id], [Close], [CreatedAt], [High], [Low], [Open], [Source], [TimeFrame], [Timestamp], [UpdatedAt], [Volume])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-01-14 00:13:13.671 +03:00 [INF] تم جلب سعر الذهب: 2030.56 USD في "2026-01-13T21:13:13.6612335Z"
+2026-01-14 00:13:13.671 +03:00 [INF] تم بث السعر العالمي: 2030.56 USD
+2026-01-14 00:13:13.672 +03:00 [INF] جاري جلب أسعار الذهب في الكويت...
+2026-01-14 00:13:13.676 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p2='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p3='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Int32), @p6='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p7='?' (Size = 4000), @p8='?' (DbType = DateTime2), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Guid), @p11='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p12='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p13='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Int32), @p16='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p17='?' (Size = 4000), @p18='?' (DbType = DateTime2), @p19='?' (DbType = DateTime2), @p20='?' (DbType = Guid), @p21='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p22='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p23='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p24='?' (DbType = DateTime2), @p25='?' (DbType = Int32), @p26='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p27='?' (Size = 4000), @p28='?' (DbType = DateTime2), @p29='?' (DbType = DateTime2), @p30='?' (DbType = Guid), @p31='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p32='?' (Precision = 10) (Scale = 4) (DbType = Decimal), @p33='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p34='?' (DbType = DateTime2), @p35='?' (DbType = Int32), @p36='?' (Precision = 18) (Scale = 4) (DbType = Decimal), @p37='?' (Size = 4000), @p38='?' (DbType = DateTime2), @p39='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [KuwaitGoldPrices] ([Id], [BuyPrice], [ChangePercent], [ChangeValue], [CreatedAt], [Karat], [SellPrice], [Source], [Timestamp], [UpdatedAt])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9),
+(@p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19),
+(@p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29),
+(@p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39);
+2026-01-14 00:13:13.678 +03:00 [INF] تم جلب 4 أسعار للكويت في "2026-01-13T21:13:13.6789303Z"
+2026-01-14 00:13:13.680 +03:00 [INF] تم بث 4 أسعار للكويت
+2026-01-14 00:13:13.681 +03:00 [INF] تم تحديث الأسعار بنجاح
+2026-01-14 00:13:16.774 +03:00 [DBG] Hangfire Server is stopping...
+2026-01-14 00:13:16.775 +03:00 [INF] Server omar:22432:7b3d74b5 caught stopping signal...
+2026-01-14 00:13:16.776 +03:00 [DBG] Execution loop RecurringJobScheduler:359f336f stopped in 0.1537 ms
+2026-01-14 00:13:16.776 +03:00 [DBG] Execution loop DelayedJobScheduler:819c2179 stopped in 0.1437 ms
+2026-01-14 00:13:16.776 +03:00 [DBG] Execution loop ExpirationManager:d7b2db01 stopped in 0.1623 ms
+2026-01-14 00:13:16.776 +03:00 [DBG] Execution loop ServerJobCancellationWatcher:998db620 stopped in 0.1858 ms
+2026-01-14 00:13:16.776 +03:00 [DBG] Execution loop ServerWatchdog:a756aa6f stopped in 0.1732 ms
+2026-01-14 00:13:16.776 +03:00 [DBG] Execution loop CountersAggregator:6c5ee0d5 stopped in 0.1814 ms
+2026-01-14 00:13:16.776 +03:00 [INF] Application is shutting down...
+2026-01-14 00:13:16.778 +03:00 [DBG] Execution loop Worker:eccb00d1 stopped in 2.1911 ms
+2026-01-14 00:13:16.778 +03:00 [DBG] Execution loop Worker:c912e88b stopped in 2.1876 ms
+2026-01-14 00:13:16.789 +03:00 [DBG] Hangfire Server is stopping...
+2026-01-14 00:13:17.106 +03:00 [DBG] Execution loop SqlServerHeartbeatProcess:5810469b stopped in 330.2868 ms
+2026-01-14 00:13:17.109 +03:00 [INF] Server omar:22432:7b3d74b5 All dispatchers stopped
+2026-01-14 00:13:17.110 +03:00 [DBG] Execution loop ServerHeartbeatProcess:322620a6 stopped in 0.0738 ms
+2026-01-14 00:13:17.115 +03:00 [INF] Server omar:22432:7b3d74b5 successfully reported itself as stopped in 3.4869 ms
+2026-01-14 00:13:17.116 +03:00 [INF] Server omar:22432:7b3d74b5 has been stopped in total 340.4352 ms
+2026-01-14 00:13:17.117 +03:00 [DBG] Execution loop BackgroundServerProcess:b35cdf0b stopped in 340.9706 ms
+2026-01-14 19:58:45.742 +03:00 [WRN] No store type was specified for the decimal property 'ClosePrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 19:58:45.798 +03:00 [WRN] No store type was specified for the decimal property 'HighPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 19:58:45.803 +03:00 [WRN] No store type was specified for the decimal property 'LowPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 19:58:45.809 +03:00 [WRN] No store type was specified for the decimal property 'OpenPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 19:58:45.965 +03:00 [WRN] No store type was specified for the decimal property 'ClosePrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 19:58:45.968 +03:00 [WRN] No store type was specified for the decimal property 'HighPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 19:58:45.971 +03:00 [WRN] No store type was specified for the decimal property 'LowPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 19:58:45.973 +03:00 [WRN] No store type was specified for the decimal property 'OpenPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 20:00:14.192 +03:00 [WRN] No store type was specified for the decimal property 'ClosePrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 20:00:14.242 +03:00 [WRN] No store type was specified for the decimal property 'HighPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 20:00:14.246 +03:00 [WRN] No store type was specified for the decimal property 'LowPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 20:00:14.248 +03:00 [WRN] No store type was specified for the decimal property 'OpenPrice' on entity type 'MarketReport'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-01-14 20:00:14.997 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-01-14 20:00:15.023 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-01-14 20:00:15.029 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-01-14 20:00:15.033 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-01-14 20:00:15.076 +03:00 [INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-01-14 20:00:15.097 +03:00 [INF] Applying migration '20260114165846_AddMarketReports'.
+2026-01-14 20:00:15.876 +03:00 [INF] Executed DbCommand (719ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+EXEC sp_rename N'[Recommendations].[ActualPriceAtExpiry]', N'StopLoss', N'COLUMN';
+2026-01-14 20:00:15.902 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Recommendations] ADD [ActualResult] decimal(18,4) NULL;
+2026-01-14 20:00:15.922 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [MarketReports] (
+    [Id] uniqueidentifier NOT NULL,
+    [Period] int NOT NULL,
+    [DateFrom] datetime2 NOT NULL,
+    [DateTo] datetime2 NOT NULL,
+    [HighPrice] decimal(18,2) NOT NULL,
+    [LowPrice] decimal(18,2) NOT NULL,
+    [OpenPrice] decimal(18,2) NOT NULL,
+    [ClosePrice] decimal(18,2) NOT NULL,
+    [ChangePercent] float NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [ExecutiveSummary] nvarchar(max) NOT NULL,
+    [Recommendations] nvarchar(max) NOT NULL,
+    [FutureOutlook] nvarchar(max) NOT NULL,
+    [ReportDataJson] nvarchar(max) NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_MarketReports] PRIMARY KEY ([Id])
+);
+2026-01-14 20:00:15.929 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260114165846_AddMarketReports', N'8.0.0');

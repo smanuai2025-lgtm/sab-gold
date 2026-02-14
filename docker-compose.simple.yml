@@ -1,0 +1,54 @@
+# ═══════════════════════════════════════════════════════════════════
+# SabeekaGold - Simple Docker Compose (without local DB)
+# ═══════════════════════════════════════════════════════════════════
+# استخدم هذا الملف إذا كنت تستخدم قاعدة بيانات خارجية (Azure SQL, etc)
+
+version: '3.8'
+
+services:
+  # Frontend (Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sabeekagold-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # Backend (.NET API)
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: sabeekagold-backend
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=${DATABASE_CONNECTION_STRING}
+      - ConnectionStrings__Redis=${REDIS_CONNECTION_STRING}
+      - Jwt__Key=${JWT_SECRET_KEY}
+    networks:
+      - app-network
+
+  # Redis Cache (local)
+  redis:
+    image: redis:7-alpine
+    container_name: sabeekagold-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+volumes:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge
